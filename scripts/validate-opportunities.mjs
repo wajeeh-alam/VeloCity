@@ -5,12 +5,12 @@ import process from 'node:process'
 
 const readJson = async url => JSON.parse(await readFile(url, 'utf8'))
 const schema = await readJson(new URL('../data/contracts/corridor-opportunities.v1.schema.json', import.meta.url))
-const validateSchema = new Ajv({ allErrors: true, jsonPointers: true }).compile(schema)
+const validateSchema = new Ajv({ allErrors: true, strict: false }).compile(schema)
 
 export function validateOpportunities(artifact, demand, catalogue) {
   const failures = []
   if (!validateSchema(artifact)) {
-    return validateSchema.errors.map(error => `${error.dataPath || '/'} ${error.message}`)
+    return validateSchema.errors.map(error => `${error.instancePath ?? error.dataPath ?? '/'} ${error.message}`)
   }
   if (artifact.evidenceArtifactId !== demand.artifactId) failures.push('Evidence artifact ID mismatch')
   const demandRecords = new Map(demand.records.map(record => [record.corridorId, record]))

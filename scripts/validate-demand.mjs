@@ -4,12 +4,12 @@ import { pathToFileURL } from 'node:url'
 import process from 'node:process'
 
 const schema = JSON.parse(await readFile(new URL('../data/contracts/corridor-demand.v2.schema.json', import.meta.url), 'utf8'))
-const validateSchema = new Ajv({ allErrors: true, jsonPointers: true }).compile(schema)
+const validateSchema = new Ajv({ allErrors: true, strict: false }).compile(schema)
 
 export function validateDemand(artifact, manifest, catalogue) {
   const failures = []
   if (!validateSchema(artifact)) {
-    return validateSchema.errors.map(error => `${error.dataPath || '/'} ${error.message}`)
+    return validateSchema.errors.map(error => `${error.instancePath ?? error.dataPath ?? '/'} ${error.message}`)
   }
   const model = artifact.model
   const validation = model.validation
