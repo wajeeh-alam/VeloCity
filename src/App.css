@@ -139,7 +139,7 @@ h1, h2, p { margin: 0; }
 .comparison-key { display: flex; gap: 14px; color: #777; font-size: 8px; }
 .comparison-key span::before { content: ''; display: inline-block; width: 5px; height: 5px; margin-right: 6px; border-radius: 50%; background: #626262; }
 .comparison-key span:last-child::before { background: var(--accent); }
-.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: #fff; }
+.metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: #fff; }
 .metric-card { min-width: 0; padding: 15px; border-right: 1px solid var(--border); }
 .metric-card:last-child { border-right: 0; }
 .metric-icon { height: 18px; color: var(--accent); font: 14px var(--mono); }

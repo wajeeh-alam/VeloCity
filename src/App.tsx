@@ -78,7 +78,8 @@ function App() {
   const hourlyDemand = prediction.relativeBicyclesPerObservedHour * demandReference
   const hourlyLower = prediction.uncertainty.lower * demandReference
   const hourlyUpper = prediction.uncertainty.upper * demandReference
-  const metricKeys = Object.keys(artifact.scenarioModel.metricDefinitions) as SimulationMetricKey[]
+  const metricKeys = (Object.keys(artifact.scenarioModel.metricDefinitions) as SimulationMetricKey[])
+    .filter((key) => key !== 'lowStressTrips')
 
   function selectCorridor(corridor: OpportunityProfile) {
     setSelectedId(corridor.corridorId)
