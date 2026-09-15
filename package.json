@@ -22,16 +22,21 @@
     "opportunities:generate": "node scripts/generate-opportunities.mjs",
     "opportunities:validate": "node scripts/validate-opportunities.mjs",
     "test:opportunities": "node --test scripts/opportunities.test.mjs",
-    "handoff:check": "npm run demand:validate && npm run opportunities:validate && npm run test:demand && npm run test:opportunities && npm test && npm run lint && npm run build"
+    "handoff:check": "npm run demand:validate && npm run opportunities:validate && npm run test:demand && npm run test:opportunities && npm run b:validate && npm run b:test && npm test && npm run lint && npm run build",
+    "b:fetch": "node scripts/fetch-b-network.mjs",
+    "b:prepare": "node scripts/prepare-b.mjs",
+    "b:validate": "node scripts/prepare-b.mjs --validate",
+    "b:test": "node --test scripts/prepare-b.test.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
+    "@types/leaflet": "^1.9.22",
+    "leaflet": "^1.9.4",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "ajv": "6.15.0",
     "@babel/core": "^7.29.7",
     "@eslint/js": "^10.0.1",
     "@rolldown/plugin-babel": "^0.2.3",
@@ -40,6 +45,7 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
+    "ajv": "^8.20.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^10.10.0",
     "eslint-plugin-react-hooks": "^7.1.1",
