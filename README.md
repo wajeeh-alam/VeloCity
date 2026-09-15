@@ -8,7 +8,7 @@ VeloCity combines observed cycling demand, potential demand, road danger, access
 
 ## Current status
 
-The repository contains the React/Vite shell plus a versioned Member A data contract and synthetic fixtures. The fixtures make parallel dashboard and simulation work possible; they are not analytical results.
+Member A has trained a random-forest demand model on 754 June 2024 counter observations (10 training sites and 3 test sites) and exported 20 official candidate segments to `public/data/corridor-demand.json`. Held-out relative MAE is 0.675 versus the training-median baseline's 1.115. The React UI and legacy corridor catalogue still contain placeholders. See [the Member B handoff](data/TRAINING.md) before integration.
 
 ## Sixty-second demo
 
@@ -50,18 +50,24 @@ The source registry is [`data/source-registry.json`](data/source-registry.json).
 
 ```bash
 npm install
-npm run data:fetch
-# Also download the 206 MB Bike Share 2024 archive:
-npm run data:fetch -- --include-large
-# Also download optional TTC GTFS:
-npm run data:fetch -- --include-optional
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements-data.txt
+# Includes the 206 MB Bike Share archive and all corridor evidence layers:
+npm run data:fetch -- --include-large --include-optional
 npm run data:prepare:bike-share
+npm run data:prepare:training
 npm run data:validate
+npm run pretrain:check
+npm run model:train
+npm run test:demand
 ```
 
 For the hackathon, extract only June 2024 from the annual Bike Share archive. Join trip station IDs/names to the snapshotted GBFS station coordinates. Keep the date and checksum from `data/raw/download-report.json` in the final manifest.
 
-Member A replaces the synthetic fixtures with observed/modelled corridor evidence, updates `model-metrics.json`, changes `artifact_status`, and runs validation before handoff.
+Member A exports demand evidence to `corridor-demand.json`. Its output excludes routing, agents, before/after benefits and rollout; Member B supplies those. Legacy `corridors.geojson` remains a visibly synthetic fixture.
+
+Training uses `data/processed/counter-training.csv`: valid interval volumes divided by observed hours for each direction/day, grouped by physical counter site. Both directions stay in the same split. Features use Bike Share, cycling network, pre-June-2024 cyclist KSI events and census. The frozen split, hashes and dates are in `data/processed/training-manifest.json`. The final export satisfies `data/contracts/corridor-demand.v2.schema.json`; its example under `data/fixtures/` must not be published.
 
 ## Handoff contract
 
@@ -69,21 +75,24 @@ Commit these small, host-ready artifacts:
 
 | File | Consumer | Purpose |
 |---|---|---|
-| `public/data/corridors.geojson` | Members B and C | Candidate geometry, nine scores and rating |
+| `public/data/corridor-demand.json` | Members B and C | Trained demand, uncertainty, raw features, nine evidence scores |
+| `public/data/candidate-catalogue.geojson` | Members B and C | Matching IDs, names, official candidate geometry and plan status |
+| `public/data/corridors.geojson` | Legacy only | Synthetic fixture; not a source for training |
 | `public/data/flows.json` | Member B | Observed June 2024 station OD flows and relative weights |
 | `public/data/model-metrics.json` | Members B and C | Baseline/model validation and selected strategy |
 | `public/data/data-manifest.json` | Everyone | Provenance, status and limitations |
-| `data/contracts/*.schema.json` | Everyone | Frozen v1 interface |
+| `data/contracts/corridor-demand.v2.schema.json` | Everyone | Evidence-only v2 demand contract |
 
 Do **not** send raw archives through Git. Push the files above to `feature/data-model`; if another member needs raw data, share an external read-only folder plus its checksum. Announce schema changes before pushing them.
 
-Member B should treat `corridor_id` as the stable join key and add simulation output without changing Member A’s score names. Member C can develop against the committed fixtures immediately.
+Member B joins by `corridorId` and adapts its v1 prediction loader to accept the v2 demand contract. These real candidate IDs differ from B's synthetic catalogue IDs. B owns scenario outputs; A's `productionEligible` flag only means the demand model beat the baseline. Member C must load `data-manifest.json` warnings alongside the evidence and distinguish trained demand from synthetic simulation.
 
 ## Development and hosting
 
 ```bash
 npm run dev
 npm run lint
+npm test
 npm run data:validate
 npm run build
 npm run preview

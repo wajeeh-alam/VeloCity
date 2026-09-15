@@ -3,12 +3,29 @@
   "$id": "https://velocity.local/contracts/flows.schema.json",
   "title": "VeloCity observed Bike Share OD flows",
   "type": "object",
-  "required": ["schema_version", "data_status", "period", "summary", "flows"],
+  "required": ["schema_version", "data_status", "period", "summary", "stations", "flows"],
   "properties": {
     "schema_version": { "const": "1.0.0" },
     "data_status": { "const": "observed" },
     "period": { "type": "string" },
     "summary": { "type": "object" },
+    "stations": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          { "$ref": "#/$defs/station" },
+          {
+            "type": "object",
+            "required": ["trip_starts", "trip_ends", "trip_ends_total"],
+            "properties": {
+              "trip_starts": { "type": "integer", "minimum": 0 },
+              "trip_ends": { "type": "integer", "minimum": 0 },
+              "trip_ends_total": { "type": "integer", "minimum": 0 }
+            }
+          }
+        ]
+      }
+    },
     "flows": {
       "type": "array",
       "items": {
