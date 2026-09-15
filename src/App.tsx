@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type CSSProperties } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import './App.css'
 import { TorontoMap } from './TorontoMap.tsx'
 import {
@@ -38,7 +38,6 @@ function App() {
   const [loadError, setLoadError] = useState<string | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [showAllRoutes, setShowAllRoutes] = useState(false)
-  const [year, setYear] = useState<1 | 2 | 3>(1)
 
   useEffect(() => {
     let live = true
@@ -54,13 +53,6 @@ function App() {
       })
     return () => { live = false }
   }, [])
-
-  const activeIds = useMemo(() => {
-    if (!artifact) return []
-    return artifact.portfolio.years
-      .filter((entry) => entry.year <= year)
-      .flatMap((entry) => entry.corridorIds)
-  }, [artifact, year])
 
   if (loadError) {
     return (
@@ -88,7 +80,6 @@ function App() {
 
   function selectCorridor(corridor: OpportunityProfile) {
     setSelectedId(corridor.corridorId)
-    setYear(corridor.priority.rolloutYear)
   }
 
   return (
@@ -140,7 +131,7 @@ function App() {
             <TorontoMap
               opportunities={artifact.records}
               selected={selected}
-              activeIds={activeIds}
+              activeIds={[]}
               built
               showAllRoutes={showAllRoutes}
               onSelect={selectCorridor}
@@ -212,10 +203,6 @@ function App() {
             ))}
           </div>
           <div className="scenario-notice"><b>Illustrative scenario</b><p>{artifact.portfolio.disclaimer}</p></div>
-          <div className="rollout">
-            <div className="rollout-head"><div><span className="eyebrow">Network rollout</span><b>3-year scenario</b></div><span>{activeIds.length} active</span></div>
-            <div className="year-selector">{([1, 2, 3] as const).map((value) => <button key={value} className={year === value ? 'active' : ''} onClick={() => setYear(value)}><b>0{value}</b><small>YEAR</small></button>)}</div>
-          </div>
         </aside>
       </main>
     </div>
