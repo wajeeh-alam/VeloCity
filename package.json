@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "test": "node --test src/lib/corridorDomain.test.ts src/data/opportunities.test.ts",
+    "test": "node --experimental-strip-types --test src/lib/corridorDomain.test.ts src/data/opportunities.test.ts",
     "preview": "vite preview",
     "data:fetch": "node scripts/fetch-data.mjs",
     "data:prepare:bike-share": "python3 scripts/prepare_bike_share.py",
@@ -24,9 +24,9 @@
     "test:opportunities": "node --test scripts/opportunities.test.mjs",
     "handoff:check": "npm run demand:validate && npm run opportunities:validate && npm run test:demand && npm run test:opportunities && npm run b:validate && npm run b:test && npm test && npm run lint && npm run build",
     "b:fetch": "node scripts/fetch-b-network.mjs",
-    "b:prepare": "node scripts/prepare-b.mjs",
-    "b:validate": "node scripts/prepare-b.mjs --validate",
-    "b:test": "node --test scripts/prepare-b.test.mjs"
+    "b:prepare": "node --experimental-strip-types scripts/prepare-b.mjs",
+    "b:validate": "node --experimental-strip-types scripts/prepare-b.mjs --validate",
+    "b:test": "node --experimental-strip-types --test scripts/prepare-b.test.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

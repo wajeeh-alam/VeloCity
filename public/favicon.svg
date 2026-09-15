@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#18231d"/>
+  <path d="M0 0h7v64H0z" fill="#707070"/>
+  <text x="35" y="39" fill="#fbfaf6" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">VC</text>
+</svg>
