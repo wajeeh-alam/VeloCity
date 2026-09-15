@@ -10,7 +10,11 @@
     "preview": "vite preview",
     "data:fetch": "node scripts/fetch-data.mjs",
     "data:prepare:bike-share": "python3 scripts/prepare_bike_share.py",
-    "data:validate": "node scripts/validate-data.mjs"
+    "data:validate": "node scripts/validate-data.mjs",
+    "b:fetch": "node scripts/fetch-b-network.mjs",
+    "b:prepare": "node scripts/prepare-b.mjs",
+    "b:validate": "node scripts/prepare-b.mjs --validate",
+    "b:test": "node --test scripts/prepare-b.test.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
@@ -29,6 +33,7 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
+    "ajv": "^8.20.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^10.10.0",
     "eslint-plugin-react-hooks": "^7.1.1",

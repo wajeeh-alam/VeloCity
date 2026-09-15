@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "velocity.b-source.v1",
+  "generatedAt": "2026-09-15T16:31:23.863Z",
+  "scope": "Candidate-local extracts sufficient to regenerate public/data/b-precomputed.json; not broad regional downloads.",
+  "provenance": [
+    {
+      "role": "network",
+      "title": "City of Toronto Cycling Network",
+      "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/abbe5ee3-e249-4f86-a219-f0022eaddcc9/resource/023da9a2-8848-4e10-9cad-e7f9119cd874/download/cycling-network-4326.geojson",
+      "license": "Open Government Licence – Toronto"
+    },
+    {
+      "role": "osm",
+      "title": "OpenStreetMap API 0.6 candidate-local tiles",
+      "url": "https://www.openstreetmap.org/copyright",
+      "license": "ODbL-1.0",
+      "snapshot": "2026-09-15T16:31:23.863Z"
+    }
+  ],
+  "files": [
+    {
+      "role": "network",
+      "path": "data/b-source/v1/cycling-network.geojson.gz",
+      "sha256": "69bec7620ef1c118377e69669b2ebe7e70ba2932ca995ca8cb023cb4d70e9814",
+      "bytes": 944840,
+      "uncompressedSha256": "c5d53a5fd367d39da5cdd58f97b8f95d4d94fcbc760ab15d55620c34dfc6fec1",
+      "uncompressedBytes": 3263145
+    },
+    {
+      "role": "osm",
+      "path": "data/b-source/v1/b-osm-network.json.gz",
+      "sha256": "5db6f11ece48d9be27610e311a940a678df629457eb34fe90015d857f4499f0c",
+      "bytes": 2646088,
+      "uncompressedSha256": "80f6f8ba70eb92ce44e1c138b8850b2d7164fa3f5b8c340c429f6f9f7f64df38",
+      "uncompressedBytes": 23051956
+    }
+  ]
+}
