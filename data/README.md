@@ -36,3 +36,5 @@ Member B's TypeScript names are canonical: `corridorId`, `candidateType`, `curre
 `npm run data:prepare:training` creates leakage-safe counter rows and a frozen spatial split in `data/processed/`. Run `npm run pretrain:check` before training. The check enforces disjoint counter-site groups, training-only normalization, Member B's field names and the evidence-only `velocity.corridor-demand.v2` boundary.
 
 See [TRAINING.md](TRAINING.md) for the trained model, output contract and important interpretation limits. Evidence scores use min/max over the frozen candidate set; this is separate from demand-model normalization, which is fitted on training sites only. The model uses raw features, not the nine descriptive scores.
+
+Member B's deterministic scenario generator publishes `public/data/corridor-opportunities.json`. It copies A's evidence unchanged, then adds explicitly synthetic comparisons, weighted representative agents, official candidate-alignment references, network states and illustrative Year 1–3 placement. See [MEMBER_C_HANDOFF.md](MEMBER_C_HANDOFF.md); regenerate with `npm run opportunities:generate` after every demand export.
