@@ -9,6 +9,7 @@ import {
   type ScoreInputs,
 } from './corridorScoring.ts'
 
+/** @deprecated A should export velocity.corridor-demand.v2 instead. */
 export const PREDICTION_ARTIFACT_SCHEMA_VERSION =
   'velocity.corridor-predictions.v1' as const
 
@@ -46,6 +47,7 @@ export type CorridorPredictionRecord = {
   activeCorridorIds: string[]
 }
 
+/** @deprecated Legacy precomputed B scenario contract, not the A demand handoff. */
 export type CorridorPredictionArtifact = {
   schemaVersion: typeof PREDICTION_ARTIFACT_SCHEMA_VERSION
   artifactId: string
