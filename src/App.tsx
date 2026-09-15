@@ -170,10 +170,6 @@ function App() {
                 </article>
               })}
             </div>
-            <details className="scenario-warnings">
-              <summary>{comparison.warnings.length} scenario notes and limitations</summary>
-              <ul>{comparison.warnings.map((warning) => <li key={warning}>{warning}</li>)}</ul>
-            </details>
           </section>
         </section>
 
