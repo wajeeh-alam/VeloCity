@@ -46,6 +46,7 @@ def main() -> int:
 
     stations = load_stations()
     aggregates: dict[tuple[str, str], list[int]] = defaultdict(lambda: [0, 0])
+    station_activity: dict[str, list[int]] = defaultdict(lambda: [0, 0])
     rows_seen = june_rows = accepted_rows = 0
     missing_station_rows = invalid_duration_rows = 0
 
@@ -75,6 +76,8 @@ def main() -> int:
                     continue
                 aggregates[(origin, destination)][0] += 1
                 aggregates[(origin, destination)][1] += duration
+                station_activity[origin][0] += 1
+                station_activity[destination][1] += 1
                 accepted_rows += 1
 
     ranked = sorted(aggregates.items(), key=lambda item: (-item[1][0], item[0]))[:MAX_FLOWS]
@@ -88,6 +91,15 @@ def main() -> int:
             "mean_duration_seconds": round(total_duration / count, 1),
         }
         for (origin, destination), (count, total_duration) in ranked
+    ]
+    station_demand = [
+        {
+            **stations[identifier],
+            "trip_starts": counts[0],
+            "trip_ends": counts[1],
+            "trip_ends_total": counts[0] + counts[1],
+        }
+        for identifier, counts in sorted(station_activity.items())
     ]
 
     payload = {
@@ -105,6 +117,7 @@ def main() -> int:
             "published_top_od_pairs": len(flows),
             "duration_range_seconds": [MIN_DURATION_SECONDS, MAX_DURATION_SECONDS],
         },
+        "stations": station_demand,
         "flows": flows,
         "limitations": [
             "Station metadata is a current snapshot joined to historical 2024 trips; retired or renamed stations may not match.",

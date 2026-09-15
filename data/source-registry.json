@@ -3,6 +3,28 @@
   "updated_at": "2026-09-15",
   "sources": [
     {
+      "id": "permanent-bike-counter-intervals",
+      "title": "Permanent bicycle counters: 2024–2025 intervals",
+      "purpose": ["training_labels_and_observed_hours"],
+      "format": "CSV",
+      "download_url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/ff7e7369-cbba-4545-9e26-e5a5ef6a123c/resource/49675bd6-a17c-4de7-af66-c0e8338d7d13/download/cycling_permanent_counts_15min_2024_2025.csv",
+      "output": "counter-intervals-2024-2025.csv", "required": true, "large": false
+    },
+    {
+      "id": "school-locations-all-types",
+      "title": "Toronto School Locations – All Types",
+      "purpose": ["destination_proxy"], "format": "GeoJSON",
+      "download_url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/1a714b5c-64c0-4cdf-9739-0086f80fb3ee/resource/f1160f3f-a651-40ed-914e-07b670ac5aec/download/school-locations-all-types-data-4326.geojson",
+      "output": "schools.geojson", "required": false, "large": false
+    },
+    {
+      "id": "bridge-structures",
+      "title": "Toronto Bridge Structures",
+      "purpose": ["barrier_presence_proxy"], "format": "GeoJSON",
+      "download_url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/4e10dbb5-2d67-4bc4-92d3-af7749707748/resource/9a087353-e2f7-4e44-92a4-56f2208aec5f/download/bridges-structure-4326.geojson",
+      "output": "bridges.geojson", "required": false, "large": false
+    },
+    {
       "id": "bike-share-trips-2024",
       "title": "Bike Share Toronto Ridership Data (2024)",
       "purpose": ["current_demand", "agent_origins_destinations"],
@@ -82,6 +104,16 @@
       "format": "XLSX",
       "download_url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/6e19a90f-971c-46b3-852c-0c48c436d1fc/resource/19d4a806-7385-4889-acf2-256f1e079060/download/nbhd_2021_census_profile_full_158model.xlsx",
       "output": "neighbourhood-profiles-2021.xlsx",
+      "required": true,
+      "large": false
+    },
+    {
+      "id": "neighbourhood-boundaries-158",
+      "title": "Toronto Neighbourhood Boundaries, 158-neighbourhood model",
+      "purpose": ["census_spatial_join"],
+      "format": "GeoJSON",
+      "download_url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/fc443770-ef0a-4025-9c2c-2cb558bfab00/resource/0719053b-28b7-48ea-b863-068823a93aaa/download/neighbourhoods-4326.geojson",
+      "output": "neighbourhood-boundaries.geojson",
       "required": true,
       "large": false
     },

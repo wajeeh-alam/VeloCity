@@ -7,10 +7,18 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "test": "node --test src/lib/corridorDomain.test.ts",
     "preview": "vite preview",
     "data:fetch": "node scripts/fetch-data.mjs",
     "data:prepare:bike-share": "python3 scripts/prepare_bike_share.py",
-    "data:validate": "node scripts/validate-data.mjs"
+    "data:prepare:training": "python3 scripts/prepare_training_data.py",
+    "data:validate": "node scripts/validate-data.mjs",
+    "pretrain:validate": "node scripts/validate-pretraining.mjs",
+    "pretrain:check": "npm run data:validate && npm run pretrain:validate && npm test && npm run lint && npm run build",
+    "model:train": "npm run pretrain:check && python3 scripts/train_demand_model.py && npm run model:export",
+    "model:export": "python3 scripts/export_corridor_demand.py && npm run demand:validate",
+    "demand:validate": "node scripts/validate-demand.mjs",
+    "test:demand": "node --test scripts/demand.test.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
@@ -19,6 +27,7 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
+    "ajv": "6.15.0",
     "@babel/core": "^7.29.7",
     "@eslint/js": "^10.0.1",
     "@rolldown/plugin-babel": "^0.2.3",

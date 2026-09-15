@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "velocity.training-data.v1",
+  "generatedAt": "2026-09-15T16:32:44.588735+00:00",
+  "featureVersion": "velocity-counter-features.v2",
+  "target": "bicycles-per-observed-hour",
+  "rowCount": 754,
+  "trainingDataSha256": "d568b39cfdd01675fca870aa4f87a19d407ea31bda2b8a232b524ab78c663f14",
+  "configurationSha256": "8f687d948864605bcfc778b3874949eb6bf1bb6013bdf2e8b86c2079e5dbd3e2",
+  "inputFileHashes": {
+    "data/raw/counter-intervals-2024-2025.csv": "bc2d6e5ba5fb43267570ab6d092c8e0488136356b12113c7e5d552860a1a6477",
+    "data/raw/bike-counter-locations.geojson": "6f1dc8aefe46b28776574c963304162eaa039bd3b80c0336993de6e81c9d2a5b",
+    "public/data/flows.json": "2811b8810113775255f11622816b0c660d2af129c0d18a01031e0c387e3fe475",
+    "data/raw/ksi-collisions.geojson": "b84649e81cac073c23006816f1c28be850df11937caddb7d0d8c0d468820e255",
+    "data/raw/cycling-network.geojson": "c5d53a5fd367d39da5cdd58f97b8f95d4d94fcbc760ab15d55620c34dfc6fec1",
+    "data/raw/neighbourhood-boundaries.geojson": "b0cb58077f5b3a47e0e56a68913c6980cfaf39d37d7d020fd91b60650c480233",
+    "data/raw/neighbourhood-profiles-2021.xlsx": "9a3c372907e9de09407d847398703146a9cfc0f5b2217446fd61ab8ab35345eb"
+  },
+  "grouping": "counter-site",
+  "trainGroupIds": [
+    "4dd7637aa9ad",
+    "57ae88af98ae",
+    "62a9f3857b4d",
+    "703d489beb74",
+    "7563f73ef205",
+    "94bfa38aeefb",
+    "bebc08f4b69f",
+    "dd304ccf6d8b",
+    "e7531cbe004f",
+    "f24abfdc5d61"
+  ],
+  "testGroupIds": [
+    "371f035ac73e",
+    "ce2b5aceb4da",
+    "efb7d99db164"
+  ],
+  "normalization": {
+    "fittedOn": "training-only"
+  },
+  "observationStart": "2024-06-01",
+  "observationEnd": "2024-06-30",
+  "sourceIds": [
+    "permanent-bike-counter-intervals",
+    "permanent-bike-counter-locations",
+    "bike-share-trips-2024",
+    "bike-share-stations",
+    "cycling-network",
+    "ksi-collisions",
+    "neighbourhood-profiles-2021",
+    "neighbourhood-boundaries-158"
+  ],
+  "warnings": [
+    "Labels use summed valid interval counts divided by observed hours; days below 20 hours are excluded. Zero counts retained; obstruction can depress counts. Directional daily mean, not peak-hour demand.",
+    "Collision features use deduplicated cyclist-involved KSI events from 2019-06-01 through 2024-05-31.",
+    "2026 station and cycling-network snapshots accompany 2024 observations; spatial backtesting is not historical forecasting validation.",
+    "Bike Share station activity reflects June 2024 station coverage and users, not all cycling demand.",
+    "Static spatial features are repeated across daily observations and must be grouped by counter site during validation."
+  ]
+}
