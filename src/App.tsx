@@ -9,6 +9,7 @@ import {
 } from './data/corridors.ts'
 import {
   loadOpportunityArtifact,
+  loadDemandReferenceBicyclesPerHour,
   type OpportunityArtifact,
   type OpportunityProfile,
 } from './data/opportunities.ts'
@@ -35,17 +36,19 @@ function formatObservationRange(start: string, end: string) {
 function App() {
   const [artifact, setArtifact] = useState<OpportunityArtifact | null>(null)
   const [routingBundle, setRoutingBundle] = useState<PrecomputedBundle | null>(null)
+  const [demandReference, setDemandReference] = useState<number | null>(null)
   const [loadError, setLoadError] = useState<string | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [showAllRoutes, setShowAllRoutes] = useState(false)
 
   useEffect(() => {
     let live = true
-    Promise.all([loadOpportunityArtifact(), loadPrecomputedBundle()])
-      .then(([value, routing]) => {
+    Promise.all([loadOpportunityArtifact(), loadPrecomputedBundle(), loadDemandReferenceBicyclesPerHour()])
+      .then(([value, routing, reference]) => {
         if (!live) return
         setArtifact(value)
         setRoutingBundle(routing)
+        setDemandReference(reference)
         setSelectedId(value.records[0]?.corridorId ?? null)
       })
       .catch((error: unknown) => {
@@ -63,7 +66,7 @@ function App() {
     )
   }
 
-  if (!artifact || !routingBundle || !selectedId) {
+  if (!artifact || !routingBundle || demandReference === null || !selectedId) {
     return <main className="load-state"><strong>Loading Toronto corridor evidence…</strong></main>
   }
 
@@ -72,6 +75,9 @@ function App() {
   const comparison = selected.comparison
   const shownMetrics = comparison.after
   const prediction = selected.evidence.prediction
+  const hourlyDemand = prediction.relativeBicyclesPerObservedHour * demandReference
+  const hourlyLower = prediction.uncertainty.lower * demandReference
+  const hourlyUpper = prediction.uncertainty.upper * demandReference
   const metricKeys = Object.keys(artifact.scenarioModel.metricDefinitions) as SimulationMetricKey[]
 
   function selectCorridor(corridor: OpportunityProfile) {
@@ -172,9 +178,9 @@ function App() {
 
           <section className="model-evidence">
             <div className="profile-head"><b>Trained demand evidence</b><span>{selected.evidence.modelBeatBaseline ? 'Beats baseline' : 'Below baseline'}</span></div>
-            <strong>{prediction.relativeBicyclesPerObservedHour.toFixed(2)}</strong>
-            <p>relative bicycles per observed hour</p>
-            <small>{prediction.uncertainty.lower.toFixed(2)}–{prediction.uncertainty.upper.toFixed(2)} · {Math.round(prediction.uncertainty.level * 100)}% interval</small>
+            <strong>≈{Math.round(hourlyDemand)}</strong>
+            <p>predicted bicycles per hour</p>
+            <small>≈{Math.round(hourlyLower)}–{Math.round(hourlyUpper)} bicycles/hour · {Math.round(prediction.uncertainty.level * 100)}% interval</small>
             <small>{formatObservationRange(selected.evidence.observation.start, selected.evidence.observation.end)}</small>
             <small>{selected.evidence.modelValidation.metric.toUpperCase()} {selected.evidence.modelValidation.modelValue.toFixed(2)} vs {selected.evidence.modelValidation.medianBaselineValue.toFixed(2)} median baseline</small>
           </section>

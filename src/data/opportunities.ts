@@ -1,5 +1,6 @@
 import type { ScoreInputs } from '../lib/corridorScoring.ts'
 import type { SimulationMetrics } from '../lib/corridorDomain.ts'
+import { parseCorridorDemandArtifact } from '../lib/corridorDemandArtifact.ts'
 
 export type GeoLine = {
   type: 'LineString' | 'MultiLineString'
@@ -131,4 +132,15 @@ export async function loadOpportunityArtifact(
   const response = await fetcher(`${import.meta.env.BASE_URL}data/corridor-opportunities.json`)
   if (!response.ok) throw new Error(`Opportunity data failed to load (${response.status})`)
   return parseOpportunityArtifact(await response.json())
+}
+
+/** Loads the training-only hourly reference used to convert relative demand into an approximate hourly count. */
+export async function loadDemandReferenceBicyclesPerHour(
+  fetcher: typeof fetch = fetch,
+): Promise<number> {
+  const response = await fetcher(`${import.meta.env.BASE_URL}data/corridor-demand.json`)
+  if (!response.ok) throw new Error(`Demand data failed to load (${response.status})`)
+  const parsed = parseCorridorDemandArtifact(await response.json())
+  if (!parsed.ok) throw new Error(`Demand data is invalid: ${parsed.errors[0]}`)
+  return parsed.artifact.model.normalization.referenceBicyclesPerHour
 }
