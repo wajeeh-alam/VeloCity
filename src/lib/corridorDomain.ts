@@ -160,6 +160,7 @@ export type CorridorSimulation = {
   }>>
   routes?: import('./corridorNetworkSimulation.ts').ScenarioRoute[]
   networkState?: PortfolioNetworkState
+  networkProvenance?: { version: string; sourceName: string; sourceUrl: string; coordinateReferenceSystem: 'EPSG:4326'; isIllustrative: boolean }
   demand?: { prediction: number; lower: number; upper: number; unit: 'dimensionless-relative-hourly-demand' }
 }
 

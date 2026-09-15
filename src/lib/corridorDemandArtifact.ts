@@ -1,4 +1,5 @@
 import { SCORE_KEYS, type ScoreInputs } from './corridorScoring.ts'
+import { INPUT_LIMITS, boundedJsonError, addValidationError } from './corridorInputLimits.ts'
 
 /** Canonical A→B contract. v1's precomputed simulation records are deprecated. */
 export const DEMAND_ARTIFACT_SCHEMA_VERSION = 'velocity.corridor-demand.v2' as const
@@ -24,7 +25,7 @@ export type DemandPrediction = {
     observationEnd: string
     observedHours: number
   }
-  candidate?: {
+  candidate: {
     kind: 'plan-backed' | 'exploratory'
     sourceName: string
     sourceUrl: string
@@ -78,7 +79,7 @@ type Obj = Record<string, unknown>
 const object = (value: unknown): value is Obj => !!value && typeof value === 'object' && !Array.isArray(value)
 const nonempty = (value: unknown): value is string => typeof value === 'string' && value.trim() === value && value.length > 0
 const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value) && value >= 0
-const id = (value: unknown): value is string => nonempty(value) && /^[a-zA-Z0-9][a-zA-Z0-9._:-]*$/.test(value)
+const id = (value: unknown): value is string => nonempty(value) && value.length <= INPUT_LIMITS.idLength && /^[a-zA-Z0-9][a-zA-Z0-9._:-]*$/.test(value)
 function date(value: unknown): value is string {
   if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d{3})?Z)?$/.test(value)) return false
   const time = Date.parse(value)
@@ -89,7 +90,7 @@ function url(value: unknown): boolean {
   try { return ['https:', 'http:'].includes(new URL(value).protocol) } catch { return false }
 }
 function keys(value: Obj, allowed: string[], errors: string[], path: string) {
-  for (const key of Object.keys(value)) if (!allowed.includes(key)) errors.push(`${path}.${key} is not part of the demand contract`)
+  for (const key of Object.keys(value)) if (!allowed.includes(key)) addValidationError(errors, `${path}.${key} is not part of the demand contract`)
 }
 
 /** Validates JSON and production eligibility; no producer flag bypasses the baseline gate. */
@@ -97,7 +98,9 @@ export function parseCorridorDemandArtifact(value: unknown):
   | { ok: true; artifact: CorridorDemandArtifact }
   | { ok: false; errors: string[] } {
   const errors: string[] = []
-  const check = (condition: unknown, message: string) => { if (!condition) errors.push(message) }
+  const sizeError = boundedJsonError(value)
+  if (sizeError) return { ok: false, errors: [sizeError] }
+  const check = (condition: unknown, message: string) => { if (!condition) addValidationError(errors, message) }
   if (!object(value)) return { ok: false, errors: ['Demand artifact must be an object'] }
   keys(value, ['schemaVersion', 'artifactId', 'generatedAt', 'model', 'records'], errors, 'artifact')
   check(value.schemaVersion === DEMAND_ARTIFACT_SCHEMA_VERSION, 'Unsupported demand schemaVersion')
@@ -118,14 +121,16 @@ export function parseCorridorDemandArtifact(value: unknown):
   check(validation.strategy === 'spatial-holdout' && ['counter-site', 'corridor'].includes(String(validation.grouping)), 'Spatial holdout by counter site or corridor is required')
   check(['mae', 'rmse'].includes(String(validation.metric)) && validation.lowerIsBetter === true && validation.baseline === 'training-median', 'Validation must compare against the training median')
   check(model.productionEligible === true && finite(validation.modelValue) && finite(validation.medianBaselineValue) && validation.modelValue < validation.medianBaselineValue, 'Model must beat the spatial median baseline and be production eligible')
-  const groups = (input: unknown): input is string[] => Array.isArray(input) && input.length > 0 && input.every(id) && new Set(input).size === input.length
+  const groups = (input: unknown): input is string[] => Array.isArray(input) && input.length > 0 && input.length <= INPUT_LIMITS.spatialGroups && input.every(id) && new Set(input).size === input.length
   check(groups(validation.trainGroupIds) && groups(validation.testGroupIds), 'Nonempty unique train/test group IDs are required')
   if (groups(validation.trainGroupIds) && groups(validation.testGroupIds)) {
     check(!validation.testGroupIds.some((group) => (validation.trainGroupIds as string[]).includes(group)), 'Train/test spatial groups overlap')
   }
   check(Array.isArray(value.records) && value.records.length > 0, 'Prediction records must be nonempty')
+  if (Array.isArray(value.records) && value.records.length > INPUT_LIMITS.records) return { ok: false, errors: ['Prediction records exceed cardinality limit'] }
   const seen = new Set<string>()
   for (const [index, record] of (Array.isArray(value.records) ? value.records : []).entries()) {
+    if (errors.length >= INPUT_LIMITS.errors) break
     const path = `records[${index}]`
     if (!object(record)) { errors.push(`${path} must be an object`); continue }
     keys(record, ['corridorId', 'prediction', 'uncertainty', 'features', 'observedDemandProvenance', 'candidate'], errors, path)
@@ -139,14 +144,15 @@ export function parseCorridorDemandArtifact(value: unknown):
     keys(features, ['version', 'raw', 'normalized', 'hash'], errors, `${path}.features`)
     const raw = features.raw
     const normalized = features.normalized
-    const validFeatures = nonempty(features.version) && features.version === model.featureVersion && object(raw) && Object.keys(raw).length > 0 && Object.values(raw).every((n) => typeof n === 'number' && Number.isFinite(n)) && object(normalized) && Object.keys(normalized).length === SCORE_KEYS.length && SCORE_KEYS.every((key) => finite(normalized[key]) && normalized[key] <= 100)
+    const validFeatures = nonempty(features.version) && features.version === model.featureVersion && object(raw) && Object.keys(raw).length > 0 && Object.keys(raw).length <= INPUT_LIMITS.rawFeatures && Object.values(raw).every((n) => typeof n === 'number' && Number.isFinite(n)) && object(normalized) && Object.keys(normalized).length === SCORE_KEYS.length && SCORE_KEYS.every((key) => finite(normalized[key]) && normalized[key] <= 100)
     check(validFeatures, `${path} has an invalid feature snapshot/version`)
     if (validFeatures) check(features.hash === hashFeatureSnapshot(features as DemandFeatureSnapshot), `${path} feature hash mismatch`)
     const provenance = object(record.observedDemandProvenance) ? record.observedDemandProvenance : {}
     keys(provenance, ['kind', 'sourceName', 'sourceUrls', 'observationStart', 'observationEnd', 'observedHours'], errors, `${path}.observedDemandProvenance`)
-    check(['counter-observation', 'bike-share-od', 'multiple-observed-sources'].includes(String(provenance.kind)) && nonempty(provenance.sourceName) && Array.isArray(provenance.sourceUrls) && provenance.sourceUrls.length > 0 && provenance.sourceUrls.every(url), `${path} requires observed source provenance`)
+    check(['counter-observation', 'bike-share-od', 'multiple-observed-sources'].includes(String(provenance.kind)) && nonempty(provenance.sourceName) && Array.isArray(provenance.sourceUrls) && provenance.sourceUrls.length > 0 && provenance.sourceUrls.length <= INPUT_LIMITS.sourceUrls && provenance.sourceUrls.every(url), `${path} requires observed source provenance`)
     check(finite(provenance.observedHours) && provenance.observedHours > 0, `${path} requires valid observed hours`)
     check(date(provenance.observationStart) && date(provenance.observationEnd) && Date.parse(provenance.observationStart) <= Date.parse(provenance.observationEnd) && date(value.generatedAt) && Date.parse(provenance.observationEnd) <= Date.parse(value.generatedAt), `${path} has invalid observation dates`)
+    check(object(record.candidate), `${path} requires candidate provenance`)
     if (record.candidate !== undefined) {
       const candidate = object(record.candidate) ? record.candidate : {}
       keys(candidate, ['kind', 'sourceName', 'sourceUrl', 'geometry'], errors, `${path}.candidate`)
@@ -154,7 +160,7 @@ export function parseCorridorDemandArtifact(value: unknown):
       if (candidate.geometry !== undefined) {
         const geometry = object(candidate.geometry) ? candidate.geometry : {}
         keys(geometry, ['type', 'coordinates'], errors, `${path}.candidate.geometry`)
-        check(geometry.type === 'LineString' && Array.isArray(geometry.coordinates) && geometry.coordinates.length >= 2 && geometry.coordinates.every((point) => Array.isArray(point) && point.length === 2 && point.every((n) => typeof n === 'number' && Number.isFinite(n)) && Math.abs(point[0]) <= 180 && Math.abs(point[1]) <= 90), `${path} geometry must be a WGS84 LineString`)
+        check(geometry.type === 'LineString' && Array.isArray(geometry.coordinates) && geometry.coordinates.length >= 2 && geometry.coordinates.length <= INPUT_LIMITS.geometryPoints && geometry.coordinates.every((point) => Array.isArray(point) && point.length === 2 && point.every((n) => typeof n === 'number' && Number.isFinite(n)) && Math.abs(point[0]) <= 180 && Math.abs(point[1]) <= 90), `${path} geometry must be a bounded WGS84 LineString`)
       }
     }
   }

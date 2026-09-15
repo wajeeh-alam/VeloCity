@@ -7,6 +7,9 @@ import { simulateCorridor } from './corridorSimulation.ts'
 import { generatePortfolioRollout } from './corridorPortfolio.ts'
 import type { SimulationNetwork } from './corridorNetworkSimulation.ts'
 import { normalizeScoreInputs, SCORE_KEYS } from './corridorScoring.ts'
+import { INPUT_LIMITS } from './corridorInputLimits.ts'
+import { validateSimulationNetwork } from './corridorNetworkSimulation.ts'
+import { DEMO_SIMULATION_NETWORK, DEMO_NETWORK_METADATA } from '../data/demandNetworkFixture.ts'
 
 const scores = normalizeScoreInputs(Object.fromEntries(SCORE_KEYS.map((key) => [key, 55])))
 const corridor = (id = 'link'): Corridor => ({ id, name: id, subtitle: '', tier: 'Top', meanScore: 99, inputs: scores, path: 'M 0 0 L 10 10', color: '#000', rolloutYear: 1, plannedRolloutYear: 1, summary: '' })
@@ -26,20 +29,22 @@ function artifact(): CorridorDemandArtifact {
       corridorId: 'link', prediction: 1.25, uncertainty: { lower: 0.8, upper: 1.8, coverage: 0.9 },
       features: { ...features, hash: hashFeatureSnapshot(features) },
       observedDemandProvenance: { kind: 'counter-observation', sourceName: 'Toronto counters', sourceUrls: ['https://open.toronto.ca/'], observationStart: '2024-06-01', observationEnd: '2024-06-30', observedHours: 600 },
+      candidate: { kind: 'exploratory', sourceName: 'Test candidate fixture', sourceUrl: 'https://example.com/test-candidate' },
     }],
   }
 }
 
 function network(): SimulationNetwork {
   return {
-    version: 'network-1', sourceName: 'Test network fixture', sourceUrl: 'https://example.com/test-network', accessibilityMinutes: 10, stressPenalty: 3,
+    schemaVersion: 'velocity.simulation-network.v1', coordinateReferenceSystem: 'EPSG:4326',
+    version: 'network-1', sourceName: 'Test network fixture', sourceUrl: 'https://example.com/test-network', accessibilityMinutes: 10, stressPenalty: 3, maxLowStressDetourRatio: 3,
     nodes: [
-      { id: 'a', x: 0, y: 0, population: 100, destinations: 0 },
-      { id: 'b', x: 10, y: 0, population: 0, destinations: 2 },
-      { id: 'c', x: 0, y: 10, population: 50, destinations: 0 },
+      { id: 'a', longitude: -79.4, latitude: 43.7, x: 0, y: 0, population: 100, destinations: 0 },
+      { id: 'b', longitude: -79.39, latitude: 43.7, x: 10, y: 0, population: 0, destinations: 2 },
+      { id: 'c', longitude: -79.4, latitude: 43.71, x: 0, y: 10, population: 50, destinations: 0 },
     ],
     edges: [
-      { id: 'direct', from: 'a', to: 'b', minutes: 2, highStress: true, corridorId: 'link' },
+      { id: 'direct', from: 'a', to: 'b', minutes: 5, highStress: true, corridorId: 'link' },
       { id: 'detour-a', from: 'a', to: 'c', minutes: 6, highStress: false },
       { id: 'detour-b', from: 'c', to: 'b', minutes: 6, highStress: false },
     ],
@@ -112,6 +117,7 @@ test('malformed predictions, uncertainty, IDs, provenance, dates, units, hashes 
     (a) => { Reflect.set(a.records[0], 'before', {}) },
     (a) => { a.records = [] },
     (a) => { Reflect.deleteProperty(a.records[0], 'prediction') },
+    (a) => { Reflect.deleteProperty(a.records[0], 'candidate') },
   ]
   for (const mutate of mutations) { const value = artifact(); mutate(value); assert.equal(parseCorridorDemandArtifact(value).ok, false); assert.equal(run(value).mode, 'synthetic-fallback') }
   assert.equal(run(null).mode, 'synthetic-fallback')
@@ -156,7 +162,7 @@ test('inactive corridor has no build effect; a stress-only route moves conserved
 
 test('disconnected OD demand is explicitly unserved, while invalid networks fail closed', () => {
   const graph = network()
-  graph.nodes.push({ id: 'd', x: 90, y: 90, population: 0, destinations: 0 })
+  graph.nodes.push({ id: 'd', longitude: -79.5, latitude: 43.75, x: 90, y: 90, population: 0, destinations: 0 })
   graph.flows[0].to = 'd'
   const result = run(artifact(), graph)
   assert.equal(result.routes?.[0].after, null)
@@ -187,6 +193,97 @@ test('zero demand is valid and yields no weighted agents; unsafe weight overflow
   assert.equal(run(value).agents.length, 0)
   const graph = network(); graph.flows[0].weight = Number.MAX_VALUE
   assert.match(run(artifact(), graph).warnings?.[0] ?? '', /overflow/)
+})
+
+test('unchanged flows emit no rerouted agents; stress-only changes still animate', () => {
+  const graph = network()
+  graph.flows.push({ id: 'unchanged', from: 'a', to: 'c', corridorId: 'link', weight: 2 })
+  const result = run(artifact(), graph)
+  assert.ok(result.agents.length > 0)
+  assert.ok(result.agents.every((agent) => !agent.id.startsWith('unchanged')))
+  const unchanged = result.routes!.find((item) => item.flowId === 'unchanged')!
+  assert.deepEqual(unchanged.before, unchanged.after)
+  assert.equal(result.agents.reduce((sum, agent) => sum + agent.weight!, 0), 3.125)
+  const inactive = simulateCorridor(corridor(), { demandArtifact: artifact(), network: graph, networkState: { ...state, activeCorridorIds: [] } })
+  assert.equal(inactive.agents.length, 0)
+  graph.edges = [graph.edges[0]]
+  graph.flows = [graph.flows[0]]
+  assert.ok(run(artifact(), graph).agents.length > 0)
+})
+
+test('geographic routes are ordered WGS84 positions independent of optional SVG coordinates', () => {
+  const graph = network()
+  for (const node of graph.nodes) { delete node.x; delete node.y }
+  const result = run(artifact(), graph)
+  assert.equal(result.routes?.[0].after?.coordinateReferenceSystem, 'EPSG:4326')
+  assert.deepEqual(result.routes?.[0].after?.coordinates, [[-79.4, 43.7], [-79.39, 43.7]])
+  graph.nodes[0].latitude = 91
+  assert.equal(run(artifact(), graph).mode, 'synthetic-fallback')
+  graph.nodes[0].latitude = 43.7
+  Reflect.set(graph, 'coordinateReferenceSystem', 'EPSG:3857')
+  assert.equal(run(artifact(), graph).mode, 'synthetic-fallback')
+})
+
+test('stress tradeoff and maximum detour prevent arbitrary safe-route detours', () => {
+  const graph = network()
+  graph.edges[0].minutes = 1
+  const result = run(artifact(), graph)
+  assert.deepEqual(result.routes?.[0].before?.edgeIds, ['direct'])
+  assert.equal(result.routes?.[0].before?.highStressEdges, 1)
+  // Even a huge stress aversion cannot bypass the hard detour cap.
+  graph.stressPenalty = 100
+  assert.deepEqual(run(artifact(), graph).routes?.[0].before?.edgeIds, ['direct'])
+})
+
+test('oversized demand collections and strings fail before feature hashing', () => {
+  const mutations: Array<(value: CorridorDemandArtifact) => void> = [
+    (value) => { value.records = Array.from({ length: INPUT_LIMITS.records + 1 }, () => value.records[0]) },
+    (value) => { value.model.validation.trainGroupIds = Array(INPUT_LIMITS.spatialGroups + 1).fill('group') },
+    (value) => { value.artifactId = 'a'.repeat(INPUT_LIMITS.stringLength + 1) },
+    (value) => { value.records[0].features.raw = Object.fromEntries(Array.from({ length: INPUT_LIMITS.rawFeatures + 1 }, (_, index) => [`f${index}`, index])) },
+    (value) => { value.records[0].candidate.geometry = { type: 'LineString', coordinates: Array.from({ length: INPUT_LIMITS.geometryPoints + 1 }, () => [-79, 43]) } },
+    (value) => { value.records[0].observedDemandProvenance.sourceUrls = Array(INPUT_LIMITS.sourceUrls + 1).fill('https://example.com') },
+  ]
+  for (const mutate of mutations) {
+    const value = artifact(); mutate(value)
+    const result = parseCorridorDemandArtifact(value)
+    assert.equal(result.ok, false)
+    if (!result.ok) assert.ok(result.errors.length <= INPUT_LIMITS.errors)
+  }
+  const manyErrors = { records: Array(40).fill({}) }
+  const result = parseCorridorDemandArtifact(manyErrors)
+  assert.equal(result.ok, false)
+  if (!result.ok) assert.ok(result.errors.length <= INPUT_LIMITS.errors)
+  const circular: Record<string, unknown> = {}; circular.self = circular
+  assert.equal(parseCorridorDemandArtifact(circular).ok, false)
+})
+
+test('network cardinality and routing-work budgets reject oversized inputs before routing', () => {
+  for (const field of ['nodes', 'edges', 'flows'] as const) {
+    const graph = network()
+    const limit = field === 'nodes' ? INPUT_LIMITS.networkNodes : field === 'edges' ? INPUT_LIMITS.networkEdges : INPUT_LIMITS.networkFlows
+    Reflect.set(graph, field, Array(limit + 1).fill(graph[field][0]))
+    assert.match(validateSimulationNetwork(graph).join(';'), /cardinality/)
+    assert.equal(run(artifact(), graph).mode, 'synthetic-fallback')
+  }
+  const graph = network()
+  graph.nodes = Array.from({ length: INPUT_LIMITS.networkNodes }, (_, index) => ({ id: `n${index}`, longitude: -79, latitude: 43, population: 1, destinations: 1 }))
+  graph.edges = Array.from({ length: INPUT_LIMITS.networkNodes - 1 }, (_, index) => ({ id: `e${index}`, from: `n${index}`, to: `n${index + 1}`, minutes: 1, highStress: true, corridorId: 'link' }))
+  graph.flows = [{ id: 'flow', from: 'n0', to: 'n47', corridorId: 'link', weight: 1 }]
+  assert.match(validateSimulationNetwork(graph).join(';'), /work budget/)
+  const malformed = network(); malformed.edges = Array.from({ length: 100 }, (_, index) => ({ ...malformed.edges[0], id: `e${index}`, minutes: -1 }))
+  assert.ok(validateSimulationNetwork(malformed).length <= INPUT_LIMITS.errors)
+})
+
+test('versioned host-ready demo network exercises A→B adapter without being presented as observations', () => {
+  assert.equal(DEMO_NETWORK_METADATA.isIllustrative, true)
+  assert.deepEqual(validateSimulationNetwork(DEMO_SIMULATION_NETWORK), [])
+  const demand = artifact(); demand.records[0].corridorId = 'eglinton-east'
+  const result = simulateCorridor(corridor('eglinton-east'), { demandArtifact: demand, network: DEMO_SIMULATION_NETWORK, networkState: { ...state, activeCorridorIds: ['eglinton-east'] } })
+  assert.equal(result.mode, 'trained-artifact')
+  assert.deepEqual(result.routes?.[0].after?.edgeIds, ['demo-direct'])
+  assert.equal(result.networkProvenance?.isIllustrative, true)
+  assert.match(result.disclaimer ?? '', /Synthetic routing network/)
 })
 
 test('portfolio ranking ignores stale tiers, ties by stable ID, schedules prior-year dependencies', () => {

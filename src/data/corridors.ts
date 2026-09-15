@@ -7,6 +7,8 @@ export { DEMAND_ARTIFACT_SCHEMA_VERSION, DEMAND_TARGET, canonicalFeatureSnapshot
 export type { CorridorDemandArtifact, DemandPrediction, DemandFeatureSnapshot } from '../lib/corridorDemandArtifact.ts'
 export type { SimulationNetwork, NetworkNode, NetworkEdge, DemandFlow, ScenarioRoute, RouteResult } from '../lib/corridorNetworkSimulation.ts'
 export { validateSimulationNetwork } from '../lib/corridorNetworkSimulation.ts'
+export { INPUT_LIMITS } from '../lib/corridorInputLimits.ts'
+export { DEMO_SIMULATION_NETWORK, DEMO_NETWORK_METADATA } from './demandNetworkFixture.ts'
 export { generatePortfolioRollout } from '../lib/corridorPortfolio.ts'
 export type { PortfolioCandidate, PortfolioRollout } from '../lib/corridorPortfolio.ts'
 import {
