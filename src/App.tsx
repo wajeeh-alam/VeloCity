@@ -182,7 +182,7 @@ function App() {
             <div><span className="eyebrow">Corridor evidence</span><h2>{selected.name}</h2><p>{selected.subtitle}</p></div>
             <div className="score-ring" style={{ '--score-angle': `${selected.priority.score * 3.6}deg` } as CSSProperties}><b>{Math.round(selected.priority.score)}</b><small>/100</small></div>
           </div>
-          <div className="priority-banner"><span>●</span><div><b>{selected.priority.tier} priority · rank {selected.priority.rank}</b><small>{selected.sourceStatus}</small></div></div>
+          <div className="priority-banner"><span>●</span><div><b>{selected.priority.tier} priority · rank {selected.priority.rank}</b></div></div>
 
           <section className="model-evidence">
             <div className="profile-head"><b>Trained demand evidence</b><span>{selected.evidence.modelBeatBaseline ? 'Beats baseline' : 'Below baseline'}</span></div>
