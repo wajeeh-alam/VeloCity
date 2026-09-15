@@ -8,14 +8,14 @@ VeloCity combines observed cycling demand, potential demand, road danger, access
 
 ## Current status
 
-Member A has trained a random-forest demand model on 754 June 2024 counter observations (10 training sites and 3 test sites) and exported 20 official candidate segments to `public/data/corridor-demand.json`. Held-out relative MAE is 0.675 versus the training-median baseline's 1.115. The React UI and legacy corridor catalogue still contain placeholders. See [the Member B handoff](data/TRAINING.md) before integration.
+Member A trained a random-forest demand model on 754 June 2024 counter observations (10 training sites and 3 test sites) and exported 20 official candidate segments. Held-out relative MAE is 0.675 versus the training-median baseline's 1.115. Member B's deterministic scenario layer is joined with that evidence in `public/data/corridor-opportunities.json`. The React UI remains Member C's work.
 
 ## Sixty-second demo
 
 1. Select a plan-backed or exploratory corridor.
 2. Review its nine normalized evidence inputs and rating.
 3. Virtually build the connection.
-4. Watch a representative sample of weighted travel-demand agents reroute.
+4. Watch representative weighted agents use the official candidate alignment.
 5. Compare low-stress trips, population connected, destinations reached and dangerous segments avoided.
 6. Advance through an illustrative Year 1–3 portfolio.
 
@@ -36,10 +36,10 @@ The demand target is **relative bicycles per observed hour**, not a precise fore
 
 ```mermaid
 flowchart LR
-  A[Toronto Open Data + Bike Share + OSM] --> B[Member A preprocessing]
+  A[Toronto Open Data + Bike Share] --> B[Member A preprocessing]
   B --> C[Demand model + spatial validation]
   C --> D[Versioned corridor evidence]
-  D --> E[Member B routing + simulation]
+  D --> E[Member B illustrative scenarios + portfolio]
   E --> F[Static JSON and GeoJSON]
   F --> G[Member C React dashboard]
 ```
@@ -82,10 +82,12 @@ Commit these small, host-ready artifacts:
 | `public/data/model-metrics.json` | Members B and C | Baseline/model validation and selected strategy |
 | `public/data/data-manifest.json` | Everyone | Provenance, status and limitations |
 | `data/contracts/corridor-demand.v2.schema.json` | Everyone | Evidence-only v2 demand contract |
+| `public/data/corridor-opportunities.json` | Member C | Joined evidence, scenario comparison, weighted agents and Year 1–3 placement |
+| `data/contracts/corridor-opportunities.v1.schema.json` | Member C | Joined handoff contract |
 
-Do **not** send raw archives through Git. Push the files above to `feature/data-model`; if another member needs raw data, share an external read-only folder plus its checksum. Announce schema changes before pushing them.
+Do **not** send raw archives through Git. If another member needs raw data, share an external read-only folder plus its checksum. Announce schema changes before pushing them.
 
-Member B joins by `corridorId` and adapts its v1 prediction loader to accept the v2 demand contract. These real candidate IDs differ from B's synthetic catalogue IDs. B owns scenario outputs; A's `productionEligible` flag only means the demand model beat the baseline. Member C must load `data-manifest.json` warnings alongside the evidence and distinguish trained demand from synthetic simulation.
+Member B's generated scenario layer joins by `corridorId`; these real candidate IDs differ from the six legacy synthetic IDs. A's `productionEligible` flag only means the demand model beat the baseline. Member C should follow [`data/MEMBER_C_HANDOFF.md`](data/MEMBER_C_HANDOFF.md) and visibly distinguish trained demand evidence from synthetic scenario comparisons.
 
 ## Development and hosting
 
@@ -94,6 +96,8 @@ npm run dev
 npm run lint
 npm test
 npm run data:validate
+npm run opportunities:generate
+npm run handoff:check
 npm run build
 npm run preview
 ```
@@ -106,7 +110,7 @@ GitHub Pages deployment is configured in `.github/workflows/deploy-pages.yml`. I
 - Precompute the strongest 10 scenarios and animate only representative agents.
 - Exclude live model training, arbitrary route drawing, exhaustive citywide optimization and precise engineering costs.
 - Bike Share has geographic and membership bias; a one-month sample is seasonal.
-- Routes are inferred rather than GPS-observed.
+- Candidate alignments come from the City plan dataset; no pathfinding or alternate-route inference is performed.
 - Counter timing and coverage are inconsistent.
 - Engineering feasibility, road width, utilities, consultation and approvals remain outside the MVP.
 

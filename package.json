@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "test": "node --test src/lib/corridorDomain.test.ts",
+    "test": "node --test src/lib/corridorDomain.test.ts src/data/opportunities.test.ts",
     "preview": "vite preview",
     "data:fetch": "node scripts/fetch-data.mjs",
     "data:prepare:bike-share": "python3 scripts/prepare_bike_share.py",
@@ -16,9 +16,13 @@
     "pretrain:validate": "node scripts/validate-pretraining.mjs",
     "pretrain:check": "npm run data:validate && npm run pretrain:validate && npm test && npm run lint && npm run build",
     "model:train": "npm run pretrain:check && python3 scripts/train_demand_model.py && npm run model:export",
-    "model:export": "python3 scripts/export_corridor_demand.py && npm run demand:validate",
+    "model:export": "python3 scripts/export_corridor_demand.py && npm run demand:validate && npm run opportunities:generate && npm run opportunities:validate",
     "demand:validate": "node scripts/validate-demand.mjs",
-    "test:demand": "node --test scripts/demand.test.mjs"
+    "test:demand": "node --test scripts/demand.test.mjs",
+    "opportunities:generate": "node scripts/generate-opportunities.mjs",
+    "opportunities:validate": "node scripts/validate-opportunities.mjs",
+    "test:opportunities": "node --test scripts/opportunities.test.mjs",
+    "handoff:check": "npm run demand:validate && npm run opportunities:validate && npm run test:demand && npm run test:opportunities && npm test && npm run lint && npm run build"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
