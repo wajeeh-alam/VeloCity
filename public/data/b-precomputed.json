@@ -3,28 +3,31 @@
   "coordinateReferenceSystem": "EPSG:4326",
   "dataStatus": "osm-routing-analysis",
   "checksums": {
-    "network": "c5d53a5fd367d39da5cdd58f97b8f95d4d94fcbc760ab15d55620c34dfc6fec1",
-    "osm": "80f6f8ba70eb92ce44e1c138b8850b2d7164fa3f5b8c340c429f6f9f7f64df38",
+    "network": "69bec7620ef1c118377e69669b2ebe7e70ba2932ca995ca8cb023cb4d70e9814",
+    "osm": "5db6f11ece48d9be27610e311a940a678df629457eb34fe90015d857f4499f0c",
     "flows": "d270406c5e76cfa23bef65e8019f40b060deb9bc96a0d044c5f0b04b3c388e93",
-    "candidates": "d055b141285f1e1c5b4c61d6b66ccd7e30da37fd65f0c41606b72bb9a9dab657"
+    "candidates": "d055b141285f1e1c5b4c61d6b66ccd7e30da37fd65f0c41606b72bb9a9dab657",
+    "sourceManifest": "2bed682b6e32176df68f6109a2d41d6446fa136463d92eeadd3833894fafffa0"
   },
   "source": {
     "name": "City of Toronto Cycling Network",
     "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/abbe5ee3-e249-4f86-a219-f0022eaddcc9/resource/023da9a2-8848-4e10-9cad-e7f9119cd874/download/cycling-network-4326.geojson",
     "osm": "https://www.openstreetmap.org/copyright",
-    "osmSnapshot": "2026-09-15T16:31:23.863Z"
+    "osmSnapshot": "2026-09-15T16:31:23.863Z",
+    "snapshotManifest": "data/b-source/v1/manifest.json",
+    "snapshotLicense": "ODbL-1.0 (OSM); Open Government Licence – Toronto (cycling infrastructure)"
   },
   "graph": {
-    "nodes": 27525,
-    "edges": 28249,
+    "nodes": 24685,
+    "edges": 25375,
     "exclusions": {
-      "forbiddenWays": 17349,
-      "directionalWays": 1079
+      "forbiddenWays": 17716,
+      "directionalWays": 1065
     },
     "stressEvidence": {
-      "osmLowStressEdges": 21459,
-      "torontoEnrichedEdges": 821,
-      "highStressEdges": 5969
+      "osmLowStressEdges": 21444,
+      "torontoEnrichedEdges": 614,
+      "highStressEdges": 3317
     }
   },
   "observationPeriod": "2024-06",
@@ -211,7 +214,7 @@
           "network": {
             "schemaVersion": "velocity.simulation-network.v1",
             "coordinateReferenceSystem": "EPSG:4326",
-            "version": "osm-v1-80f6f8ba70eb",
+            "version": "osm-v1-5db6f11ece48",
             "sourceName": "OpenStreetMap highway topology enriched with Toronto cycling infrastructure",
             "sourceUrl": "https://www.openstreetmap.org/copyright",
             "isIllustrative": false,
@@ -456,7 +459,7 @@
           "network": {
             "schemaVersion": "velocity.simulation-network.v1",
             "coordinateReferenceSystem": "EPSG:4326",
-            "version": "osm-v1-80f6f8ba70eb",
+            "version": "osm-v1-5db6f11ece48",
             "sourceName": "OpenStreetMap highway topology enriched with Toronto cycling infrastructure",
             "sourceUrl": "https://www.openstreetmap.org/copyright",
             "isIllustrative": false,
@@ -645,7 +648,7 @@
           "network": {
             "schemaVersion": "velocity.simulation-network.v1",
             "coordinateReferenceSystem": "EPSG:4326",
-            "version": "osm-v1-80f6f8ba70eb",
+            "version": "osm-v1-5db6f11ece48",
             "sourceName": "OpenStreetMap highway topology enriched with Toronto cycling infrastructure",
             "sourceUrl": "https://www.openstreetmap.org/copyright",
             "isIllustrative": false,
@@ -890,7 +893,7 @@
           "network": {
             "schemaVersion": "velocity.simulation-network.v1",
             "coordinateReferenceSystem": "EPSG:4326",
-            "version": "osm-v1-80f6f8ba70eb",
+            "version": "osm-v1-5db6f11ece48",
             "sourceName": "OpenStreetMap highway topology enriched with Toronto cycling infrastructure",
             "sourceUrl": "https://www.openstreetmap.org/copyright",
             "isIllustrative": false,
@@ -1541,47 +1544,52 @@
     }
   ],
   "portfolio": {
-    "dataStatus": "unverified-candidate-scores",
+    "dataStatus": "routing-ready-only",
     "years": [
       {
         "horizonYear": 1,
         "builtCorridorIds": [
-          "fixture-east-west",
           "fixture-core-weakness"
         ],
         "activeCorridorIds": [
-          "fixture-core-weakness",
-          "fixture-east-west"
+          "fixture-core-weakness"
         ]
       },
       {
         "horizonYear": 2,
-        "builtCorridorIds": [
-          "fixture-north-south"
-        ],
+        "builtCorridorIds": [],
         "activeCorridorIds": [
-          "fixture-core-weakness",
-          "fixture-east-west",
-          "fixture-north-south"
+          "fixture-core-weakness"
         ]
       },
       {
         "horizonYear": 3,
         "builtCorridorIds": [],
         "activeCorridorIds": [
-          "fixture-core-weakness",
-          "fixture-east-west",
-          "fixture-north-south"
+          "fixture-core-weakness"
         ]
       }
     ],
     "rankedCorridorIds": [
-      "fixture-east-west",
-      "fixture-core-weakness",
-      "fixture-north-south"
+      "fixture-core-weakness"
     ],
     "unbuiltCorridorIds": [],
-    "warnings": []
+    "warnings": [],
+    "excludedCandidates": [
+      {
+        "corridorId": "fixture-east-west",
+        "reasons": [
+          "Candidate cannot be conflated to a constrained connected OSM path",
+          "Route-complete bounded coverage below 20% of connected trips"
+        ]
+      },
+      {
+        "corridorId": "fixture-north-south",
+        "reasons": [
+          "Candidate cannot be conflated to a constrained connected OSM path"
+        ]
+      }
+    ]
   },
   "scenarios": [
     {

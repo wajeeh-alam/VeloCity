@@ -3,6 +3,8 @@ import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import process from 'node:process'
+import { gunzipSync } from 'node:zlib'
+import { isDeepStrictEqual } from 'node:util'
 import Ajv from 'ajv'
 import { validateSimulationNetwork, simulateDemandNetwork } from '../src/lib/corridorNetworkSimulation.ts'
 import { parseCorridorDemandArtifact } from '../src/lib/corridorDemandArtifact.ts'
@@ -11,7 +13,7 @@ import { evaluateScore } from '../src/lib/corridorScoring.ts'
 import { buildGraph, adjacency, route, snap, matchCandidate, compare } from './b-osm-graph.mjs'
 
 export const digest = (value) => createHash('sha256').update(value).digest('hex')
-export const INPUT_FILES = { network: 'data/raw/cycling-network.geojson', osm: 'data/raw/b-osm-network.json', flows: 'public/data/flows.json', candidates: 'public/data/corridors.geojson' }
+export const INPUT_FILES = { network: 'data/b-source/v1/cycling-network.geojson.gz', osm: 'data/b-source/v1/b-osm-network.json.gz', flows: 'public/data/flows.json', candidates: 'public/data/corridors.geojson', sourceManifest: 'data/b-source/v1/manifest.json' }
 const assumptions = [
   'OSM node identities and highway ways define connectivity. Geometric crossings are not joined. Forbidden roads and bicycle access restrictions are excluded.',
   'B v1 supports bidirectional edges only: one-way ways without explicit bicycle contraflow permission are omitted. Turn restrictions are not modeled; this is analysis, not navigation guidance.',
@@ -100,7 +102,13 @@ export function prepareB({ raw, osm, flows, candidates, source, checksums, deman
     const blockers = [...errors, ...(!parsed.ok ? parsed.errors : !record ? [`Missing demand record: ${id}`] : alignmentErrors)]
     scenarios.push({ corridorId: id, candidateStatus, status: blockers.length ? 'blocked' : 'precomputed', blockers, simulations: blockers.length ? [] : partitions.map((partition) => ({ partitionId: partition.partitionId, simulation: simulateDemandNetwork(corridor, parsed.artifact, partition.network, { horizonYear: 1, activeCorridorIds: [id] }) })) })
   }
-  const portfolio = generatePortfolioRollout(portfolioCandidates)
+  const ready = new Set(networks.filter((network) => network.status === 'ready').map((network) => network.corridorId))
+  const rollout = generatePortfolioRollout(portfolioCandidates.filter(({ corridor }) => ready.has(corridor.id)))
+  const portfolio = {
+    dataStatus: 'routing-ready-only',
+    ...rollout,
+    excludedCandidates: networks.filter((network) => network.status === 'blocked').map((network) => ({ corridorId: network.corridorId, reasons: network.errors })),
+  }
   if (demandErrors.length) for (const scenario of scenarios) {
     scenario.status = 'blocked'
     scenario.blockers = [...new Set([...scenario.blockers, ...demandErrors])]
@@ -111,7 +119,35 @@ export function prepareB({ raw, osm, flows, candidates, source, checksums, deman
     item.simulation.networkState = { horizonYear: year.horizonYear, activeCorridorIds: [scenario.corridorId] }
     item.simulation.warnings.unshift(`Candidate status: ${scenario.candidateStatus}. Geometry is not a verified construction scope. Population and destination metrics are unavailable. Results cover only retained OD partitions.`)
   }
-  return { schemaVersion: 'velocity.b-precompute.v2', coordinateReferenceSystem: 'EPSG:4326', dataStatus: 'osm-routing-analysis', checksums, source: { name: source.title, url: source.download_url, osm: 'https://www.openstreetmap.org/copyright', osmSnapshot: osm.osm3s.timestamp_osm_base }, graph: { nodes: graph.nodes.size, edges: graph.edges.length, exclusions: graph.exclusions, stressEvidence: graph.evidence }, observationPeriod: flows.period, assumptions, demandStatus: demandErrors.length ? 'blocked' : 'validated', demandErrors, networks, portfolio: { dataStatus: 'unverified-candidate-scores', ...portfolio }, scenarios }
+  return { schemaVersion: 'velocity.b-precompute.v2', coordinateReferenceSystem: 'EPSG:4326', dataStatus: 'osm-routing-analysis', checksums, source: { name: source.title, url: source.download_url, osm: 'https://www.openstreetmap.org/copyright', osmSnapshot: osm.osm3s.timestamp_osm_base, snapshotManifest: INPUT_FILES.sourceManifest, snapshotLicense: 'ODbL-1.0 (OSM); Open Government Licence – Toronto (cycling infrastructure)' }, graph: { nodes: graph.nodes.size, edges: graph.edges.length, exclusions: graph.exclusions, stressEvidence: graph.evidence }, observationPeriod: flows.period, assumptions, demandStatus: demandErrors.length ? 'blocked' : 'validated', demandErrors, networks, portfolio, scenarios }
+}
+
+export function validateCanonicalBundle(bundle, inputs) {
+  const regenerated = prepareB(inputs)
+  if (!isDeepStrictEqual(bundle, regenerated)) throw Error('Canonical regeneration mismatch: committed B output does not match verified inputs')
+}
+
+async function loadCanonicalInputs(root, bundle) {
+  const fileBytes = Object.fromEntries(await Promise.all(Object.entries(INPUT_FILES).map(async ([key, file]) => [key, await readFile(path.join(root, file))])))
+  const manifest = JSON.parse(fileBytes.sourceManifest)
+  if (manifest.schemaVersion !== 'velocity.b-source.v1') throw Error('Unsupported B source manifest')
+  const unpack = {}
+  for (const key of ['network', 'osm']) {
+    const entry = manifest.files?.find((item) => item.role === key)
+    if (!entry || entry.path !== INPUT_FILES[key] || entry.sha256 !== digest(fileBytes[key]) || entry.bytes !== fileBytes[key].length) throw Error(`Pinned source manifest mismatch: ${key}`)
+    const raw = gunzipSync(fileBytes[key])
+    if (entry.uncompressedSha256 !== digest(raw) || entry.uncompressedBytes !== raw.length) throw Error(`Pinned source content mismatch: ${key}`)
+    unpack[key] = JSON.parse(raw)
+  }
+  const networkProvenance = manifest.provenance?.find((item) => item.role === 'network')
+  if (!networkProvenance?.title || !networkProvenance?.url) throw Error('Pinned source provenance missing: network')
+  const demandPath = bundle?.checksums?.demandPath ?? 'public/data/corridor-demand.json'
+  if (path.isAbsolute(demandPath) || demandPath.split(/[\\/]/).includes('..')) throw Error('Demand path must remain inside checkout')
+  let demand, demandBytes
+  try { demandBytes = await readFile(path.join(root, demandPath)); demand = JSON.parse(demandBytes) } catch (error) { if (error.code !== 'ENOENT') throw error }
+  const checksums = Object.fromEntries(Object.entries(fileBytes).map(([key, bytes]) => [key, digest(bytes)]))
+  if (demandBytes) { checksums.demand = digest(demandBytes); checksums.demandPath = demandPath }
+  return { raw: unpack.network, osm: unpack.osm, flows: JSON.parse(fileBytes.flows), candidates: JSON.parse(fileBytes.candidates), source: { title: networkProvenance.title, download_url: networkProvenance.url }, checksums, demand }
 }
 
 export async function validateBundle(bundle, root = process.cwd(), verifySources = false) {
@@ -146,13 +182,17 @@ export async function validateBundle(bundle, root = process.cwd(), verifySources
     if (item.status === 'ready' && (item.coverage.connectedFraction < 0.8 || item.coverage.retainedFraction < 0.2 || item.coverage.retainedOdPairs < 3)) throw Error('Readiness threshold violated')
   }
   const active = new Set()
+  const ready = new Set(bundle.networks.filter((network) => network.status === 'ready').map((network) => network.corridorId))
+  const blocked = new Map(bundle.networks.filter((network) => network.status === 'blocked').map((network) => [network.corridorId, network.errors]))
   for (const [index, year] of bundle.portfolio.years.entries()) {
     if (year.horizonYear !== index + 1) throw Error('Invalid portfolio year')
-    for (const id of year.builtCorridorIds) { if (!known.has(id) || active.has(id)) throw Error('Unknown or repeated portfolio build'); active.add(id) }
+    for (const id of year.builtCorridorIds) { if (!ready.has(id) || active.has(id)) throw Error('Blocked, unknown or repeated portfolio build'); active.add(id) }
     if (JSON.stringify([...active].sort(compare)) !== JSON.stringify([...year.activeCorridorIds].sort(compare))) throw Error('Noncumulative portfolio')
   }
-  if (bundle.portfolio.rankedCorridorIds.length !== known.size || bundle.portfolio.rankedCorridorIds.some((id) => !known.has(id))) throw Error('Unknown portfolio ranking')
-  if (bundle.portfolio.unbuiltCorridorIds.some((id) => !known.has(id) || active.has(id))) throw Error('Invalid unbuilt portfolio IDs')
+  if (bundle.portfolio.rankedCorridorIds.length !== ready.size || bundle.portfolio.rankedCorridorIds.some((id) => !ready.has(id)) || ready.size !== new Set(bundle.portfolio.rankedCorridorIds).size) throw Error('Portfolio ranking must contain ready candidates only')
+  if (bundle.portfolio.unbuiltCorridorIds.some((id) => !ready.has(id) || active.has(id))) throw Error('Invalid unbuilt portfolio IDs')
+  if (bundle.portfolio.excludedCandidates.length !== blocked.size || new Set(bundle.portfolio.excludedCandidates.map((item) => item.corridorId)).size !== blocked.size) throw Error('Portfolio blocked-candidate coverage mismatch')
+  for (const excluded of bundle.portfolio.excludedCandidates) if (!blocked.has(excluded.corridorId) || !isDeepStrictEqual(excluded.reasons, blocked.get(excluded.corridorId))) throw Error('Portfolio exclusion reasons mismatch')
   if (bundle.scenarios.length !== known.size || new Set(bundle.scenarios.map((s) => s.corridorId)).size !== known.size) throw Error('Scenario candidate coverage mismatch')
   for (const scenario of bundle.scenarios) {
     const network = bundle.networks.find((n) => n.corridorId === scenario.corridorId)
@@ -165,19 +205,19 @@ export async function validateBundle(bundle, root = process.cwd(), verifySources
   }
   if (verifySources) {
     for (const [key, relative] of Object.entries(INPUT_FILES)) if (digest(await readFile(path.join(root, relative))) !== bundle.checksums[key]) throw Error(`Source checksum mismatch: ${relative}`)
-    if (bundle.checksums.demand && (!bundle.checksums.demandPath || digest(await readFile(path.resolve(root, bundle.checksums.demandPath))) !== bundle.checksums.demand)) throw Error('Demand checksum mismatch')
+    if (bundle.checksums.demand) {
+      const demandPath = bundle.checksums.demandPath
+      if (!demandPath || path.isAbsolute(demandPath) || demandPath.split(/[\\/]/).includes('..') || digest(await readFile(path.join(root, demandPath))) !== bundle.checksums.demand) throw Error('Demand checksum mismatch')
+    }
+    validateCanonicalBundle(bundle, await loadCanonicalInputs(root, bundle))
   }
 }
 
 async function main() {
   const output = 'public/data/b-precomputed.json'
   if (process.argv.includes('--validate')) { await validateBundle(JSON.parse(await readFile(output, 'utf8')), process.cwd(), true); console.log('B schema, routing, readiness, portfolio, OD accounting and source checksums validated.'); return }
-  const bytes = Object.fromEntries(await Promise.all(Object.entries(INPUT_FILES).map(async ([key, file]) => [key, await readFile(file)])))
-  const registry = JSON.parse(await readFile('data/source-registry.json', 'utf8'))
-  const demandPath = process.argv.find((a) => a.startsWith('--demand='))?.slice(9) ?? 'public/data/corridor-demand.json'
-  let demand, demandBytes
-  try { demandBytes = await readFile(demandPath); demand = JSON.parse(demandBytes) } catch (error) { if (error.code !== 'ENOENT') throw error }
-  const result = prepareB({ raw: JSON.parse(bytes.network), osm: JSON.parse(bytes.osm), flows: JSON.parse(bytes.flows), candidates: JSON.parse(bytes.candidates), source: registry.sources.find((s) => s.id === 'cycling-network'), checksums: { ...Object.fromEntries(Object.entries(bytes).map(([k, b]) => [k, digest(b)])), ...(demandBytes ? { demand: digest(demandBytes), demandPath } : {}) }, demand })
+  const demandPath = process.argv.find((a) => a.startsWith('--demand='))?.slice(9)
+  const result = prepareB(await loadCanonicalInputs(process.cwd(), demandPath ? { checksums: { demandPath } } : undefined))
   await validateBundle(result)
   await writeFile(output, `${JSON.stringify(result, null, 2)}\n`)
   console.log(`B: ${result.graph.nodes} OSM nodes, ${result.graph.edges} edges. Demand ${result.demandStatus}. A handoff: public/data/corridor-demand.json; rerun b:prepare when A lands.`)

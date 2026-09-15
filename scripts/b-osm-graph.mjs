@@ -8,9 +8,42 @@ export const pointSegmentDistance = (p, a, b) => {
 export const coordinate = (n) => [n.longitude, n.latitude]
 export const toLine = (p, line) => Math.min(...line.slice(1).map((end, i) => pointSegmentDistance(p, line[i], end)))
 
+// Deliberately narrow: B publishes an undirected bicycle graph, not a general
+// purpose rendering of every OSM object carrying a highway tag.
+const ROUTABLE_HIGHWAYS = new Set([
+  'primary', 'primary_link', 'secondary', 'secondary_link', 'tertiary', 'tertiary_link',
+  'unclassified', 'residential', 'living_street', 'service', 'road', 'track', 'path',
+  'cycleway', 'footway', 'pedestrian',
+])
+const BICYCLE_ONLY_HIGHWAYS = new Set(['path', 'footway', 'pedestrian'])
+const DENIED_ACCESS = new Set(['no', 'private', 'use_sidepath'])
+const ALLOWED_BICYCLE = new Set(['yes', 'designated', 'permissive', 'destination'])
+
+/** OSM access is most-specific-first: bicycle overrides vehicle, which overrides access. */
+export function bicycleAllowed(tags = {}) {
+  if (!ROUTABLE_HIGHWAYS.has(tags.highway) || tags.indoor === 'yes') return false
+  const access = tags.bicycle ?? tags.vehicle ?? tags.access
+  if (DENIED_ACCESS.has(access)) return false
+  if (BICYCLE_ONLY_HIGHWAYS.has(tags.highway) && !ALLOWED_BICYCLE.has(tags.bicycle)) return false
+  return true
+}
+
+/** Return true when bicycle travel is directional and cannot be represented by B v1. */
+export function bicycleDirectional(tags = {}) {
+  if (tags['oneway:bicycle:conditional'] !== undefined || tags['oneway:conditional'] !== undefined) return true
+  if (tags['oneway:bicycle'] !== undefined) return !['no', '0', 'false'].includes(tags['oneway:bicycle'])
+  const contraflow = Object.entries(tags).some(([key, value]) =>
+    /^cycleway(?::(left|right|both))?$/.test(key) && /^opposite(?:_|$)/.test(value)
+      || /^cycleway(?::(left|right|both))?:oneway$/.test(key) && ['-1', 'no'].includes(value),
+  )
+  if (contraflow) return false
+  if (tags.oneway !== undefined) return !['no', '0', 'false'].includes(tags.oneway)
+  return tags.junction === 'roundabout'
+}
+
 /** OSM identities establish connectivity; geometric crossings are never joined. */
 export function buildGraph(osm, cycling) {
-  if (!osm?.elements?.length || !osm.osm3s?.timestamp_osm_base) throw Error('Missing live OSM snapshot; b:fetch must succeed before preparation')
+  if (!osm?.elements?.length || !osm.osm3s?.timestamp_osm_base) throw Error('Missing pinned OSM snapshot; run b:fetch explicitly to refresh it')
   const nodes = new Map(osm.elements.filter((e) => e.type === 'node').map((n) => {
     if (!Number.isFinite(n.lon) || !Number.isFinite(n.lat) || Math.abs(n.lon) > 180 || Math.abs(n.lat) > 90) throw Error('Invalid OSM node coordinate')
     return [`osm-n-${n.id}`, { id: `osm-n-${n.id}`, longitude: n.lon, latitude: n.lat, population: 0, destinations: 0 }]
@@ -25,9 +58,9 @@ export function buildGraph(osm, cycling) {
   const edges = [], exclusions = { forbiddenWays: 0, directionalWays: 0 }, evidence = { osmLowStressEdges: 0, torontoEnrichedEdges: 0, highStressEdges: 0 }
   for (const way of osm.elements.filter((e) => e.type === 'way').sort((a, b) => a.id - b.id)) {
     const t = way.tags ?? {}
-    if (!t.highway || ['motorway', 'motorway_link', 'trunk', 'trunk_link', 'construction', 'proposed', 'steps'].includes(t.highway) || ['no', 'private'].includes(t.access) || ['no', 'private', 'use_sidepath'].includes(t.bicycle) || ['footway', 'pedestrian'].includes(t.highway) && !['yes', 'designated'].includes(t.bicycle)) { exclusions.forbiddenWays++; continue }
+    if (!bicycleAllowed(t)) { exclusions.forbiddenWays++; continue }
     // B v1 cannot represent directed edges: omit directional ways instead of permitting illegal reverse travel.
-    if ((['yes', '1', '-1'].includes(t.oneway) || t.junction === 'roundabout') && t['oneway:bicycle'] !== 'no' && !Object.entries(t).some(([k, v]) => k.startsWith('cycleway') && /^opposite/.test(v))) { exclusions.directionalWays++; continue }
+    if (bicycleDirectional(t)) { exclusions.directionalWays++; continue }
     const speedKmh = Number.parseFloat(t.maxspeed) * (/mph/i.test(t.maxspeed ?? '') ? 1.609344 : 1)
     const tagLow = t.highway === 'cycleway' || t.highway === 'living_street' || ['path', 'track'].includes(t.highway) && ['yes', 'designated'].includes(t.bicycle) || ['residential', 'service'].includes(t.highway) && (!t.maxspeed || speedKmh <= 40) || Object.entries(t).some(([k, v]) => k.startsWith('cycleway') && ['track', 'opposite_track'].includes(v))
     for (let i = 1; i < way.nodes.length; i++) {

@@ -30,6 +30,10 @@
           "type": "string",
           "pattern": "^[a-f0-9]{64}$"
         },
+        "sourceManifest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
         "demand": {
           "type": "string",
           "pattern": "^[a-f0-9]{64}$"
@@ -42,7 +46,8 @@
         "network",
         "osm",
         "flows",
-        "candidates"
+        "candidates",
+        "sourceManifest"
       ],
       "additionalProperties": false
     },
@@ -60,13 +65,22 @@
         },
         "osmSnapshot": {
           "type": "string"
+        },
+        "snapshotManifest": {
+          "const": "data/b-source/v1/manifest.json"
+        },
+        "snapshotLicense": {
+          "type": "string",
+          "minLength": 1
         }
       },
       "required": [
         "name",
         "url",
         "osm",
-        "osmSnapshot"
+        "osmSnapshot",
+        "snapshotManifest",
+        "snapshotLicense"
       ],
       "additionalProperties": false
     },
@@ -522,7 +536,7 @@
       "type": "object",
       "properties": {
         "dataStatus": {
-          "const": "unverified-candidate-scores"
+          "const": "routing-ready-only"
         },
         "years": {
           "type": "array",
@@ -580,6 +594,22 @@
           "items": {
             "type": "string"
           }
+        },
+        "excludedCandidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "corridorId": { "type": "string" },
+              "reasons": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1
+              }
+            },
+            "required": ["corridorId", "reasons"],
+            "additionalProperties": false
+          }
         }
       },
       "required": [
@@ -587,7 +617,8 @@
         "years",
         "rankedCorridorIds",
         "unbuiltCorridorIds",
-        "warnings"
+        "warnings",
+        "excludedCandidates"
       ],
       "additionalProperties": false
     },

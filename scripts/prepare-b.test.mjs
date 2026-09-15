@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { prepareB, validateBundle } from './prepare-b.mjs'
+import { prepareB, validateBundle, validateCanonicalBundle } from './prepare-b.mjs'
 import { hashFeatureSnapshot } from '../src/lib/corridorDemandArtifact.ts'
 import { SCORE_KEYS } from '../src/lib/corridorScoring.ts'
-import { buildGraph, adjacency, route, matchCandidate } from './b-osm-graph.mjs'
+import { buildGraph, adjacency, route, matchCandidate, bicycleAllowed, bicycleDirectional } from './b-osm-graph.mjs'
 
 function input() {
   const coords = Array.from({ length: 60 }, (_, i) => [-79.42 + i * 0.001, 43.66])
@@ -14,8 +14,18 @@ function input() {
     osm: { osm3s: { timestamp_osm_base: '2026-09-15T00:00:00Z' }, elements: [...coords.map((p, i) => ({ type: 'node', id: i + 1, lon: p[0], lat: p[1] })), { type: 'way', id: 1, nodes: coords.map((_, i) => i + 1), tags: { highway: 'residential' } }] },
     candidates: { features: [{ properties: { corridor_id: 'test', name: 'Test', candidate_type: 'plan_backed', data_status: 'fixture', scores: { safety: 60, connectivity: 60, equity_population: 60, current_demand: 60, potential_demand: 60, transit: 60, barriers: 60, coverage: 60, destinations: 60 } }, geometry: { type: 'LineString', coordinates: [coords[0], coords[59]] } }] },
     source: { title: 'Test source', download_url: 'https://example.com/network' },
-    checksums: { network: 'a'.repeat(64), osm: 'd'.repeat(64), flows: 'b'.repeat(64), candidates: 'c'.repeat(64) },
+    checksums: { network: 'a'.repeat(64), osm: 'd'.repeat(64), flows: 'b'.repeat(64), candidates: 'c'.repeat(64), sourceManifest: 'e'.repeat(64) },
   }
+}
+
+function validDemand() {
+  const features = { version: 'f1', raw: { observed: 10 }, normalized: Object.fromEntries(SCORE_KEYS.map((k) => [k, 60])) }
+  const demand = {
+    schemaVersion: 'velocity.corridor-demand.v2', artifactId: 'test-demand', generatedAt: '2026-09-15',
+    model: { id: 'test', version: '1', trainedAt: '2026-09-15', datasetManifestVersion: 'd1', featureVersion: 'f1', target: 'relative-bicycles-per-observed-hour', unit: 'dimensionless-relative-hourly-demand', normalization: { referenceBicyclesPerHour: 10, fittedOn: 'training-only' }, productionEligible: true, validation: { strategy: 'spatial-holdout', grouping: 'corridor', metric: 'mae', modelValue: 1, medianBaselineValue: 2, baseline: 'training-median', lowerIsBetter: true, trainGroupIds: ['train'], testGroupIds: ['test'] } },
+    records: [{ corridorId: 'test', prediction: 2, uncertainty: { lower: 1, upper: 3, coverage: 0.9 }, features: { ...features, hash: hashFeatureSnapshot(features) }, observedDemandProvenance: { kind: 'bike-share-od', sourceName: 'Test source', sourceUrls: ['https://example.com/od'], observationStart: '2024-06-01', observationEnd: '2024-06-30', observedHours: 720 }, candidate: { kind: 'exploratory', sourceName: 'Test', sourceUrl: 'https://example.com/candidate', geometry: input().candidates.features[0].geometry } }],
+  }
+  return demand
 }
 
 test('deterministic stable graph IDs and sample; preserves OD accounting and caps', async () => {
@@ -53,13 +63,7 @@ test('missing raw, unobserved OD and unsupported CRS fail visibly', () => {
 })
 
 test('valid A handoff runs B scenario engine and conserves relative demand', () => {
-  const features = { version: 'f1', raw: { observed: 10 }, normalized: Object.fromEntries(SCORE_KEYS.map((k) => [k, 60])) }
-  const demand = {
-    schemaVersion: 'velocity.corridor-demand.v2', artifactId: 'test-demand', generatedAt: '2026-09-15',
-    model: { id: 'test', version: '1', trainedAt: '2026-09-15', datasetManifestVersion: 'd1', featureVersion: 'f1', target: 'relative-bicycles-per-observed-hour', unit: 'dimensionless-relative-hourly-demand', normalization: { referenceBicyclesPerHour: 10, fittedOn: 'training-only' }, productionEligible: true, validation: { strategy: 'spatial-holdout', grouping: 'corridor', metric: 'mae', modelValue: 1, medianBaselineValue: 2, baseline: 'training-median', lowerIsBetter: true, trainGroupIds: ['train'], testGroupIds: ['test'] } },
-    records: [{ corridorId: 'test', prediction: 2, uncertainty: { lower: 1, upper: 3, coverage: 0.9 }, features: { ...features, hash: hashFeatureSnapshot(features) }, observedDemandProvenance: { kind: 'bike-share-od', sourceName: 'Test source', sourceUrls: ['https://example.com/od'], observationStart: '2024-06-01', observationEnd: '2024-06-30', observedHours: 720 }, candidate: { kind: 'exploratory', sourceName: 'Test', sourceUrl: 'https://example.com/candidate' } }],
-  }
-  demand.records[0].candidate.geometry = input().candidates.features[0].geometry
+  const demand = validDemand()
   const result = prepareB({ ...input(), demand })
   assert.equal(result.demandStatus, 'validated')
   const scenario = result.scenarios[0]
@@ -89,6 +93,30 @@ test('OSM identities, bicycle permissions and stress tags determine graph topolo
   assert.ok(buildGraph(data.osm, data.raw).edges.length > 0)
   way.tags.bicycle = 'no'
   assert.equal(buildGraph(data.osm, data.raw).edges.length, 0)
+})
+
+test('OSM bicycle allowlist, access hierarchy and direction rules are conservative', () => {
+  for (const highway of ['motorway', 'trunk', 'construction', 'proposed', 'steps', 'corridor', 'elevator', 'platform', 'bus_stop']) assert.equal(bicycleAllowed({ highway }), false, highway)
+  assert.equal(bicycleAllowed({ highway: 'residential', access: 'no', bicycle: 'yes' }), true)
+  assert.equal(bicycleAllowed({ highway: 'residential', vehicle: 'no', bicycle: 'designated' }), true)
+  assert.equal(bicycleAllowed({ highway: 'residential', access: 'yes', vehicle: 'no' }), false)
+  assert.equal(bicycleAllowed({ highway: 'cycleway', access: 'private', bicycle: 'yes' }), true)
+  assert.equal(bicycleAllowed({ highway: 'cycleway', bicycle: 'no' }), false)
+  assert.equal(bicycleAllowed({ highway: 'footway' }), false)
+  assert.equal(bicycleAllowed({ highway: 'footway', bicycle: 'designated' }), true)
+  assert.equal(bicycleAllowed({ highway: 'service', indoor: 'yes', bicycle: 'yes' }), false)
+
+  assert.equal(bicycleDirectional({ highway: 'residential', oneway: 'yes' }), true)
+  assert.equal(bicycleDirectional({ highway: 'residential', oneway: '-1' }), true)
+  assert.equal(bicycleDirectional({ highway: 'residential', oneway: 'no', 'oneway:bicycle': 'yes' }), true)
+  assert.equal(bicycleDirectional({ highway: 'residential', oneway: 'yes', 'oneway:bicycle': 'no' }), false)
+  assert.equal(bicycleDirectional({ highway: 'residential', oneway: 'yes', cycleway: 'opposite_lane' }), false)
+  assert.equal(bicycleDirectional({ highway: 'residential', oneway: 'yes', 'cycleway:left': 'opposite_track' }), false)
+  assert.equal(bicycleDirectional({ highway: 'residential', oneway: 'yes', 'cycleway:left': 'lane', 'cycleway:left:oneway': '-1' }), false)
+  assert.equal(bicycleDirectional({ highway: 'residential', oneway: 'no', 'oneway:bicycle': '-1' }), true)
+  assert.equal(bicycleDirectional({ highway: 'residential', 'oneway:bicycle:conditional': 'yes @ (Mo-Fr)' }), true)
+  assert.equal(bicycleDirectional({ highway: 'residential', junction: 'roundabout' }), true)
+  assert.equal(bicycleDirectional({ highway: 'residential', junction: 'roundabout', oneway: 'no' }), false)
 })
 
 test('candidate conversion tags only its matched path; route partitions retain full OSM paths', () => {
@@ -136,4 +164,22 @@ test('schema and semantics reject readiness, portfolio, demand and disconnected 
   }
   const incorrectChecksum = structuredClone(base)
   await assert.rejects(validateBundle(incorrectChecksum, process.cwd(), true), /checksum/)
+})
+
+test('canonical regeneration rejects graph, match, edge cost and route mutations', () => {
+  const data = { ...input(), demand: validDemand() }
+  data.checksums.demand = 'f'.repeat(64)
+  data.checksums.demandPath = 'public/data/corridor-demand.json'
+  const base = prepareB(data)
+  const mutations = [
+    (bundle) => { bundle.graph.nodes++ },
+    (bundle) => { bundle.networks[0].match.edgeIds[0] = 'osm-w-tampered-0' },
+    (bundle) => { bundle.networks[0].partitions[0].network.edges[0].minutes += 0.01 },
+    (bundle) => { bundle.scenarios[0].simulations[0].simulation.routes[0].before.edgeIds[0] = 'osm-w-tampered-0' },
+  ]
+  for (const mutate of mutations) {
+    const bundle = structuredClone(base)
+    mutate(bundle)
+    assert.throws(() => validateCanonicalBundle(bundle, data), /Canonical regeneration mismatch/)
+  }
 })
