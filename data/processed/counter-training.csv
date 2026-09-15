@@ -1,0 +1,755 @@
+observation_date,group_id,location_direction_id,direction,observed_hours,bicycles_per_observed_hour,counter_site,longitude,latitude,bike_share_stations_1km,bike_share_trip_ends_1km,cyclist_ksi_collisions_1km,cycling_network_km_1km,neighbourhood_id,neighbourhood_population,neighbourhood_low_income_pct,neighbourhood_improvement_area,day_of_week
+2024-06-01,62a9f3857b4d,14,Northbound,24.0,2.625,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,5
+2024-06-02,62a9f3857b4d,14,Northbound,24.0,1.25,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,6
+2024-06-03,62a9f3857b4d,14,Northbound,24.0,2.333333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,0
+2024-06-04,62a9f3857b4d,14,Northbound,24.0,2.166667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,1
+2024-06-05,62a9f3857b4d,14,Northbound,24.0,1.875,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,2
+2024-06-06,62a9f3857b4d,14,Northbound,24.0,2.041667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,3
+2024-06-07,62a9f3857b4d,14,Northbound,24.0,1.333333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,4
+2024-06-08,62a9f3857b4d,14,Northbound,24.0,0.75,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,5
+2024-06-09,62a9f3857b4d,14,Northbound,24.0,0.916667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,6
+2024-06-10,62a9f3857b4d,14,Northbound,24.0,1.666667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,0
+2024-06-11,62a9f3857b4d,14,Northbound,24.0,1.791667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,1
+2024-06-12,62a9f3857b4d,14,Northbound,24.0,1.666667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,2
+2024-06-13,62a9f3857b4d,14,Northbound,24.0,1.458333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,3
+2024-06-14,62a9f3857b4d,14,Northbound,24.0,1.708333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,4
+2024-06-15,62a9f3857b4d,14,Northbound,24.0,1.625,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,5
+2024-06-16,62a9f3857b4d,14,Northbound,24.0,1.75,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,6
+2024-06-17,62a9f3857b4d,14,Northbound,24.0,1.791667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,0
+2024-06-18,62a9f3857b4d,14,Northbound,24.0,2.083333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,1
+2024-06-19,62a9f3857b4d,14,Northbound,24.0,1.0,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,2
+2024-06-20,62a9f3857b4d,14,Northbound,24.0,1.458333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,3
+2024-06-21,62a9f3857b4d,14,Northbound,24.0,1.583333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,4
+2024-06-22,62a9f3857b4d,14,Northbound,24.0,1.0,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,5
+2024-06-23,62a9f3857b4d,14,Northbound,24.0,1.25,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,6
+2024-06-24,62a9f3857b4d,14,Northbound,24.0,1.583333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,0
+2024-06-25,62a9f3857b4d,14,Northbound,24.0,1.458333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,1
+2024-06-26,62a9f3857b4d,14,Northbound,24.0,1.25,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,2
+2024-06-27,62a9f3857b4d,14,Northbound,24.0,1.916667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,3
+2024-06-28,62a9f3857b4d,14,Northbound,24.0,2.166667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,4
+2024-06-29,62a9f3857b4d,14,Northbound,24.0,1.0,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,5
+2024-06-30,62a9f3857b4d,14,Northbound,24.0,1.375,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,6
+2024-06-01,62a9f3857b4d,15,Southbound,24.0,3.083333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,5
+2024-06-02,62a9f3857b4d,15,Southbound,24.0,0.541667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,6
+2024-06-03,62a9f3857b4d,15,Southbound,24.0,1.791667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,0
+2024-06-04,62a9f3857b4d,15,Southbound,24.0,2.0,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,1
+2024-06-05,62a9f3857b4d,15,Southbound,24.0,1.583333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,2
+2024-06-06,62a9f3857b4d,15,Southbound,24.0,1.416667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,3
+2024-06-07,62a9f3857b4d,15,Southbound,24.0,0.875,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,4
+2024-06-08,62a9f3857b4d,15,Southbound,24.0,1.0,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,5
+2024-06-09,62a9f3857b4d,15,Southbound,24.0,0.916667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,6
+2024-06-10,62a9f3857b4d,15,Southbound,24.0,1.458333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,0
+2024-06-11,62a9f3857b4d,15,Southbound,24.0,1.041667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,1
+2024-06-12,62a9f3857b4d,15,Southbound,24.0,1.416667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,2
+2024-06-13,62a9f3857b4d,15,Southbound,24.0,1.125,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,3
+2024-06-14,62a9f3857b4d,15,Southbound,24.0,1.791667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,4
+2024-06-15,62a9f3857b4d,15,Southbound,24.0,1.5,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,5
+2024-06-16,62a9f3857b4d,15,Southbound,24.0,1.541667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,6
+2024-06-17,62a9f3857b4d,15,Southbound,24.0,1.333333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,0
+2024-06-18,62a9f3857b4d,15,Southbound,24.0,1.375,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,1
+2024-06-19,62a9f3857b4d,15,Southbound,24.0,0.833333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,2
+2024-06-20,62a9f3857b4d,15,Southbound,24.0,0.833333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,3
+2024-06-21,62a9f3857b4d,15,Southbound,24.0,0.916667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,4
+2024-06-22,62a9f3857b4d,15,Southbound,24.0,1.083333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,5
+2024-06-23,62a9f3857b4d,15,Southbound,24.0,0.75,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,6
+2024-06-24,62a9f3857b4d,15,Southbound,24.0,1.458333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,0
+2024-06-25,62a9f3857b4d,15,Southbound,24.0,1.083333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,1
+2024-06-26,62a9f3857b4d,15,Southbound,24.0,1.125,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,2
+2024-06-27,62a9f3857b4d,15,Southbound,24.0,1.583333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,3
+2024-06-28,62a9f3857b4d,15,Southbound,24.0,1.958333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,4
+2024-06-29,62a9f3857b4d,15,Southbound,24.0,1.041667,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,5
+2024-06-30,62a9f3857b4d,15,Southbound,24.0,0.958333,"Keele St, south of Sheppard Ave W (multi-use path)",-79.4861368,43.7444884,4,865,0,11.7024,155,17970,9.6,1,6
+2024-06-01,7563f73ef205,16,Eastbound,24.0,1.083333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,5
+2024-06-02,7563f73ef205,16,Eastbound,24.0,0.416667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,6
+2024-06-03,7563f73ef205,16,Eastbound,24.0,0.833333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,0
+2024-06-04,7563f73ef205,16,Eastbound,24.0,0.833333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,1
+2024-06-05,7563f73ef205,16,Eastbound,24.0,0.375,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,2
+2024-06-06,7563f73ef205,16,Eastbound,24.0,0.541667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,3
+2024-06-07,7563f73ef205,16,Eastbound,24.0,0.583333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,4
+2024-06-08,7563f73ef205,16,Eastbound,24.0,0.5,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,5
+2024-06-09,7563f73ef205,16,Eastbound,24.0,0.666667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,6
+2024-06-10,7563f73ef205,16,Eastbound,24.0,0.416667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,0
+2024-06-11,7563f73ef205,16,Eastbound,24.0,0.541667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,1
+2024-06-12,7563f73ef205,16,Eastbound,24.0,0.666667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,2
+2024-06-13,7563f73ef205,16,Eastbound,24.0,0.416667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,3
+2024-06-14,7563f73ef205,16,Eastbound,24.0,0.666667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,4
+2024-06-15,7563f73ef205,16,Eastbound,24.0,0.666667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,5
+2024-06-16,7563f73ef205,16,Eastbound,24.0,0.916667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,6
+2024-06-17,7563f73ef205,16,Eastbound,24.0,0.791667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,0
+2024-06-18,7563f73ef205,16,Eastbound,24.0,1.166667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,1
+2024-06-19,7563f73ef205,16,Eastbound,24.0,0.625,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,2
+2024-06-20,7563f73ef205,16,Eastbound,24.0,0.583333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,3
+2024-06-21,7563f73ef205,16,Eastbound,24.0,0.541667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,4
+2024-06-22,7563f73ef205,16,Eastbound,24.0,0.25,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,5
+2024-06-23,7563f73ef205,16,Eastbound,24.0,0.666667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,6
+2024-06-24,7563f73ef205,16,Eastbound,24.0,0.958333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,0
+2024-06-25,7563f73ef205,16,Eastbound,24.0,0.916667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,1
+2024-06-26,7563f73ef205,16,Eastbound,24.0,0.333333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,2
+2024-06-27,7563f73ef205,16,Eastbound,24.0,1.166667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,3
+2024-06-28,7563f73ef205,16,Eastbound,24.0,0.791667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,4
+2024-06-29,7563f73ef205,16,Eastbound,24.0,0.583333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,5
+2024-06-30,7563f73ef205,16,Eastbound,24.0,0.75,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,6
+2024-06-01,7563f73ef205,17,Westbound,24.0,1.125,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,5
+2024-06-02,7563f73ef205,17,Westbound,24.0,0.625,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,6
+2024-06-03,7563f73ef205,17,Westbound,24.0,0.791667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,0
+2024-06-04,7563f73ef205,17,Westbound,24.0,0.875,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,1
+2024-06-05,7563f73ef205,17,Westbound,24.0,0.833333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,2
+2024-06-06,7563f73ef205,17,Westbound,24.0,0.75,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,3
+2024-06-07,7563f73ef205,17,Westbound,24.0,1.208333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,4
+2024-06-08,7563f73ef205,17,Westbound,24.0,0.75,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,5
+2024-06-09,7563f73ef205,17,Westbound,24.0,0.875,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,6
+2024-06-10,7563f73ef205,17,Westbound,24.0,0.416667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,0
+2024-06-11,7563f73ef205,17,Westbound,24.0,0.916667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,1
+2024-06-12,7563f73ef205,17,Westbound,24.0,1.041667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,2
+2024-06-13,7563f73ef205,17,Westbound,24.0,0.5,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,3
+2024-06-14,7563f73ef205,17,Westbound,24.0,1.25,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,4
+2024-06-15,7563f73ef205,17,Westbound,24.0,0.958333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,5
+2024-06-16,7563f73ef205,17,Westbound,24.0,0.958333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,6
+2024-06-17,7563f73ef205,17,Westbound,24.0,0.833333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,0
+2024-06-18,7563f73ef205,17,Westbound,24.0,1.375,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,1
+2024-06-19,7563f73ef205,17,Westbound,24.0,1.125,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,2
+2024-06-20,7563f73ef205,17,Westbound,24.0,0.666667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,3
+2024-06-21,7563f73ef205,17,Westbound,24.0,0.458333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,4
+2024-06-22,7563f73ef205,17,Westbound,24.0,0.625,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,5
+2024-06-23,7563f73ef205,17,Westbound,24.0,0.625,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,6
+2024-06-24,7563f73ef205,17,Westbound,24.0,1.041667,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,0
+2024-06-25,7563f73ef205,17,Westbound,24.0,1.083333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,1
+2024-06-26,7563f73ef205,17,Westbound,24.0,0.625,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,2
+2024-06-27,7563f73ef205,17,Westbound,24.0,1.083333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,3
+2024-06-28,7563f73ef205,17,Westbound,24.0,1.458333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,4
+2024-06-29,7563f73ef205,17,Westbound,24.0,0.75,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,5
+2024-06-30,7563f73ef205,17,Westbound,24.0,0.708333,"Sheppard Ave W, west of Sentinel Rd (multi-use path)",-79.4921287,43.743467,2,171,0,11.592,155,17970,9.6,1,6
+2024-06-01,dd304ccf6d8b,18,Northbound,24.0,42.791667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,5
+2024-06-02,dd304ccf6d8b,18,Northbound,24.0,26.416667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,6
+2024-06-03,dd304ccf6d8b,18,Northbound,24.0,39.958333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,0
+2024-06-04,dd304ccf6d8b,18,Northbound,24.0,49.166667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,1
+2024-06-05,dd304ccf6d8b,18,Northbound,24.0,45.958333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,2
+2024-06-06,dd304ccf6d8b,18,Northbound,24.0,47.125,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,3
+2024-06-07,dd304ccf6d8b,18,Northbound,24.0,35.291667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,4
+2024-06-08,dd304ccf6d8b,18,Northbound,24.0,33.291667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,5
+2024-06-09,dd304ccf6d8b,18,Northbound,24.0,26.75,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,6
+2024-06-10,dd304ccf6d8b,18,Northbound,24.0,41.125,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,0
+2024-06-11,dd304ccf6d8b,18,Northbound,24.0,47.791667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,1
+2024-06-12,dd304ccf6d8b,18,Northbound,24.0,51.75,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,2
+2024-06-13,dd304ccf6d8b,18,Northbound,24.0,48.916667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,3
+2024-06-14,dd304ccf6d8b,18,Northbound,24.0,45.75,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,4
+2024-06-15,dd304ccf6d8b,18,Northbound,24.0,42.458333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,5
+2024-06-16,dd304ccf6d8b,18,Northbound,24.0,36.166667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,6
+2024-06-17,dd304ccf6d8b,18,Northbound,24.0,43.791667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,0
+2024-06-18,dd304ccf6d8b,18,Northbound,24.0,42.208333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,1
+2024-06-19,dd304ccf6d8b,18,Northbound,24.0,48.666667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,2
+2024-06-20,dd304ccf6d8b,18,Northbound,24.0,39.083333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,3
+2024-06-21,dd304ccf6d8b,18,Northbound,24.0,39.541667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,4
+2024-06-22,dd304ccf6d8b,18,Northbound,24.0,31.875,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,5
+2024-06-23,dd304ccf6d8b,18,Northbound,24.0,31.708333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,6
+2024-06-24,dd304ccf6d8b,18,Northbound,24.0,46.291667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,0
+2024-06-25,dd304ccf6d8b,18,Northbound,24.0,46.625,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,1
+2024-06-26,dd304ccf6d8b,18,Northbound,24.0,43.416667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,2
+2024-06-27,dd304ccf6d8b,18,Northbound,24.0,53.083333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,3
+2024-06-28,dd304ccf6d8b,18,Northbound,24.0,49.916667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,4
+2024-06-29,dd304ccf6d8b,18,Northbound,24.0,25.041667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,5
+2024-06-30,dd304ccf6d8b,18,Northbound,24.0,40.958333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,6
+2024-06-01,dd304ccf6d8b,19,Southbound,24.0,48.083333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,5
+2024-06-02,dd304ccf6d8b,19,Southbound,24.0,30.375,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,6
+2024-06-03,dd304ccf6d8b,19,Southbound,24.0,50.458333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,0
+2024-06-04,dd304ccf6d8b,19,Southbound,24.0,64.208333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,1
+2024-06-05,dd304ccf6d8b,19,Southbound,24.0,58.875,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,2
+2024-06-06,dd304ccf6d8b,19,Southbound,24.0,59.375,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,3
+2024-06-07,dd304ccf6d8b,19,Southbound,24.0,40.166667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,4
+2024-06-08,dd304ccf6d8b,19,Southbound,24.0,42.083333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,5
+2024-06-09,dd304ccf6d8b,19,Southbound,24.0,30.875,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,6
+2024-06-10,dd304ccf6d8b,19,Southbound,24.0,50.458333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,0
+2024-06-11,dd304ccf6d8b,19,Southbound,24.0,58.458333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,1
+2024-06-12,dd304ccf6d8b,19,Southbound,24.0,65.833333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,2
+2024-06-13,dd304ccf6d8b,19,Southbound,24.0,57.083333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,3
+2024-06-14,dd304ccf6d8b,19,Southbound,24.0,54.791667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,4
+2024-06-15,dd304ccf6d8b,19,Southbound,24.0,45.708333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,5
+2024-06-16,dd304ccf6d8b,19,Southbound,24.0,40.583333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,6
+2024-06-17,dd304ccf6d8b,19,Southbound,24.0,55.916667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,0
+2024-06-18,dd304ccf6d8b,19,Southbound,24.0,47.666667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,1
+2024-06-19,dd304ccf6d8b,19,Southbound,24.0,59.291667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,2
+2024-06-20,dd304ccf6d8b,19,Southbound,24.0,50.041667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,3
+2024-06-21,dd304ccf6d8b,19,Southbound,24.0,44.5,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,4
+2024-06-22,dd304ccf6d8b,19,Southbound,24.0,36.416667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,5
+2024-06-23,dd304ccf6d8b,19,Southbound,24.0,37.333333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,6
+2024-06-24,dd304ccf6d8b,19,Southbound,24.0,56.791667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,0
+2024-06-25,dd304ccf6d8b,19,Southbound,24.0,56.416667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,1
+2024-06-26,dd304ccf6d8b,19,Southbound,24.0,55.375,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,2
+2024-06-27,dd304ccf6d8b,19,Southbound,24.0,62.875,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,3
+2024-06-28,dd304ccf6d8b,19,Southbound,24.0,59.416667,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,4
+2024-06-29,dd304ccf6d8b,19,Southbound,24.0,27.375,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,5
+2024-06-30,dd304ccf6d8b,19,Southbound,24.0,45.583333,"Sherbourne St, north of Gerrard St",-79.3725671,43.662038,41,146509,6,10.3249,73,21490,23.3,0,6
+2024-06-01,703d489beb74,22,Northbound,24.0,47.125,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,5
+2024-06-02,703d489beb74,22,Northbound,24.0,31.041667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,6
+2024-06-03,703d489beb74,22,Northbound,24.0,48.583333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,0
+2024-06-04,703d489beb74,22,Northbound,24.0,55.916667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,1
+2024-06-05,703d489beb74,22,Northbound,24.0,54.375,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,2
+2024-06-06,703d489beb74,22,Northbound,24.0,52.708333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,3
+2024-06-07,703d489beb74,22,Northbound,24.0,42.541667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,4
+2024-06-08,703d489beb74,22,Northbound,24.0,42.0,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,5
+2024-06-09,703d489beb74,22,Northbound,24.0,32.916667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,6
+2024-06-10,703d489beb74,22,Northbound,24.0,50.625,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,0
+2024-06-11,703d489beb74,22,Northbound,24.0,56.25,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,1
+2024-06-12,703d489beb74,22,Northbound,24.0,63.791667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,2
+2024-06-13,703d489beb74,22,Northbound,24.0,53.625,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,3
+2024-06-14,703d489beb74,22,Northbound,24.0,50.625,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,4
+2024-06-15,703d489beb74,22,Northbound,24.0,42.833333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,5
+2024-06-16,703d489beb74,22,Northbound,24.0,41.958333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,6
+2024-06-17,703d489beb74,22,Northbound,24.0,49.666667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,0
+2024-06-18,703d489beb74,22,Northbound,24.0,44.416667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,1
+2024-06-19,703d489beb74,22,Northbound,24.0,55.583333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,2
+2024-06-20,703d489beb74,22,Northbound,24.0,44.708333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,3
+2024-06-21,703d489beb74,22,Northbound,24.0,43.208333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,4
+2024-06-22,703d489beb74,22,Northbound,24.0,39.166667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,5
+2024-06-23,703d489beb74,22,Northbound,24.0,36.875,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,6
+2024-06-24,703d489beb74,22,Northbound,24.0,53.75,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,0
+2024-06-25,703d489beb74,22,Northbound,24.0,55.166667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,1
+2024-06-26,703d489beb74,22,Northbound,24.0,47.333333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,2
+2024-06-27,703d489beb74,22,Northbound,24.0,57.083333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,3
+2024-06-28,703d489beb74,22,Northbound,24.0,51.708333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,4
+2024-06-29,703d489beb74,22,Northbound,24.0,24.666667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,5
+2024-06-30,703d489beb74,22,Northbound,24.0,41.583333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,6
+2024-06-01,703d489beb74,23,Southbound,24.0,53.958333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,5
+2024-06-02,703d489beb74,23,Southbound,24.0,39.208333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,6
+2024-06-03,703d489beb74,23,Southbound,24.0,59.666667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,0
+2024-06-04,703d489beb74,23,Southbound,24.0,73.583333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,1
+2024-06-05,703d489beb74,23,Southbound,24.0,70.375,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,2
+2024-06-06,703d489beb74,23,Southbound,24.0,68.625,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,3
+2024-06-07,703d489beb74,23,Southbound,24.0,49.375,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,4
+2024-06-08,703d489beb74,23,Southbound,24.0,49.25,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,5
+2024-06-09,703d489beb74,23,Southbound,24.0,40.166667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,6
+2024-06-10,703d489beb74,23,Southbound,24.0,60.833333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,0
+2024-06-11,703d489beb74,23,Southbound,24.0,66.75,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,1
+2024-06-12,703d489beb74,23,Southbound,24.0,72.458333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,2
+2024-06-13,703d489beb74,23,Southbound,24.0,66.041667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,3
+2024-06-14,703d489beb74,23,Southbound,24.0,63.25,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,4
+2024-06-15,703d489beb74,23,Southbound,24.0,54.625,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,5
+2024-06-16,703d489beb74,23,Southbound,24.0,47.416667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,6
+2024-06-17,703d489beb74,23,Southbound,24.0,64.75,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,0
+2024-06-18,703d489beb74,23,Southbound,24.0,55.5,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,1
+2024-06-19,703d489beb74,23,Southbound,24.0,69.916667,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,2
+2024-06-20,703d489beb74,23,Southbound,24.0,58.125,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,3
+2024-06-21,703d489beb74,23,Southbound,24.0,56.583333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,4
+2024-06-22,703d489beb74,23,Southbound,24.0,47.208333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,5
+2024-06-23,703d489beb74,23,Southbound,24.0,44.0,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,6
+2024-06-24,703d489beb74,23,Southbound,24.0,67.0,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,0
+2024-06-25,703d489beb74,23,Southbound,24.0,70.083333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,1
+2024-06-26,703d489beb74,23,Southbound,24.0,64.25,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,2
+2024-06-27,703d489beb74,23,Southbound,24.0,71.0,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,3
+2024-06-28,703d489beb74,23,Southbound,24.0,66.208333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,4
+2024-06-29,703d489beb74,23,Southbound,24.0,32.5,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,5
+2024-06-30,703d489beb74,23,Southbound,24.0,52.958333,"Sherbourne St, north of Wellesley St E",-79.375044,43.6679708,33,104350,6,12.1078,74,18535,21.9,0,6
+2024-06-01,4dd7637aa9ad,26,Northbound,24.0,42.791667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,5
+2024-06-02,4dd7637aa9ad,26,Northbound,24.0,25.416667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,6
+2024-06-03,4dd7637aa9ad,26,Northbound,24.0,43.416667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,0
+2024-06-04,4dd7637aa9ad,26,Northbound,24.0,46.875,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,1
+2024-06-05,4dd7637aa9ad,26,Northbound,24.0,47.625,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,2
+2024-06-06,4dd7637aa9ad,26,Northbound,24.0,47.791667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,3
+2024-06-07,4dd7637aa9ad,26,Northbound,24.0,39.875,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,4
+2024-06-08,4dd7637aa9ad,26,Northbound,24.0,33.375,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,5
+2024-06-09,4dd7637aa9ad,26,Northbound,24.0,27.5,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,6
+2024-06-10,4dd7637aa9ad,26,Northbound,24.0,42.791667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,0
+2024-06-11,4dd7637aa9ad,26,Northbound,24.0,45.125,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,1
+2024-06-12,4dd7637aa9ad,26,Northbound,24.0,47.125,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,2
+2024-06-13,4dd7637aa9ad,26,Northbound,24.0,48.708333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,3
+2024-06-14,4dd7637aa9ad,26,Northbound,24.0,43.916667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,4
+2024-06-15,4dd7637aa9ad,26,Northbound,24.0,40.25,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,5
+2024-06-16,4dd7637aa9ad,26,Northbound,24.0,42.75,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,6
+2024-06-17,4dd7637aa9ad,26,Northbound,24.0,42.291667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,0
+2024-06-18,4dd7637aa9ad,26,Northbound,24.0,41.666667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,1
+2024-06-19,4dd7637aa9ad,26,Northbound,24.0,47.833333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,2
+2024-06-20,4dd7637aa9ad,26,Northbound,24.0,37.916667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,3
+2024-06-21,4dd7637aa9ad,26,Northbound,24.0,46.416667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,4
+2024-06-22,4dd7637aa9ad,26,Northbound,24.0,39.291667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,5
+2024-06-23,4dd7637aa9ad,26,Northbound,24.0,33.375,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,6
+2024-06-24,4dd7637aa9ad,26,Northbound,24.0,50.041667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,0
+2024-06-25,4dd7637aa9ad,26,Northbound,24.0,45.583333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,1
+2024-06-26,4dd7637aa9ad,26,Northbound,24.0,42.666667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,2
+2024-06-27,4dd7637aa9ad,26,Northbound,24.0,49.5,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,3
+2024-06-28,4dd7637aa9ad,26,Northbound,24.0,43.458333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,4
+2024-06-29,4dd7637aa9ad,26,Northbound,24.0,25.208333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,5
+2024-06-30,4dd7637aa9ad,26,Northbound,24.0,18.5,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,6
+2024-06-01,4dd7637aa9ad,27,Southbound,24.0,58.041667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,5
+2024-06-02,4dd7637aa9ad,27,Southbound,24.0,35.25,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,6
+2024-06-03,4dd7637aa9ad,27,Southbound,24.0,51.541667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,0
+2024-06-04,4dd7637aa9ad,27,Southbound,24.0,61.791667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,1
+2024-06-05,4dd7637aa9ad,27,Southbound,24.0,65.083333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,2
+2024-06-06,4dd7637aa9ad,27,Southbound,24.0,61.708333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,3
+2024-06-07,4dd7637aa9ad,27,Southbound,24.0,51.125,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,4
+2024-06-08,4dd7637aa9ad,27,Southbound,24.0,45.375,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,5
+2024-06-09,4dd7637aa9ad,27,Southbound,24.0,38.75,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,6
+2024-06-10,4dd7637aa9ad,27,Southbound,24.0,49.458333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,0
+2024-06-11,4dd7637aa9ad,27,Southbound,24.0,56.25,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,1
+2024-06-12,4dd7637aa9ad,27,Southbound,24.0,65.958333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,2
+2024-06-13,4dd7637aa9ad,27,Southbound,24.0,61.958333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,3
+2024-06-14,4dd7637aa9ad,27,Southbound,24.0,60.75,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,4
+2024-06-15,4dd7637aa9ad,27,Southbound,24.0,55.416667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,5
+2024-06-16,4dd7637aa9ad,27,Southbound,24.0,53.125,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,6
+2024-06-17,4dd7637aa9ad,27,Southbound,24.0,53.791667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,0
+2024-06-18,4dd7637aa9ad,27,Southbound,24.0,53.416667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,1
+2024-06-19,4dd7637aa9ad,27,Southbound,24.0,58.208333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,2
+2024-06-20,4dd7637aa9ad,27,Southbound,24.0,51.166667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,3
+2024-06-21,4dd7637aa9ad,27,Southbound,24.0,58.375,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,4
+2024-06-22,4dd7637aa9ad,27,Southbound,24.0,41.375,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,5
+2024-06-23,4dd7637aa9ad,27,Southbound,24.0,35.666667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,6
+2024-06-24,4dd7637aa9ad,27,Southbound,24.0,64.125,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,0
+2024-06-25,4dd7637aa9ad,27,Southbound,24.0,59.833333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,1
+2024-06-26,4dd7637aa9ad,27,Southbound,24.0,59.833333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,2
+2024-06-27,4dd7637aa9ad,27,Southbound,24.0,62.666667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,3
+2024-06-28,4dd7637aa9ad,27,Southbound,24.0,55.25,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,4
+2024-06-29,4dd7637aa9ad,27,Southbound,24.0,34.041667,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,5
+2024-06-30,4dd7637aa9ad,27,Southbound,24.0,24.958333,"Yonge St, north of Bloor St",-79.3868925,43.6705587,36,112823,7,12.6559,98,20080,8.8,0,6
+2024-06-01,57ae88af98ae,28,Northbound,24.0,38.375,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,5
+2024-06-02,57ae88af98ae,28,Northbound,24.0,25.333333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,6
+2024-06-03,57ae88af98ae,28,Northbound,24.0,41.833333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,0
+2024-06-04,57ae88af98ae,28,Northbound,24.0,50.0,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,1
+2024-06-05,57ae88af98ae,28,Northbound,24.0,53.541667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,2
+2024-06-06,57ae88af98ae,28,Northbound,24.0,47.083333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,3
+2024-06-07,57ae88af98ae,28,Northbound,24.0,37.666667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,4
+2024-06-08,57ae88af98ae,28,Northbound,24.0,35.583333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,5
+2024-06-09,57ae88af98ae,28,Northbound,24.0,27.375,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,6
+2024-06-10,57ae88af98ae,28,Northbound,24.0,41.791667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,0
+2024-06-11,57ae88af98ae,28,Northbound,24.0,45.125,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,1
+2024-06-12,57ae88af98ae,28,Northbound,24.0,54.041667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,2
+2024-06-13,57ae88af98ae,28,Northbound,24.0,51.833333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,3
+2024-06-14,57ae88af98ae,28,Northbound,24.0,48.416667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,4
+2024-06-15,57ae88af98ae,28,Northbound,24.0,39.875,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,5
+2024-06-16,57ae88af98ae,28,Northbound,24.0,33.583333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,6
+2024-06-17,57ae88af98ae,28,Northbound,24.0,47.958333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,0
+2024-06-18,57ae88af98ae,28,Northbound,24.0,38.125,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,1
+2024-06-19,57ae88af98ae,28,Northbound,24.0,45.666667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,2
+2024-06-20,57ae88af98ae,28,Northbound,24.0,39.875,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,3
+2024-06-21,57ae88af98ae,28,Northbound,24.0,40.708333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,4
+2024-06-22,57ae88af98ae,28,Northbound,24.0,37.208333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,5
+2024-06-23,57ae88af98ae,28,Northbound,24.0,29.041667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,6
+2024-06-24,57ae88af98ae,28,Northbound,24.0,47.583333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,0
+2024-06-25,57ae88af98ae,28,Northbound,24.0,47.75,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,1
+2024-06-26,57ae88af98ae,28,Northbound,24.0,41.875,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,2
+2024-06-27,57ae88af98ae,28,Northbound,24.0,51.583333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,3
+2024-06-28,57ae88af98ae,28,Northbound,24.0,45.791667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,4
+2024-06-29,57ae88af98ae,28,Northbound,24.0,22.333333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,5
+2024-06-30,57ae88af98ae,28,Northbound,24.0,28.666667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,6
+2024-06-01,57ae88af98ae,29,Southbound,24.0,46.75,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,5
+2024-06-02,57ae88af98ae,29,Southbound,24.0,30.208333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,6
+2024-06-03,57ae88af98ae,29,Southbound,24.0,46.708333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,0
+2024-06-04,57ae88af98ae,29,Southbound,24.0,57.375,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,1
+2024-06-05,57ae88af98ae,29,Southbound,24.0,56.625,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,2
+2024-06-06,57ae88af98ae,29,Southbound,24.0,61.708333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,3
+2024-06-07,57ae88af98ae,29,Southbound,24.0,43.0,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,4
+2024-06-08,57ae88af98ae,29,Southbound,24.0,40.291667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,5
+2024-06-09,57ae88af98ae,29,Southbound,24.0,31.333333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,6
+2024-06-10,57ae88af98ae,29,Southbound,24.0,46.625,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,0
+2024-06-11,57ae88af98ae,29,Southbound,24.0,53.083333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,1
+2024-06-12,57ae88af98ae,29,Southbound,24.0,62.541667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,2
+2024-06-13,57ae88af98ae,29,Southbound,24.0,60.375,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,3
+2024-06-14,57ae88af98ae,29,Southbound,24.0,57.875,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,4
+2024-06-15,57ae88af98ae,29,Southbound,24.0,44.125,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,5
+2024-06-16,57ae88af98ae,29,Southbound,24.0,37.5,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,6
+2024-06-17,57ae88af98ae,29,Southbound,24.0,53.166667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,0
+2024-06-18,57ae88af98ae,29,Southbound,24.0,47.375,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,1
+2024-06-19,57ae88af98ae,29,Southbound,24.0,55.958333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,2
+2024-06-20,57ae88af98ae,29,Southbound,24.0,52.791667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,3
+2024-06-21,57ae88af98ae,29,Southbound,24.0,54.208333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,4
+2024-06-22,57ae88af98ae,29,Southbound,24.0,46.708333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,5
+2024-06-23,57ae88af98ae,29,Southbound,24.0,38.208333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,6
+2024-06-24,57ae88af98ae,29,Southbound,24.0,59.375,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,0
+2024-06-25,57ae88af98ae,29,Southbound,24.0,55.916667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,1
+2024-06-26,57ae88af98ae,29,Southbound,24.0,52.166667,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,2
+2024-06-27,57ae88af98ae,29,Southbound,24.0,57.25,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,3
+2024-06-28,57ae88af98ae,29,Southbound,24.0,55.083333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,4
+2024-06-29,57ae88af98ae,29,Southbound,24.0,29.125,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,5
+2024-06-30,57ae88af98ae,29,Southbound,24.0,35.458333,"Yonge St, north of Davenport Rd",-79.3880628,43.6734429,33,86756,8,11.0307,98,20080,8.8,0,6
+2024-06-01,371f035ac73e,3,Eastbound,24.0,37.583333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,5
+2024-06-02,371f035ac73e,3,Eastbound,24.0,17.0,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,6
+2024-06-03,371f035ac73e,3,Eastbound,24.0,33.416667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,0
+2024-06-04,371f035ac73e,3,Eastbound,24.0,38.041667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,1
+2024-06-05,371f035ac73e,3,Eastbound,24.0,33.291667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,2
+2024-06-06,371f035ac73e,3,Eastbound,24.0,38.458333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,3
+2024-06-07,371f035ac73e,3,Eastbound,24.0,27.916667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,4
+2024-06-08,371f035ac73e,3,Eastbound,24.0,33.916667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,5
+2024-06-09,371f035ac73e,3,Eastbound,24.0,25.708333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,6
+2024-06-10,371f035ac73e,3,Eastbound,24.0,28.958333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,0
+2024-06-11,371f035ac73e,3,Eastbound,24.0,32.625,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,1
+2024-06-12,371f035ac73e,3,Eastbound,24.0,40.125,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,2
+2024-06-13,371f035ac73e,3,Eastbound,24.0,36.208333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,3
+2024-06-14,371f035ac73e,3,Eastbound,24.0,38.791667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,4
+2024-06-15,371f035ac73e,3,Eastbound,24.0,40.041667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,5
+2024-06-16,371f035ac73e,3,Eastbound,24.0,35.083333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,6
+2024-06-17,371f035ac73e,3,Eastbound,24.0,32.25,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,0
+2024-06-18,371f035ac73e,3,Eastbound,24.0,28.833333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,1
+2024-06-19,371f035ac73e,3,Eastbound,24.0,37.416667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,2
+2024-06-20,371f035ac73e,3,Eastbound,24.0,29.0,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,3
+2024-06-21,371f035ac73e,3,Eastbound,24.0,30.875,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,4
+2024-06-22,371f035ac73e,3,Eastbound,24.0,27.625,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,5
+2024-06-23,371f035ac73e,3,Eastbound,24.0,27.958333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,6
+2024-06-24,371f035ac73e,3,Eastbound,24.0,39.458333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,0
+2024-06-25,371f035ac73e,3,Eastbound,24.0,35.166667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,1
+2024-06-26,371f035ac73e,3,Eastbound,24.0,30.708333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,2
+2024-06-27,371f035ac73e,3,Eastbound,24.0,39.416667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,3
+2024-06-28,371f035ac73e,3,Eastbound,24.0,34.875,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,4
+2024-06-29,371f035ac73e,3,Eastbound,24.0,15.458333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,5
+2024-06-30,371f035ac73e,3,Eastbound,24.0,27.75,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,6
+2024-06-01,94bfa38aeefb,30,Northbound,24.0,37.416667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,5
+2024-06-02,94bfa38aeefb,30,Northbound,24.0,24.0,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,6
+2024-06-03,94bfa38aeefb,30,Northbound,24.0,41.875,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,0
+2024-06-04,94bfa38aeefb,30,Northbound,24.0,52.208333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,1
+2024-06-05,94bfa38aeefb,30,Northbound,24.0,52.333333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,2
+2024-06-06,94bfa38aeefb,30,Northbound,24.0,47.291667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,3
+2024-06-07,94bfa38aeefb,30,Northbound,24.0,35.375,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,4
+2024-06-08,94bfa38aeefb,30,Northbound,24.0,30.916667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,5
+2024-06-09,94bfa38aeefb,30,Northbound,24.0,24.708333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,6
+2024-06-10,94bfa38aeefb,30,Northbound,24.0,41.458333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,0
+2024-06-11,94bfa38aeefb,30,Northbound,24.0,46.333333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,1
+2024-06-12,94bfa38aeefb,30,Northbound,24.0,54.375,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,2
+2024-06-13,94bfa38aeefb,30,Northbound,24.0,47.916667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,3
+2024-06-14,94bfa38aeefb,30,Northbound,24.0,46.416667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,4
+2024-06-15,94bfa38aeefb,30,Northbound,24.0,39.083333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,5
+2024-06-16,94bfa38aeefb,30,Northbound,24.0,31.125,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,6
+2024-06-17,94bfa38aeefb,30,Northbound,24.0,46.416667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,0
+2024-06-18,94bfa38aeefb,30,Northbound,24.0,38.458333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,1
+2024-06-19,94bfa38aeefb,30,Northbound,24.0,46.083333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,2
+2024-06-20,94bfa38aeefb,30,Northbound,24.0,40.333333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,3
+2024-06-21,94bfa38aeefb,30,Northbound,24.0,38.416667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,4
+2024-06-22,94bfa38aeefb,30,Northbound,24.0,34.375,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,5
+2024-06-23,94bfa38aeefb,30,Northbound,24.0,27.708333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,6
+2024-06-24,94bfa38aeefb,30,Northbound,24.0,49.708333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,0
+2024-06-25,94bfa38aeefb,30,Northbound,24.0,45.708333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,1
+2024-06-26,94bfa38aeefb,30,Northbound,24.0,41.333333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,2
+2024-06-27,94bfa38aeefb,30,Northbound,24.0,52.833333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,3
+2024-06-28,94bfa38aeefb,30,Northbound,24.0,42.541667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,4
+2024-06-29,94bfa38aeefb,30,Northbound,24.0,19.541667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,5
+2024-06-30,94bfa38aeefb,30,Northbound,24.0,26.916667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,6
+2024-06-23,94bfa38aeefb,31,Southbound,24.0,21.208333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,6
+2024-06-24,94bfa38aeefb,31,Southbound,24.0,18.291667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,0
+2024-06-25,94bfa38aeefb,31,Southbound,24.0,21.75,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,1
+2024-06-26,94bfa38aeefb,31,Southbound,24.0,33.125,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,2
+2024-06-27,94bfa38aeefb,31,Southbound,24.0,59.291667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,3
+2024-06-28,94bfa38aeefb,31,Southbound,24.0,54.708333,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,4
+2024-06-29,94bfa38aeefb,31,Southbound,24.0,23.041667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,5
+2024-06-30,94bfa38aeefb,31,Southbound,24.0,34.041667,"Yonge St, north of Macpherson Ave",-79.3905663,43.6795414,12,17040,6,9.3474,98,20080,8.8,0,6
+2024-06-01,bebc08f4b69f,32,Northbound,24.0,34.208333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,5
+2024-06-02,bebc08f4b69f,32,Northbound,24.0,20.291667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,6
+2024-06-03,bebc08f4b69f,32,Northbound,24.0,32.0,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,0
+2024-06-04,bebc08f4b69f,32,Northbound,24.0,39.125,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,1
+2024-06-05,bebc08f4b69f,32,Northbound,24.0,35.833333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,2
+2024-06-06,bebc08f4b69f,32,Northbound,24.0,35.791667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,3
+2024-06-07,bebc08f4b69f,32,Northbound,24.0,25.416667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,4
+2024-06-08,bebc08f4b69f,32,Northbound,24.0,25.458333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,5
+2024-06-09,bebc08f4b69f,32,Northbound,24.0,20.166667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,6
+2024-06-10,bebc08f4b69f,32,Northbound,24.0,29.791667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,0
+2024-06-11,bebc08f4b69f,32,Northbound,24.0,35.208333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,1
+2024-06-12,bebc08f4b69f,32,Northbound,24.0,40.375,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,2
+2024-06-13,bebc08f4b69f,32,Northbound,24.0,35.791667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,3
+2024-06-14,bebc08f4b69f,32,Northbound,24.0,34.583333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,4
+2024-06-15,bebc08f4b69f,32,Northbound,24.0,26.666667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,5
+2024-06-16,bebc08f4b69f,32,Northbound,24.0,23.416667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,6
+2024-06-17,bebc08f4b69f,32,Northbound,24.0,32.5,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,0
+2024-06-18,bebc08f4b69f,32,Northbound,24.0,28.583333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,1
+2024-06-19,bebc08f4b69f,32,Northbound,24.0,34.041667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,2
+2024-06-20,bebc08f4b69f,32,Northbound,24.0,29.833333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,3
+2024-06-21,bebc08f4b69f,32,Northbound,24.0,29.375,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,4
+2024-06-22,bebc08f4b69f,32,Northbound,24.0,26.791667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,5
+2024-06-23,bebc08f4b69f,32,Northbound,24.0,20.666667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,6
+2024-06-24,bebc08f4b69f,32,Northbound,24.0,36.541667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,0
+2024-06-25,bebc08f4b69f,32,Northbound,24.0,35.416667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,1
+2024-06-26,bebc08f4b69f,32,Northbound,24.0,30.875,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,2
+2024-06-27,bebc08f4b69f,32,Northbound,24.0,37.291667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,3
+2024-06-28,bebc08f4b69f,32,Northbound,24.0,33.125,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,4
+2024-06-29,bebc08f4b69f,32,Northbound,24.0,15.458333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,5
+2024-06-30,bebc08f4b69f,32,Northbound,24.0,21.625,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,6
+2024-06-01,bebc08f4b69f,33,Southbound,24.0,43.291667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,5
+2024-06-02,bebc08f4b69f,33,Southbound,24.0,29.208333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,6
+2024-06-03,bebc08f4b69f,33,Southbound,24.0,36.583333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,0
+2024-06-04,bebc08f4b69f,33,Southbound,24.0,45.166667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,1
+2024-06-05,bebc08f4b69f,33,Southbound,24.0,43.916667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,2
+2024-06-06,bebc08f4b69f,33,Southbound,24.0,45.041667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,3
+2024-06-07,bebc08f4b69f,33,Southbound,24.0,32.458333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,4
+2024-06-08,bebc08f4b69f,33,Southbound,24.0,33.625,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,5
+2024-06-09,bebc08f4b69f,33,Southbound,24.0,23.208333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,6
+2024-06-10,bebc08f4b69f,33,Southbound,24.0,36.541667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,0
+2024-06-11,bebc08f4b69f,33,Southbound,24.0,39.833333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,1
+2024-06-12,bebc08f4b69f,33,Southbound,24.0,49.208333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,2
+2024-06-13,bebc08f4b69f,33,Southbound,24.0,43.958333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,3
+2024-06-14,bebc08f4b69f,33,Southbound,24.0,40.0,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,4
+2024-06-15,bebc08f4b69f,33,Southbound,24.0,34.875,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,5
+2024-06-16,bebc08f4b69f,33,Southbound,24.0,28.125,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,6
+2024-06-17,bebc08f4b69f,33,Southbound,24.0,39.625,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,0
+2024-06-18,bebc08f4b69f,33,Southbound,24.0,37.5,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,1
+2024-06-19,bebc08f4b69f,33,Southbound,24.0,41.125,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,2
+2024-06-20,bebc08f4b69f,33,Southbound,24.0,38.875,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,3
+2024-06-21,bebc08f4b69f,33,Southbound,24.0,37.0,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,4
+2024-06-22,bebc08f4b69f,33,Southbound,24.0,35.25,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,5
+2024-06-23,bebc08f4b69f,33,Southbound,24.0,28.0,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,6
+2024-06-24,bebc08f4b69f,33,Southbound,24.0,42.541667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,0
+2024-06-25,bebc08f4b69f,33,Southbound,24.0,40.375,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,1
+2024-06-26,bebc08f4b69f,33,Southbound,24.0,38.583333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,2
+2024-06-27,bebc08f4b69f,33,Southbound,24.0,42.083333,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,3
+2024-06-28,bebc08f4b69f,33,Southbound,24.0,38.291667,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,4
+2024-06-29,bebc08f4b69f,33,Southbound,24.0,18.125,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,5
+2024-06-30,bebc08f4b69f,33,Southbound,24.0,24.5,"Yonge St, north of St Clair Ave",-79.3944265,43.6888532,12,9643,3,10.3063,98,20080,8.8,0,6
+2024-06-01,e7531cbe004f,34,Northbound,24.0,28.208333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,5
+2024-06-02,e7531cbe004f,34,Northbound,24.0,32.333333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,6
+2024-06-03,e7531cbe004f,34,Northbound,24.0,27.625,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,0
+2024-06-04,e7531cbe004f,34,Northbound,24.0,28.625,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,1
+2024-06-05,e7531cbe004f,34,Northbound,24.0,31.25,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,2
+2024-06-06,e7531cbe004f,34,Northbound,24.0,28.166667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,3
+2024-06-07,e7531cbe004f,34,Northbound,24.0,29.083333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,4
+2024-06-08,e7531cbe004f,34,Northbound,24.0,34.083333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,5
+2024-06-09,e7531cbe004f,34,Northbound,24.0,21.041667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,6
+2024-06-10,e7531cbe004f,34,Northbound,24.0,21.666667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,0
+2024-06-11,e7531cbe004f,34,Northbound,24.0,22.416667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,1
+2024-06-12,e7531cbe004f,34,Northbound,24.0,28.833333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,2
+2024-06-13,e7531cbe004f,34,Northbound,24.0,28.166667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,3
+2024-06-14,e7531cbe004f,34,Northbound,24.0,31.125,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,4
+2024-06-15,e7531cbe004f,34,Northbound,24.0,23.833333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,5
+2024-06-16,e7531cbe004f,34,Northbound,24.0,22.041667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,6
+2024-06-17,e7531cbe004f,34,Northbound,24.0,25.625,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,0
+2024-06-18,e7531cbe004f,34,Northbound,24.0,21.083333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,1
+2024-06-19,e7531cbe004f,34,Northbound,24.0,26.166667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,2
+2024-06-20,e7531cbe004f,34,Northbound,24.0,27.166667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,3
+2024-06-21,e7531cbe004f,34,Northbound,24.0,30.041667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,4
+2024-06-22,e7531cbe004f,34,Northbound,24.0,20.75,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,5
+2024-06-23,e7531cbe004f,34,Northbound,24.0,20.0,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,6
+2024-06-24,e7531cbe004f,34,Northbound,24.0,28.791667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,0
+2024-06-25,e7531cbe004f,34,Northbound,24.0,25.208333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,1
+2024-06-26,e7531cbe004f,34,Northbound,24.0,27.916667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,2
+2024-06-27,e7531cbe004f,34,Northbound,24.0,30.583333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,3
+2024-06-28,e7531cbe004f,34,Northbound,24.0,24.875,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,4
+2024-06-29,e7531cbe004f,34,Northbound,24.0,11.375,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,5
+2024-06-30,e7531cbe004f,34,Northbound,24.0,18.375,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,6
+2024-06-01,e7531cbe004f,35,Southbound,24.0,26.708333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,5
+2024-06-02,e7531cbe004f,35,Southbound,24.0,14.75,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,6
+2024-06-03,e7531cbe004f,35,Southbound,24.0,28.041667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,0
+2024-06-04,e7531cbe004f,35,Southbound,24.0,30.125,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,1
+2024-06-05,e7531cbe004f,35,Southbound,24.0,28.625,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,2
+2024-06-06,e7531cbe004f,35,Southbound,24.0,31.333333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,3
+2024-06-07,e7531cbe004f,35,Southbound,24.0,19.75,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,4
+2024-06-08,e7531cbe004f,35,Southbound,24.0,20.041667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,5
+2024-06-09,e7531cbe004f,35,Southbound,24.0,15.458333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,6
+2024-06-10,e7531cbe004f,35,Southbound,24.0,23.208333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,0
+2024-06-11,e7531cbe004f,35,Southbound,24.0,27.375,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,1
+2024-06-12,e7531cbe004f,35,Southbound,24.0,32.833333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,2
+2024-06-13,e7531cbe004f,35,Southbound,24.0,28.291667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,3
+2024-06-14,e7531cbe004f,35,Southbound,24.0,28.583333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,4
+2024-06-15,e7531cbe004f,35,Southbound,24.0,22.5,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,5
+2024-06-16,e7531cbe004f,35,Southbound,24.0,21.208333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,6
+2024-06-17,e7531cbe004f,35,Southbound,24.0,27.166667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,0
+2024-06-18,e7531cbe004f,35,Southbound,24.0,22.125,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,1
+2024-06-19,e7531cbe004f,35,Southbound,24.0,28.458333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,2
+2024-06-20,e7531cbe004f,35,Southbound,24.0,25.416667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,3
+2024-06-21,e7531cbe004f,35,Southbound,24.0,27.125,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,4
+2024-06-22,e7531cbe004f,35,Southbound,24.0,20.208333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,5
+2024-06-23,e7531cbe004f,35,Southbound,24.0,16.708333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,6
+2024-06-24,e7531cbe004f,35,Southbound,24.0,32.916667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,0
+2024-06-25,e7531cbe004f,35,Southbound,24.0,27.916667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,1
+2024-06-26,e7531cbe004f,35,Southbound,24.0,26.625,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,2
+2024-06-27,e7531cbe004f,35,Southbound,24.0,32.125,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,3
+2024-06-28,e7531cbe004f,35,Southbound,24.0,28.541667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,4
+2024-06-29,e7531cbe004f,35,Southbound,24.0,12.458333,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,5
+2024-06-30,e7531cbe004f,35,Southbound,24.0,19.791667,"Yonge St, south of Davisville Ave",-79.3965356,43.697978,16,8744,1,6.9514,174,22735,15.3,0,6
+2024-06-01,ce2b5aceb4da,36,Northbound,24.0,3.416667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,5
+2024-06-02,ce2b5aceb4da,36,Northbound,24.0,1.958333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,6
+2024-06-03,ce2b5aceb4da,36,Northbound,24.0,4.208333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,0
+2024-06-04,ce2b5aceb4da,36,Northbound,24.0,4.083333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,1
+2024-06-05,ce2b5aceb4da,36,Northbound,24.0,3.333333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,2
+2024-06-06,ce2b5aceb4da,36,Northbound,24.0,3.458333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,3
+2024-06-07,ce2b5aceb4da,36,Northbound,24.0,3.625,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,4
+2024-06-08,ce2b5aceb4da,36,Northbound,24.0,1.458333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,5
+2024-06-09,ce2b5aceb4da,36,Northbound,24.0,1.666667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,6
+2024-06-10,ce2b5aceb4da,36,Northbound,24.0,2.0,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,0
+2024-06-11,ce2b5aceb4da,36,Northbound,24.0,2.666667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,1
+2024-06-12,ce2b5aceb4da,36,Northbound,24.0,1.833333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,2
+2024-06-13,ce2b5aceb4da,36,Northbound,24.0,2.625,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,3
+2024-06-14,ce2b5aceb4da,36,Northbound,24.0,2.791667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,4
+2024-06-15,ce2b5aceb4da,36,Northbound,24.0,2.291667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,5
+2024-06-16,ce2b5aceb4da,36,Northbound,24.0,1.541667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,6
+2024-06-17,ce2b5aceb4da,36,Northbound,24.0,3.375,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,0
+2024-06-18,ce2b5aceb4da,36,Northbound,24.0,3.208333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,1
+2024-06-19,ce2b5aceb4da,36,Northbound,24.0,2.583333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,2
+2024-06-20,ce2b5aceb4da,36,Northbound,24.0,2.458333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,3
+2024-06-21,ce2b5aceb4da,36,Northbound,24.0,2.5,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,4
+2024-06-22,ce2b5aceb4da,36,Northbound,24.0,1.583333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,5
+2024-06-23,ce2b5aceb4da,36,Northbound,24.0,1.625,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,6
+2024-06-24,ce2b5aceb4da,36,Northbound,24.0,3.708333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,0
+2024-06-25,ce2b5aceb4da,36,Northbound,24.0,2.458333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,1
+2024-06-26,ce2b5aceb4da,36,Northbound,24.0,2.166667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,2
+2024-06-27,ce2b5aceb4da,36,Northbound,24.0,1.75,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,3
+2024-06-28,ce2b5aceb4da,36,Northbound,24.0,2.791667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,4
+2024-06-29,ce2b5aceb4da,36,Northbound,24.0,1.791667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,5
+2024-06-30,ce2b5aceb4da,36,Northbound,24.0,2.083333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,6
+2024-06-01,ce2b5aceb4da,37,Southbound,24.0,4.625,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,5
+2024-06-02,ce2b5aceb4da,37,Southbound,24.0,1.791667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,6
+2024-06-03,ce2b5aceb4da,37,Southbound,24.0,3.125,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,0
+2024-06-04,ce2b5aceb4da,37,Southbound,24.0,3.625,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,1
+2024-06-05,ce2b5aceb4da,37,Southbound,24.0,3.416667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,2
+2024-06-06,ce2b5aceb4da,37,Southbound,24.0,3.166667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,3
+2024-06-07,ce2b5aceb4da,37,Southbound,24.0,2.666667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,4
+2024-06-08,ce2b5aceb4da,37,Southbound,24.0,1.708333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,5
+2024-06-09,ce2b5aceb4da,37,Southbound,24.0,1.333333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,6
+2024-06-10,ce2b5aceb4da,37,Southbound,24.0,3.041667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,0
+2024-06-11,ce2b5aceb4da,37,Southbound,24.0,2.916667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,1
+2024-06-12,ce2b5aceb4da,37,Southbound,24.0,3.041667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,2
+2024-06-13,ce2b5aceb4da,37,Southbound,24.0,2.791667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,3
+2024-06-14,ce2b5aceb4da,37,Southbound,24.0,3.583333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,4
+2024-06-15,ce2b5aceb4da,37,Southbound,24.0,2.333333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,5
+2024-06-16,ce2b5aceb4da,37,Southbound,24.0,2.041667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,6
+2024-06-17,ce2b5aceb4da,37,Southbound,24.0,3.125,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,0
+2024-06-18,ce2b5aceb4da,37,Southbound,24.0,3.5,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,1
+2024-06-19,ce2b5aceb4da,37,Southbound,24.0,3.791667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,2
+2024-06-20,ce2b5aceb4da,37,Southbound,24.0,2.833333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,3
+2024-06-21,ce2b5aceb4da,37,Southbound,24.0,2.75,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,4
+2024-06-22,ce2b5aceb4da,37,Southbound,24.0,2.208333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,5
+2024-06-23,ce2b5aceb4da,37,Southbound,24.0,2.0,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,6
+2024-06-24,ce2b5aceb4da,37,Southbound,24.0,2.208333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,0
+2024-06-25,ce2b5aceb4da,37,Southbound,24.0,3.333333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,1
+2024-06-26,ce2b5aceb4da,37,Southbound,24.0,2.375,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,2
+2024-06-27,ce2b5aceb4da,37,Southbound,24.0,2.5,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,3
+2024-06-28,ce2b5aceb4da,37,Southbound,24.0,2.666667,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,4
+2024-06-29,ce2b5aceb4da,37,Southbound,24.0,1.333333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,5
+2024-06-30,ce2b5aceb4da,37,Southbound,24.0,1.583333,"Keele St, north of Four Winds Dr (multi-use path)",-79.49192,43.766102,3,420,2,5.8111,27,28255,13.8,1,6
+2024-06-01,f24abfdc5d61,38,Northbound,24.0,0.625,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,5
+2024-06-02,f24abfdc5d61,38,Northbound,24.0,0.333333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,6
+2024-06-03,f24abfdc5d61,38,Northbound,24.0,1.0,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,0
+2024-06-04,f24abfdc5d61,38,Northbound,24.0,1.416667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,1
+2024-06-05,f24abfdc5d61,38,Northbound,24.0,0.875,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,2
+2024-06-06,f24abfdc5d61,38,Northbound,24.0,1.125,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,3
+2024-06-07,f24abfdc5d61,38,Northbound,24.0,1.291667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,4
+2024-06-08,f24abfdc5d61,38,Northbound,24.0,0.5,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,5
+2024-06-09,f24abfdc5d61,38,Northbound,24.0,0.416667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,6
+2024-06-11,f24abfdc5d61,38,Northbound,24.0,1.416667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,1
+2024-06-12,f24abfdc5d61,38,Northbound,24.0,1.0,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,2
+2024-06-14,f24abfdc5d61,38,Northbound,24.0,1.291667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,4
+2024-06-15,f24abfdc5d61,38,Northbound,24.0,0.75,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,5
+2024-06-16,f24abfdc5d61,38,Northbound,24.0,0.5,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,6
+2024-06-17,f24abfdc5d61,38,Northbound,24.0,1.0,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,0
+2024-06-18,f24abfdc5d61,38,Northbound,24.0,1.208333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,1
+2024-06-19,f24abfdc5d61,38,Northbound,24.0,1.333333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,2
+2024-06-20,f24abfdc5d61,38,Northbound,24.0,1.166667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,3
+2024-06-21,f24abfdc5d61,38,Northbound,24.0,1.041667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,4
+2024-06-22,f24abfdc5d61,38,Northbound,24.0,0.916667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,5
+2024-06-23,f24abfdc5d61,38,Northbound,24.0,0.416667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,6
+2024-06-24,f24abfdc5d61,38,Northbound,24.0,1.541667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,0
+2024-06-25,f24abfdc5d61,38,Northbound,24.0,1.041667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,1
+2024-06-26,f24abfdc5d61,38,Northbound,24.0,1.458333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,2
+2024-06-27,f24abfdc5d61,38,Northbound,24.0,1.208333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,3
+2024-06-28,f24abfdc5d61,38,Northbound,24.0,1.083333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,4
+2024-06-29,f24abfdc5d61,38,Northbound,24.0,0.208333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,5
+2024-06-30,f24abfdc5d61,38,Northbound,24.0,0.416667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,6
+2024-06-01,f24abfdc5d61,39,Southbound,24.0,0.625,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,5
+2024-06-02,f24abfdc5d61,39,Southbound,24.0,0.375,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,6
+2024-06-03,f24abfdc5d61,39,Southbound,24.0,0.875,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,0
+2024-06-04,f24abfdc5d61,39,Southbound,24.0,1.333333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,1
+2024-06-05,f24abfdc5d61,39,Southbound,24.0,1.25,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,2
+2024-06-06,f24abfdc5d61,39,Southbound,24.0,1.041667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,3
+2024-06-07,f24abfdc5d61,39,Southbound,24.0,1.125,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,4
+2024-06-08,f24abfdc5d61,39,Southbound,24.0,0.708333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,5
+2024-06-09,f24abfdc5d61,39,Southbound,24.0,0.291667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,6
+2024-06-11,f24abfdc5d61,39,Southbound,24.0,0.875,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,1
+2024-06-12,f24abfdc5d61,39,Southbound,24.0,1.083333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,2
+2024-06-14,f24abfdc5d61,39,Southbound,24.0,1.291667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,4
+2024-06-15,f24abfdc5d61,39,Southbound,24.0,0.416667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,5
+2024-06-16,f24abfdc5d61,39,Southbound,24.0,0.458333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,6
+2024-06-17,f24abfdc5d61,39,Southbound,24.0,1.0,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,0
+2024-06-18,f24abfdc5d61,39,Southbound,24.0,1.291667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,1
+2024-06-19,f24abfdc5d61,39,Southbound,24.0,1.416667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,2
+2024-06-20,f24abfdc5d61,39,Southbound,24.0,1.083333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,3
+2024-06-21,f24abfdc5d61,39,Southbound,24.0,0.916667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,4
+2024-06-22,f24abfdc5d61,39,Southbound,24.0,0.791667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,5
+2024-06-23,f24abfdc5d61,39,Southbound,24.0,0.291667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,6
+2024-06-24,f24abfdc5d61,39,Southbound,24.0,1.25,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,0
+2024-06-25,f24abfdc5d61,39,Southbound,24.0,0.708333,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,1
+2024-06-26,f24abfdc5d61,39,Southbound,24.0,1.041667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,2
+2024-06-27,f24abfdc5d61,39,Southbound,24.0,1.125,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,3
+2024-06-28,f24abfdc5d61,39,Southbound,24.0,1.25,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,4
+2024-06-29,f24abfdc5d61,39,Southbound,24.0,0.25,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,5
+2024-06-30,f24abfdc5d61,39,Southbound,24.0,0.291667,"Murray Ross Pkwy, north of Shoreham Dr (multi-use path)",-79.5145151,43.773275,2,110,1,4.7009,27,28255,13.8,1,6
+2024-06-01,371f035ac73e,4,Westbound,24.0,43.708333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,5
+2024-06-02,371f035ac73e,4,Westbound,24.0,19.875,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,6
+2024-06-03,371f035ac73e,4,Westbound,24.0,35.833333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,0
+2024-06-04,371f035ac73e,4,Westbound,24.0,43.5,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,1
+2024-06-05,371f035ac73e,4,Westbound,24.0,36.416667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,2
+2024-06-06,371f035ac73e,4,Westbound,24.0,39.791667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,3
+2024-06-07,371f035ac73e,4,Westbound,24.0,28.958333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,4
+2024-06-08,371f035ac73e,4,Westbound,24.0,36.208333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,5
+2024-06-09,371f035ac73e,4,Westbound,24.0,26.625,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,6
+2024-06-10,371f035ac73e,4,Westbound,24.0,30.916667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,0
+2024-06-11,371f035ac73e,4,Westbound,24.0,35.0,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,1
+2024-06-12,371f035ac73e,4,Westbound,24.0,42.791667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,2
+2024-06-13,371f035ac73e,4,Westbound,24.0,40.0,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,3
+2024-06-14,371f035ac73e,4,Westbound,24.0,42.0,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,4
+2024-06-15,371f035ac73e,4,Westbound,24.0,42.875,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,5
+2024-06-16,371f035ac73e,4,Westbound,24.0,39.541667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,6
+2024-06-17,371f035ac73e,4,Westbound,24.0,36.666667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,0
+2024-06-18,371f035ac73e,4,Westbound,24.0,32.291667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,1
+2024-06-19,371f035ac73e,4,Westbound,24.0,41.125,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,2
+2024-06-20,371f035ac73e,4,Westbound,24.0,29.416667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,3
+2024-06-21,371f035ac73e,4,Westbound,24.0,33.291667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,4
+2024-06-22,371f035ac73e,4,Westbound,24.0,30.5,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,5
+2024-06-23,371f035ac73e,4,Westbound,24.0,29.583333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,6
+2024-06-24,371f035ac73e,4,Westbound,24.0,41.416667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,0
+2024-06-25,371f035ac73e,4,Westbound,24.0,38.666667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,1
+2024-06-26,371f035ac73e,4,Westbound,24.0,32.083333,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,2
+2024-06-27,371f035ac73e,4,Westbound,24.0,41.166667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,3
+2024-06-28,371f035ac73e,4,Westbound,24.0,37.875,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,4
+2024-06-29,371f035ac73e,4,Westbound,24.0,16.666667,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,5
+2024-06-30,371f035ac73e,4,Westbound,24.0,29.0,"Bloor St W, west of Oakmount Rd",-79.4625696,43.6541459,15,15463,1,6.3015,87,22665,8.5,0,6
+2024-06-01,efb7d99db164,8,Eastbound,24.0,115.708333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,5
+2024-06-02,efb7d99db164,8,Eastbound,24.0,71.958333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,6
+2024-06-03,efb7d99db164,8,Eastbound,24.0,113.375,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,0
+2024-06-04,efb7d99db164,8,Eastbound,24.0,132.666667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,1
+2024-06-05,efb7d99db164,8,Eastbound,24.0,118.833333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,2
+2024-06-06,efb7d99db164,8,Eastbound,24.0,131.958333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,3
+2024-06-07,efb7d99db164,8,Eastbound,24.0,102.708333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,4
+2024-06-08,efb7d99db164,8,Eastbound,24.0,102.166667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,5
+2024-06-09,efb7d99db164,8,Eastbound,24.0,83.458333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,6
+2024-06-10,efb7d99db164,8,Eastbound,24.0,106.875,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,0
+2024-06-11,efb7d99db164,8,Eastbound,24.0,122.0,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,1
+2024-06-12,efb7d99db164,8,Eastbound,24.0,138.0,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,2
+2024-06-13,efb7d99db164,8,Eastbound,24.0,125.333333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,3
+2024-06-14,efb7d99db164,8,Eastbound,24.0,133.041667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,4
+2024-06-15,efb7d99db164,8,Eastbound,24.0,126.5,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,5
+2024-06-16,efb7d99db164,8,Eastbound,24.0,107.458333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,6
+2024-06-17,efb7d99db164,8,Eastbound,24.0,114.916667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,0
+2024-06-18,efb7d99db164,8,Eastbound,24.0,101.208333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,1
+2024-06-19,efb7d99db164,8,Eastbound,24.0,125.166667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,2
+2024-06-20,efb7d99db164,8,Eastbound,24.0,106.333333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,3
+2024-06-21,efb7d99db164,8,Eastbound,24.0,112.458333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,4
+2024-06-22,efb7d99db164,8,Eastbound,24.0,98.25,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,5
+2024-06-23,efb7d99db164,8,Eastbound,24.0,91.416667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,6
+2024-06-24,efb7d99db164,8,Eastbound,24.0,127.0,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,0
+2024-06-25,efb7d99db164,8,Eastbound,24.0,125.583333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,1
+2024-06-26,efb7d99db164,8,Eastbound,24.0,114.916667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,2
+2024-06-27,efb7d99db164,8,Eastbound,24.0,136.083333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,3
+2024-06-28,efb7d99db164,8,Eastbound,24.0,127.458333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,4
+2024-06-29,efb7d99db164,8,Eastbound,24.0,69.958333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,5
+2024-06-30,efb7d99db164,8,Eastbound,24.0,95.333333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,6
+2024-06-01,efb7d99db164,9,Westbound,24.0,98.583333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,5
+2024-06-02,efb7d99db164,9,Westbound,24.0,62.958333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,6
+2024-06-03,efb7d99db164,9,Westbound,24.0,93.791667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,0
+2024-06-04,efb7d99db164,9,Westbound,24.0,108.041667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,1
+2024-06-05,efb7d99db164,9,Westbound,24.0,103.916667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,2
+2024-06-06,efb7d99db164,9,Westbound,24.0,112.375,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,3
+2024-06-07,efb7d99db164,9,Westbound,24.0,86.583333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,4
+2024-06-08,efb7d99db164,9,Westbound,24.0,88.333333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,5
+2024-06-09,efb7d99db164,9,Westbound,24.0,67.416667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,6
+2024-06-10,efb7d99db164,9,Westbound,24.0,88.166667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,0
+2024-06-11,efb7d99db164,9,Westbound,24.0,105.541667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,1
+2024-06-12,efb7d99db164,9,Westbound,24.0,113.541667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,2
+2024-06-13,efb7d99db164,9,Westbound,24.0,107.208333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,3
+2024-06-14,efb7d99db164,9,Westbound,24.0,107.916667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,4
+2024-06-15,efb7d99db164,9,Westbound,24.0,106.75,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,5
+2024-06-16,efb7d99db164,9,Westbound,24.0,83.708333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,6
+2024-06-17,efb7d99db164,9,Westbound,24.0,95.25,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,0
+2024-06-18,efb7d99db164,9,Westbound,24.0,92.25,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,1
+2024-06-19,efb7d99db164,9,Westbound,24.0,111.333333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,2
+2024-06-20,efb7d99db164,9,Westbound,24.0,91.333333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,3
+2024-06-21,efb7d99db164,9,Westbound,24.0,101.333333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,4
+2024-06-22,efb7d99db164,9,Westbound,24.0,84.666667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,5
+2024-06-23,efb7d99db164,9,Westbound,24.0,77.916667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,6
+2024-06-24,efb7d99db164,9,Westbound,24.0,109.541667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,0
+2024-06-25,efb7d99db164,9,Westbound,24.0,112.25,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,1
+2024-06-26,efb7d99db164,9,Westbound,24.0,101.416667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,2
+2024-06-27,efb7d99db164,9,Westbound,24.0,115.125,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,3
+2024-06-28,efb7d99db164,9,Westbound,24.0,109.125,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,4
+2024-06-29,efb7d99db164,9,Westbound,24.0,64.166667,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,5
+2024-06-30,efb7d99db164,9,Westbound,24.0,81.833333,"Bloor St W, east of Palmerston Blvd",-79.413093,43.6647258,28,71982,2,12.9102,80,13120,10.9,0,6

@@ -9,15 +9,16 @@
       "id": "fixture-east-west",
       "geometry": { "type": "LineString", "coordinates": [[-79.425, 43.651], [-79.385, 43.659]] },
       "properties": {
-        "corridor_id": "fixture-east-west",
+        "corridorId": "fixture-east-west",
         "name": "Example East–West Connector",
-        "candidate_type": "plan_backed",
-        "scores": { "safety": 72, "connectivity": 85, "equity_population": 68, "current_demand": 55, "potential_demand": 78, "transit": 61, "barriers": 48, "coverage": 70, "destinations": 82 },
-        "mean_score": 68.8,
-        "strong_input_count": 7,
-        "rating": "High",
-        "core_weakness": false,
-        "data_status": "fixture"
+        "candidateType": "plan-backed",
+        "scores": { "safety": 72, "connectivity": 85, "equity": 68, "currentDemand": 55, "potentialDemand": 78, "transit": 61, "barriers": 48, "coverage": 70, "destinations": 82 },
+        "meanScore": 70.2,
+        "strongInputCount": 7,
+        "tier": "High",
+        "coreWeaknesses": [],
+        "rubricVersion": "velocity-priority-v1",
+        "dataStatus": "fixture"
       }
     },
     {
@@ -25,15 +26,16 @@
       "id": "fixture-north-south",
       "geometry": { "type": "LineString", "coordinates": [[-79.405, 43.648], [-79.404, 43.688]] },
       "properties": {
-        "corridor_id": "fixture-north-south",
+        "corridorId": "fixture-north-south",
         "name": "Example North–South Connector",
-        "candidate_type": "exploratory",
-        "scores": { "safety": 64, "connectivity": 74, "equity_population": 58, "current_demand": 46, "potential_demand": 69, "transit": 72, "barriers": 42, "coverage": 65, "destinations": 55 },
-        "mean_score": 60.6,
-        "strong_input_count": 5,
-        "rating": "Medium",
-        "core_weakness": false,
-        "data_status": "fixture"
+        "candidateType": "exploratory",
+        "scores": { "safety": 64, "connectivity": 74, "equity": 58, "currentDemand": 46, "potentialDemand": 69, "transit": 72, "barriers": 42, "coverage": 65, "destinations": 55 },
+        "meanScore": 61.6,
+        "strongInputCount": 5,
+        "tier": "Medium",
+        "coreWeaknesses": [],
+        "rubricVersion": "velocity-priority-v1",
+        "dataStatus": "fixture"
       }
     },
     {
@@ -41,15 +43,16 @@
       "id": "fixture-core-weakness",
       "geometry": { "type": "LineString", "coordinates": [[-79.36, 43.676], [-79.321, 43.691]] },
       "properties": {
-        "corridor_id": "fixture-core-weakness",
+        "corridorId": "fixture-core-weakness",
         "name": "Example Corridor With Safety Weakness",
-        "candidate_type": "plan_backed",
-        "scores": { "safety": 38, "connectivity": 81, "equity_population": 70, "current_demand": 62, "potential_demand": 76, "transit": 67, "barriers": 63, "coverage": 75, "destinations": 80 },
-        "mean_score": 68,
-        "strong_input_count": 8,
-        "rating": "High",
-        "core_weakness": true,
-        "data_status": "fixture"
+        "candidateType": "plan-backed",
+        "scores": { "safety": 38, "connectivity": 81, "equity": 70, "currentDemand": 62, "potentialDemand": 76, "transit": 67, "barriers": 63, "coverage": 75, "destinations": 80 },
+        "meanScore": 67.3,
+        "strongInputCount": 8,
+        "tier": "High",
+        "coreWeaknesses": ["safety"],
+        "rubricVersion": "velocity-priority-v1",
+        "dataStatus": "fixture"
       }
     }
   ]

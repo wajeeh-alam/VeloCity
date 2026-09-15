@@ -25,32 +25,33 @@
           },
           "properties": {
             "type": "object",
-            "required": ["corridor_id", "name", "candidate_type", "scores", "mean_score", "strong_input_count", "rating", "data_status"],
+            "required": ["corridorId", "name", "candidateType", "scores", "meanScore", "strongInputCount", "tier", "dataStatus"],
             "properties": {
-              "corridor_id": { "type": "string" },
+              "corridorId": { "type": "string" },
               "name": { "type": "string" },
-              "candidate_type": { "enum": ["plan_backed", "exploratory"] },
+              "candidateType": { "enum": ["plan-backed", "exploratory"] },
               "scores": {
                 "type": "object",
-                "required": ["safety", "connectivity", "equity_population", "current_demand", "potential_demand", "transit", "barriers", "coverage", "destinations"],
+                "required": ["safety", "connectivity", "equity", "currentDemand", "potentialDemand", "transit", "barriers", "coverage", "destinations"],
                 "additionalProperties": false,
                 "properties": {
                   "safety": { "$ref": "#/$defs/score" },
                   "connectivity": { "$ref": "#/$defs/score" },
-                  "equity_population": { "$ref": "#/$defs/score" },
-                  "current_demand": { "$ref": "#/$defs/score" },
-                  "potential_demand": { "$ref": "#/$defs/score" },
+                  "equity": { "$ref": "#/$defs/score" },
+                  "currentDemand": { "$ref": "#/$defs/score" },
+                  "potentialDemand": { "$ref": "#/$defs/score" },
                   "transit": { "$ref": "#/$defs/score" },
                   "barriers": { "$ref": "#/$defs/score" },
                   "coverage": { "$ref": "#/$defs/score" },
                   "destinations": { "$ref": "#/$defs/score" }
                 }
               },
-              "mean_score": { "$ref": "#/$defs/score" },
-              "strong_input_count": { "type": "integer", "minimum": 0, "maximum": 9 },
-              "rating": { "enum": ["Top", "High", "Medium", "Low"] },
-              "core_weakness": { "type": "boolean" },
-              "data_status": { "enum": ["fixture", "observed", "modelled", "mixed"] }
+              "meanScore": { "$ref": "#/$defs/score" },
+              "strongInputCount": { "type": "integer", "minimum": 0, "maximum": 9 },
+              "tier": { "enum": ["Top", "High", "Medium", "Low"] },
+              "coreWeaknesses": { "type": "array", "items": { "enum": ["safety", "connectivity", "potentialDemand"] } },
+              "rubricVersion": { "const": "velocity-priority-v1" },
+              "dataStatus": { "enum": ["fixture", "observed", "modelled", "mixed"] }
             }
           }
         }

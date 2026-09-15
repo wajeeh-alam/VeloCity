@@ -7,7 +7,7 @@
   "properties": {
     "schema_version": { "const": "1.0.0" },
     "status": { "enum": ["fixture", "trained", "fallback"] },
-    "target": { "const": "relative_bicycles_per_observed_hour" },
+    "target": { "const": "relative-bicycles-per-observed-hour" },
     "validation": { "type": "object" },
     "baseline": { "type": "object" },
     "model": { "type": ["object", "null"] },
