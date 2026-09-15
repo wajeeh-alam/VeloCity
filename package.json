@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "data:fetch": "node scripts/fetch-data.mjs",
+    "data:prepare:bike-share": "python3 scripts/prepare_bike_share.py",
+    "data:validate": "node scripts/validate-data.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

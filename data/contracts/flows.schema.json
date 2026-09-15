@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velocity.local/contracts/flows.schema.json",
+  "title": "VeloCity observed Bike Share OD flows",
+  "type": "object",
+  "required": ["schema_version", "data_status", "period", "summary", "flows"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "data_status": { "const": "observed" },
+    "period": { "type": "string" },
+    "summary": { "type": "object" },
+    "flows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["origin", "destination", "trip_count", "relative_weight", "mean_duration_seconds"],
+        "properties": {
+          "origin": { "$ref": "#/$defs/station" },
+          "destination": { "$ref": "#/$defs/station" },
+          "trip_count": { "type": "integer", "minimum": 1 },
+          "relative_weight": { "type": "number", "minimum": 0, "maximum": 1 },
+          "mean_duration_seconds": { "type": "number", "minimum": 0 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "station": {
+      "type": "object",
+      "required": ["station_id", "name", "lat", "lon"],
+      "properties": {
+        "station_id": { "type": "string" },
+        "name": { "type": "string" },
+        "lat": { "type": "number" },
+        "lon": { "type": "number" }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velocity.local/contracts/model-metrics.schema.json",
+  "title": "VeloCity model evaluation",
+  "type": "object",
+  "required": ["schema_version", "status", "target", "validation", "baseline", "selected_strategy", "warnings"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "status": { "enum": ["fixture", "trained", "fallback"] },
+    "target": { "const": "relative_bicycles_per_observed_hour" },
+    "validation": { "type": "object" },
+    "baseline": { "type": "object" },
+    "model": { "type": ["object", "null"] },
+    "selected_strategy": { "enum": ["median_baseline", "model"] },
+    "warnings": { "type": "array", "items": { "type": "string" } }
+  }
+}
