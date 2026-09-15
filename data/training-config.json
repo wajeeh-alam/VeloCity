@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "velocity.training-config.v1",
+  "featureVersion": "velocity-counter-features.v2",
+  "target": "bicycles-per-observed-hour",
+  "labelPeriod": { "start": "2024-06-01", "endExclusive": "2024-07-01" },
+  "grouping": "counter-site",
+  "testFraction": 0.25,
+  "splitSeed": 20240915,
+  "normalization": { "fittedOn": "training-only" },
+  "filters": {
+    "minimumDailyVolume": 0,
+    "maximumDailyVolume": 10000,
+    "minimumObservedHoursPerDay": 20,
+    "missingStaticFeaturePolicy": "drop-if-census-join-missing-otherwise-training-median",
+    "missingLabelPolicy": "drop"
+  },
+  "spatialRadiiMetres": {
+    "bikeShare": 1000,
+    "cyclistKsi": 1000,
+    "cyclingNetwork": 1000
+  },
+  "rawFeatureColumns": [
+    "bike_share_stations_1km",
+    "bike_share_trip_ends_1km",
+    "cyclist_ksi_collisions_1km",
+    "cycling_network_km_1km",
+    "neighbourhood_population",
+    "neighbourhood_low_income_pct",
+    "neighbourhood_improvement_area",
+    "day_of_week"
+  ]
+}

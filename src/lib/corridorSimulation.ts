@@ -13,9 +13,14 @@ import {
   type SimulationMetrics,
 } from './corridorDomain.ts'
 import { evaluateScore, normalizeScoreInputs } from './corridorScoring.ts'
+import { DEMAND_ARTIFACT_SCHEMA_VERSION, parseCorridorDemandArtifact } from './corridorDemandArtifact.ts'
+import { simulateDemandNetwork, validateSimulationNetwork, type SimulationNetwork } from './corridorNetworkSimulation.ts'
 
 export type SimulationOptions = {
-  artifact?: CorridorPredictionArtifact
+  /** Prefer the demand-only v2 contract. v1 is retained for legacy callers. */
+  artifact?: unknown
+  demandArtifact?: unknown
+  network?: SimulationNetwork
   networkState?: PortfolioNetworkState
 }
 
@@ -147,7 +152,7 @@ function findUsablePrediction(
     return { warning: 'Prediction artifact failed its spatial baseline gate.' }
   }
 
-  const horizon = options.networkState?.horizonYear ?? normalizedHorizon(corridor.rolloutYear)
+  const horizon = normalizedHorizon(options.networkState?.horizonYear ?? corridor.rolloutYear)
   const candidates = artifact.records.filter(
     (record) => record.corridorId === corridor.id && record.rolloutYear === horizon,
   )
@@ -249,7 +254,8 @@ function createArtifactSimulation(
     mode: 'trained-artifact',
     artifactId: artifact.artifactId,
     disclaimer:
-      'Spatially held-out trained-model scenario. Relative estimates remain decision support, not causal forecasts or official recommendations.',
+      'Deprecated v1 precomputed scenario; migrate to velocity.corridor-demand.v2 and B-owned routing. Relative estimates remain decision support, not causal forecasts or official recommendations.',
+    warnings: ['Deprecated simulation-heavy v1 artifact; this compatibility path does not implement the canonical A→B handoff.'],
   }
 }
 
@@ -283,8 +289,8 @@ function createSyntheticSimulation(
 ): CorridorSimulation {
   const inputs = normalizeScoreInputs(corridor.inputs)
   const scoring = evaluateScore(inputs)
-  const horizon = options.networkState?.horizonYear ?? normalizedHorizon(corridor.rolloutYear)
-  const activeCorridorCount = options.networkState
+  const horizon = normalizedHorizon(options.networkState?.horizonYear ?? corridor.rolloutYear)
+  const activeCorridorCount = Array.isArray(options.networkState?.activeCorridorIds)
     ? new Set(options.networkState.activeCorridorIds).size
     : 0
   const networkSynergy = 1 + Math.min(0.12, activeCorridorCount * 0.02)
@@ -393,7 +399,7 @@ function isCorridorActive(
   options: SimulationOptions,
 ): boolean {
   if (options.networkState) {
-    return options.networkState.activeCorridorIds.includes(corridor.id)
+    return Array.isArray(options.networkState.activeCorridorIds) && options.networkState.activeCorridorIds.includes(corridor.id)
   }
   // A trained prediction must never infer construction state from the same
   // field used as the scenario horizon. Legacy fallback callers remain
@@ -427,6 +433,33 @@ export function simulateCorridor(
   corridor: Corridor,
   options: SimulationOptions = {},
 ): CorridorSimulation {
+  const artifact = options.demandArtifact ?? options.artifact
+  const isDemand = options.demandArtifact !== undefined || (typeof artifact === 'object' && artifact !== null && 'schemaVersion' in artifact && artifact.schemaVersion === DEMAND_ARTIFACT_SCHEMA_VERSION)
+  if (isDemand) {
+    const fallback = (warning: string) => {
+      const simulation = isCorridorActive(corridor, options)
+        ? createSyntheticSimulation(corridor, options, warning)
+        : createInactiveSimulation(corridor, options)
+      return { ...simulation, warnings: [warning, ...(simulation.warnings ?? []).filter((item) => item !== warning)] }
+    }
+    const parsed = parseCorridorDemandArtifact(artifact)
+    if (!parsed.ok) return fallback(`Demand artifact rejected: ${parsed.errors.join('; ')}`)
+    const record = parsed.artifact.records.find((item) => item.corridorId === corridor.id)
+    if (!record) return fallback('No trained demand prediction exists for this stable corridor ID.')
+    if (!scoreInputsMatch(record.features.normalized, normalizeScoreInputs(corridor.inputs))) return fallback('Edited scores do not match the trained feature snapshot.')
+    if (!options.network) return fallback('A valid B-owned routing network is required to generate a demand-weighted scenario.')
+    const networkErrors = validateSimulationNetwork(options.network)
+    if (networkErrors.length) return fallback(`Invalid B routing network: ${networkErrors.join('; ')}`)
+    const predictions = new Map(parsed.artifact.records.map((item) => [item.corridorId, item.prediction]))
+    if (options.network.flows.some((flow) => !predictions.has(flow.corridorId))) return fallback('Missing demand prediction for an OD corridor in the B network.')
+    const totalWeight = options.network.flows.reduce((sum, flow) => sum + flow.weight * predictions.get(flow.corridorId)!, 0)
+    if (!Number.isFinite(totalWeight)) return fallback('Relative OD demand weights overflow; scenario rejected.')
+    if (!options.network.edges.some((edge) => edge.corridorId === corridor.id)) return fallback('Selected corridor has no mapped edges in the B routing network.')
+    const state = options.networkState
+    const known = new Set(options.network.edges.flatMap((edge) => edge.corridorId ? [edge.corridorId] : []))
+    if (!state || ![1, 2, 3].includes(state.horizonYear) || !Array.isArray(state.activeCorridorIds) || new Set(state.activeCorridorIds).size !== state.activeCorridorIds.length || !state.activeCorridorIds.every((id) => known.has(id))) return fallback('Explicit portfolio state must have horizon 1–3 and unique known corridor IDs.')
+    return simulateDemandNetwork(corridor, parsed.artifact, options.network, state)
+  }
   if (!isCorridorActive(corridor, options)) {
     return createInactiveSimulation(corridor, options)
   }
@@ -443,8 +476,9 @@ export function simulateCorridor(
 
 /** Safe bootstrap adapter for a fetched/imported JSON artifact. */
 export function createArtifactAwareSimulator(
-  artifact: CorridorPredictionArtifact,
+  artifact: unknown,
   networkState?: PortfolioNetworkState,
+  network?: SimulationNetwork,
 ): (corridor: Corridor) => CorridorSimulation {
-  return (corridor) => simulateCorridor(corridor, { artifact, networkState })
+  return (corridor) => simulateCorridor(corridor, { artifact, networkState, network })
 }

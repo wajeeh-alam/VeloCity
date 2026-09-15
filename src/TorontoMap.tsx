@@ -1,20 +1,45 @@
 import { useEffect, useRef } from 'react'
-import L, { type LayerGroup, type Map as LeafletMap } from 'leaflet'
+import L, { type LatLngExpression, type LayerGroup, type Map as LeafletMap } from 'leaflet'
 import type { GeoJsonObject } from 'geojson'
 import 'leaflet/dist/leaflet.css'
-import type { Corridor, CorridorSimulation } from './data/corridors.ts'
-import { corridorGeometry } from './mapGeometry.ts'
+import type { GeoLine, OpportunityProfile } from './data/opportunities.ts'
 
 type TorontoMapProps = {
-  corridors: Corridor[]
-  selected: Corridor
+  opportunities: OpportunityProfile[]
+  selected: OpportunityProfile
   activeIds: string[]
   built: boolean
-  simulation: CorridorSimulation
-  onSelect: (corridor: Corridor) => void
+  onSelect: (corridor: OpportunityProfile) => void
 }
 
-export function TorontoMap({ corridors, selected, activeIds, built, simulation, onSelect }: TorontoMapProps) {
+function coordinateIsValid(value: unknown): value is [number, number] {
+  return Array.isArray(value)
+    && value.length >= 2
+    && typeof value[0] === 'number'
+    && typeof value[1] === 'number'
+    && Number.isFinite(value[0])
+    && Number.isFinite(value[1])
+}
+
+function geometryLines(geometry: GeoLine): LatLngExpression[][] {
+  const coordinateLines = geometry.type === 'LineString'
+    ? [geometry.coordinates]
+    : geometry.coordinates
+
+  return coordinateLines
+    .filter(Array.isArray)
+    .map((line) => line.filter(coordinateIsValid).map(([longitude, latitude]) => [latitude, longitude] as LatLngExpression))
+    .filter((line) => line.length >= 2)
+}
+
+function hasDrawableCandidateRoute(opportunity: OpportunityProfile) {
+  return opportunity.comparison.routeAlternatives.some((route) => (
+    route.kind === 'official-candidate-alignment'
+    && route.geometryRef === 'record.geometry'
+  ))
+}
+
+export function TorontoMap({ opportunities, selected, activeIds, built, onSelect }: TorontoMapProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<LeafletMap | null>(null)
   const layerRef = useRef<LayerGroup | null>(null)
@@ -39,7 +64,7 @@ export function TorontoMap({ corridors, selected, activeIds, built, simulation, 
     mapRef.current = map
 
     const controller = new AbortController()
-    fetch('/data/toronto-cycling-network.geojson', { signal: controller.signal })
+    fetch(`${import.meta.env.BASE_URL}data/toronto-cycling-network.geojson`, { signal: controller.signal })
       .then((response) => response.ok ? response.json() as Promise<GeoJsonObject> : Promise.reject())
       .then((network) => {
         if (mapRef.current !== map) return
@@ -56,7 +81,7 @@ export function TorontoMap({ corridors, selected, activeIds, built, simulation, 
         }).addTo(map)
         cyclingNetworkRef.current.bringToBack()
       })
-      .catch(() => { /* Preserve the base map when the local network snapshot is unavailable. */ })
+      .catch(() => { /* Keep the base map usable if the network snapshot is unavailable. */ })
 
     return () => {
       controller.abort()
@@ -72,49 +97,55 @@ export function TorontoMap({ corridors, selected, activeIds, built, simulation, 
     layerRef.current?.remove()
     const group = L.layerGroup().addTo(map)
 
-    corridors.forEach((corridor) => {
-      const positions = corridorGeometry[corridor.id]
-      if (!positions) return
-      const isSelected = corridor.id === selected.id
-      const isActive = activeIds.includes(corridor.id)
+    opportunities.forEach((opportunity) => {
+      if (!hasDrawableCandidateRoute(opportunity)) return
+      const lines = geometryLines(opportunity.geometry)
+      const isSelected = opportunity.corridorId === selected.corridorId
+      const isActive = activeIds.includes(opportunity.corridorId)
       const routeClasses = [
         isSelected ? 'leaflet-selected-route' : null,
         built && isSelected ? 'leaflet-built-route' : null,
       ].filter(Boolean).join(' ')
-      const line = L.polyline(positions, {
-        color: isSelected ? '#7067e8' : '#8d8d92',
-        weight: isSelected ? (built ? 7 : 5) : 3,
-        opacity: isSelected ? 1 : isActive ? 0.72 : 0.3,
-        className: routeClasses || undefined,
-      }).addTo(group)
-      line.bindTooltip(`<strong>${corridor.name}</strong><br>${corridor.subtitle}`, { className: 'velocity-tooltip' })
-      line.on('click', () => onSelect(corridor))
+
+      lines.forEach((positions) => {
+        const line = L.polyline(positions, {
+          color: isSelected ? '#7067e8' : '#8d8d92',
+          weight: isSelected ? (built ? 7 : 5) : 3,
+          opacity: isSelected ? 1 : isActive ? 0.72 : 0.24,
+          className: routeClasses || undefined,
+        }).addTo(group)
+        line.bindTooltip(`<strong>${opportunity.name}</strong><br>${opportunity.subtitle}`, { className: 'velocity-tooltip' })
+        line.on('click', () => onSelect(opportunity))
+      })
     })
 
-    const selectedGeometry = corridorGeometry[selected.id]
-    if (selectedGeometry) {
-      const first = selectedGeometry[0]
-      const last = selectedGeometry[selectedGeometry.length - 1]
-      L.circleMarker(first, { radius: 5, color: '#7067e8', fillColor: '#ffffff', fillOpacity: 1, weight: 2 }).addTo(group)
-      L.circleMarker(last, { radius: 5, color: '#7067e8', fillColor: '#7067e8', fillOpacity: 1, weight: 2 }).addTo(group)
+    const selectedLines = hasDrawableCandidateRoute(selected) ? geometryLines(selected.geometry) : []
+    const selectedPositions = selectedLines.flat()
+    if (selectedPositions.length >= 2) {
+      L.circleMarker(selectedPositions[0], { radius: 5, color: '#7067e8', fillColor: '#ffffff', fillOpacity: 1, weight: 2 }).addTo(group)
+      L.circleMarker(selectedPositions[selectedPositions.length - 1], { radius: 5, color: '#7067e8', fillColor: '#7067e8', fillOpacity: 1, weight: 2 }).addTo(group)
+
       if (built) {
-        simulation.agents.slice(0, 8).forEach((agent, index) => {
-          const position = selectedGeometry[index % selectedGeometry.length]
+        selected.comparison.representativeAgents.slice(0, 8).forEach((agent, index) => {
+          const position = selectedPositions[Math.floor(index * (selectedPositions.length - 1) / Math.max(selected.comparison.representativeAgents.length - 1, 1))]
           L.circleMarker(position, {
             radius: 3.2,
             color: '#ffffff',
-            fillColor: '#ffffff',
+            fillColor: '#7067e8',
             fillOpacity: 1,
-            weight: 0,
+            weight: 1,
             className: 'leaflet-agent',
-          }).addTo(group).bindTooltip(`${agent.weight ?? 0} weighted trips/day`)
+          }).addTo(group).bindTooltip(`Marker represents ${agent.weight} simulated low-stress trips per weekday`)
         })
       }
-      map.flyToBounds(L.latLngBounds(selectedGeometry), { padding: [75, 75], maxZoom: 13, duration: 0.8 })
+
+      map.flyToBounds(L.latLngBounds(selectedPositions), { padding: [75, 75], maxZoom: 13, duration: 0.8 })
     }
+
+    cyclingNetworkRef.current?.bringToBack()
     layerRef.current = group
     return () => { group.remove() }
-  }, [activeIds, built, corridors, onSelect, selected, simulation.agents])
+  }, [activeIds, built, onSelect, opportunities, selected])
 
   return <div ref={containerRef} className="leaflet-map" aria-label={`OpenStreetMap of Toronto highlighting ${selected.name}`} />
 }

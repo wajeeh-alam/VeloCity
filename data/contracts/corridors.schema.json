@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velocity.local/contracts/corridors.schema.json",
+  "title": "VeloCity corridor evidence",
+  "type": "object",
+  "required": ["type", "features"],
+  "properties": {
+    "type": { "const": "FeatureCollection" },
+    "schema_version": { "const": "1.0.0" },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "id", "geometry", "properties"],
+        "properties": {
+          "type": { "const": "Feature" },
+          "id": { "type": "string" },
+          "geometry": {
+            "type": "object",
+            "required": ["type", "coordinates"],
+            "properties": {
+              "type": { "enum": ["LineString", "MultiLineString"] },
+              "coordinates": { "type": "array", "minItems": 2 }
+            }
+          },
+          "properties": {
+            "type": "object",
+            "required": ["corridorId", "name", "candidateType", "scores", "meanScore", "strongInputCount", "tier", "dataStatus"],
+            "properties": {
+              "corridorId": { "type": "string" },
+              "name": { "type": "string" },
+              "candidateType": { "enum": ["plan-backed", "exploratory"] },
+              "scores": {
+                "type": "object",
+                "required": ["safety", "connectivity", "equity", "currentDemand", "potentialDemand", "transit", "barriers", "coverage", "destinations"],
+                "additionalProperties": false,
+                "properties": {
+                  "safety": { "$ref": "#/$defs/score" },
+                  "connectivity": { "$ref": "#/$defs/score" },
+                  "equity": { "$ref": "#/$defs/score" },
+                  "currentDemand": { "$ref": "#/$defs/score" },
+                  "potentialDemand": { "$ref": "#/$defs/score" },
+                  "transit": { "$ref": "#/$defs/score" },
+                  "barriers": { "$ref": "#/$defs/score" },
+                  "coverage": { "$ref": "#/$defs/score" },
+                  "destinations": { "$ref": "#/$defs/score" }
+                }
+              },
+              "meanScore": { "$ref": "#/$defs/score" },
+              "strongInputCount": { "type": "integer", "minimum": 0, "maximum": 9 },
+              "tier": { "enum": ["Top", "High", "Medium", "Low"] },
+              "coreWeaknesses": { "type": "array", "items": { "enum": ["safety", "connectivity", "potentialDemand"] } },
+              "rubricVersion": { "const": "velocity-priority-v1" },
+              "dataStatus": { "enum": ["fixture", "observed", "modelled", "mixed"] }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "score": { "type": "number", "minimum": 0, "maximum": 100 }
+  }
+}

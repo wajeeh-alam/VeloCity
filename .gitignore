@@ -11,6 +11,15 @@ node_modules
 dist
 dist-ssr
 *.local
+__pycache__/
+*.py[cod]
+.data-python/
+.venv/
+data/models/*.joblib
+
+# Reproducible source downloads stay local. Commit only contracts and public artifacts.
+data/raw/*
+!data/raw/.gitkeep
 
 # Editor directories and files
 .vscode/*

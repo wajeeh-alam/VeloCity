@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "velocity.model-evaluation.v1",
+  "modelId": "random-forest",
+  "modelVersion": "1.0.0",
+  "trainedAt": "2026-09-15T16:32:47.016972+00:00",
+  "featureVersion": "velocity-counter-features.v2",
+  "target": "relative-bicycles-per-observed-hour",
+  "unit": "dimensionless-relative-hourly-demand",
+  "normalization": {
+    "referenceBicyclesPerHour": 32.0625,
+    "fittedOn": "training-only"
+  },
+  "validation": {
+    "strategy": "spatial-holdout",
+    "grouping": "counter-site",
+    "metric": "mae",
+    "modelValue": 0.67489,
+    "medianBaselineValue": 1.114836,
+    "baseline": "training-median",
+    "lowerIsBetter": true,
+    "trainGroupIds": [
+      "4dd7637aa9ad",
+      "57ae88af98ae",
+      "62a9f3857b4d",
+      "703d489beb74",
+      "7563f73ef205",
+      "94bfa38aeefb",
+      "bebc08f4b69f",
+      "dd304ccf6d8b",
+      "e7531cbe004f",
+      "f24abfdc5d61"
+    ],
+    "testGroupIds": [
+      "371f035ac73e",
+      "ce2b5aceb4da",
+      "efb7d99db164"
+    ]
+  },
+  "productionEligible": true,
+  "trainingSelection": {
+    "strategy": "group-k-fold",
+    "metricUnit": "bicycles-per-observed-hour",
+    "folds": 5,
+    "candidateMae": {
+      "ridge-alpha-1": 5.48031,
+      "ridge-alpha-10": 5.410787,
+      "gradient-boosting": 5.615799,
+      "random-forest": 4.897104
+    }
+  },
+  "trainingDataSha256": "d568b39cfdd01675fca870aa4f87a19d407ea31bda2b8a232b524ab78c663f14",
+  "uncertainty": {
+    "level": 0.8,
+    "method": "spatial-holdout-residual-quantile",
+    "calibration": "out-of-fold residuals from training sites only; nominal, not guaranteed coverage",
+    "absoluteResidual": 0.263977,
+    "heldOutCoverage": 0.611111
+  },
+  "sampleCounts": {
+    "trainingRows": 574,
+    "testRows": 180,
+    "trainingSites": 10,
+    "testSites": 3
+  },
+  "warnings": [
+    "Labels use summed valid interval counts divided by observed hours; days below 20 hours are excluded. Zero counts retained; obstruction can depress counts. Directional daily mean, not peak-hour demand.",
+    "Collision features use deduplicated cyclist-involved KSI events from 2019-06-01 through 2024-05-31.",
+    "2026 station and cycling-network snapshots accompany 2024 observations; spatial backtesting is not historical forecasting validation.",
+    "Bike Share station activity reflects June 2024 station coverage and users, not all cycling demand.",
+    "Static spatial features are repeated across daily observations and must be grouped by counter site during validation.",
+    "Only 13 physical sites; neighbouring sites may remain spatially correlated. The holdout was revisited after data-quality fixes; use external sites for confirmatory evaluation.",
+    "Nominal 80% uncertainty band covered 61.1% of held-out observations; uncertainty is not well calibrated for new sites."
+  ]
+}

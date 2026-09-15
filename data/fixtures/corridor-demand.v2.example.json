@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "velocity.corridor-demand.v2",
+  "artifactId": "synthetic-contract-example-do-not-publish",
+  "generatedAt": "2026-09-15T12:00:00Z",
+  "model": {
+    "id": "contract-example",
+    "version": "0.0.0",
+    "trainedAt": "2026-09-15T12:00:00Z",
+    "datasetManifestVersion": "velocity.training-data.v1",
+    "featureVersion": "velocity-counter-features.v2",
+    "target": "relative-bicycles-per-observed-hour",
+    "unit": "dimensionless-relative-hourly-demand",
+    "normalization": { "referenceBicyclesPerHour": 1, "fittedOn": "training-only" },
+    "validation": {
+      "strategy": "spatial-holdout", "grouping": "counter-site", "metric": "mae",
+      "modelValue": 1, "medianBaselineValue": 1, "baseline": "training-median",
+      "lowerIsBetter": true, "trainGroupIds": ["example-train"], "testGroupIds": ["example-test"]
+    },
+    "productionEligible": false
+  },
+  "records": [{
+    "corridorId": "example-only",
+    "geometry": null,
+    "inputScores": { "safety": 0, "connectivity": 0, "equity": 0, "currentDemand": 0, "potentialDemand": 0, "transit": 0, "barriers": 0, "coverage": 0, "destinations": 0 },
+    "rawFeatures": { "example": 0 },
+    "prediction": { "relativeBicyclesPerObservedHour": 0, "uncertainty": { "lower": 0, "upper": 0, "level": 0.8, "method": "spatial-holdout-residual-quantile" } },
+    "observation": { "start": "2024-06-01", "end": "2024-06-30" },
+    "sourceProvenance": ["synthetic-contract-example"]
+  }]
+}
