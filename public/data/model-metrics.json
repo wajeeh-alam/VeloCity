@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "status": "trained",
+  "target": "relative-bicycles-per-observed-hour",
+  "validation": {
+    "strategy": "spatial-holdout",
+    "grouping": "counter-site",
+    "metric": "mae",
+    "modelValue": 0.67489,
+    "medianBaselineValue": 1.114836,
+    "baseline": "training-median",
+    "lowerIsBetter": true,
+    "trainGroupIds": [
+      "4dd7637aa9ad",
+      "57ae88af98ae",
+      "62a9f3857b4d",
+      "703d489beb74",
+      "7563f73ef205",
+      "94bfa38aeefb",
+      "bebc08f4b69f",
+      "dd304ccf6d8b",
+      "e7531cbe004f",
+      "f24abfdc5d61"
+    ],
+    "testGroupIds": [
+      "371f035ac73e",
+      "ce2b5aceb4da",
+      "efb7d99db164"
+    ]
+  },
+  "baseline": {
+    "name": "training-median",
+    "mean_absolute_error": 1.114836
+  },
+  "model": {
+    "id": "random-forest",
+    "version": "1.0.0",
+    "mean_absolute_error": 0.67489
+  },
+  "selected_strategy": "model",
+  "warnings": [
+    "Labels use summed valid interval counts divided by observed hours; days below 20 hours are excluded. Zero counts retained; obstruction can depress counts. Directional daily mean, not peak-hour demand.",
+    "Collision features use deduplicated cyclist-involved KSI events from 2019-06-01 through 2024-05-31.",
+    "2026 station and cycling-network snapshots accompany 2024 observations; spatial backtesting is not historical forecasting validation.",
+    "Bike Share station activity reflects June 2024 station coverage and users, not all cycling demand.",
+    "Static spatial features are repeated across daily observations and must be grouped by counter site during validation.",
+    "Only 13 physical sites; neighbouring sites may remain spatially correlated. The holdout was revisited after data-quality fixes; use external sites for confirmatory evaluation.",
+    "Nominal 80% uncertainty band covered 61.1% of held-out observations; uncertainty is not well calibrated for new sites."
+  ]
+}
