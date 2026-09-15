@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_status": "mixed",
+  "generated_at": "2026-09-15T15:54:00Z",
+  "coordinate_reference_system": "EPSG:4326",
+  "score_range": [0, 100],
+  "strong_input_threshold": 60,
+  "sources": [
+    { "id": "bike-share-trips-2024", "role": "current demand and OD agents", "status": "processed_june_2024", "sha256": "0f56789e81c0af0e1aad7b2f482768643b33e4fa7fb0580b3b40527a82481cc6" },
+    { "id": "bike-share-stations", "role": "OD station coordinates", "status": "processed_snapshot_2026-09-15", "sha256": "2013fd1ea55d85887ba3a9711ab9aa61c6a13ccca288cad27edba10caabed985" },
+    { "id": "cycling-program-2025-2027", "role": "plan-backed candidate corridors", "status": "downloaded_not_processed", "sha256": "fabdbe43322e77a9542771a794d65ef332a20652e61aef5fa62a59a1100b44ce" },
+    { "id": "cycling-network", "role": "connectivity and network coverage", "status": "downloaded_not_processed", "sha256": "c5d53a5fd367d39da5cdd58f97b8f95d4d94fcbc760ab15d55620c34dfc6fec1" },
+    { "id": "ksi-collisions", "role": "safety", "status": "downloaded_not_processed", "sha256": "b84649e81cac073c23006816f1c28be850df11937caddb7d0d8c0d468820e255" },
+    { "id": "permanent-bike-counter-locations", "role": "demand validation", "status": "downloaded_not_processed", "sha256": "6f1dc8aefe46b28776574c963304162eaa039bd3b80c0336993de6e81c9d2a5b" },
+    { "id": "permanent-bike-counter-daily", "role": "current demand and demand validation", "status": "downloaded_not_processed", "sha256": "ba62d81fcd5f4433c4d6fbb97ee348813ee9f1ebaa0c1f963abadadf7152ac8c" },
+    { "id": "neighbourhood-profiles-2021", "role": "equity, population and potential demand", "status": "downloaded_not_processed", "sha256": "9a3c372907e9de09407d847398703146a9cfc0f5b2217446fd61ab8ab35345eb" },
+    { "id": "ttc-gtfs", "role": "transit access", "status": "optional" }
+  ],
+  "limitations": [
+    "Bike Share trips represent station coverage and membership, not all cycling trips.",
+    "A June sample is seasonal and must not be interpreted as annual demand.",
+    "Fixture corridor scores are synthetic and must not appear as findings in the demo."
+  ]
+}

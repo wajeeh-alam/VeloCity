@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Reproducible source downloads stay local. Commit only contracts and public artifacts.
+data/raw/*
+!data/raw/.gitkeep
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

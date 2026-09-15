@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "status": "fixture",
+  "target": "relative_bicycles_per_observed_hour",
+  "validation": {
+    "method": "spatially grouped holdout",
+    "metric": "mean_absolute_error",
+    "folds": null
+  },
+  "baseline": {
+    "name": "training-area median",
+    "mean_absolute_error": null
+  },
+  "model": null,
+  "selected_strategy": "median_baseline",
+  "warnings": [
+    "Fixture only: no model has been trained or evaluated.",
+    "The median baseline remains active until a spatially validated model performs better."
+  ]
+}

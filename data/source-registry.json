@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-09-15",
+  "sources": [
+    {
+      "id": "bike-share-trips-2024",
+      "title": "Bike Share Toronto Ridership Data (2024)",
+      "purpose": ["current_demand", "agent_origins_destinations"],
+      "format": "ZIP",
+      "download_url": "https://opendata.toronto.ca/toronto.parking.authority/bike-share-toronto-ridership-data/bikeshare-ridership-2024.zip",
+      "output": "bike-share-2024.zip",
+      "required": true,
+      "large": true,
+      "notes": "206 MB annual archive. Extract June 2024 for the hackathon MVP."
+    },
+    {
+      "id": "bike-share-stations",
+      "title": "Bike Share Toronto GBFS station information",
+      "purpose": ["station_coordinates"],
+      "format": "JSON",
+      "download_url": "https://tor.publicbikesystem.net/ube/gbfs/v1/en/station_information",
+      "output": "bike-share-stations.json",
+      "required": true,
+      "large": false,
+      "notes": "Live station metadata; snapshot date must be recorded because stations change."
+    },
+    {
+      "id": "cycling-program-2025-2027",
+      "title": "Near-term Cycling Program: 2025–2027 Programmed Cycling Projects",
+      "purpose": ["plan_backed_candidates"],
+      "format": "Shapefile ZIP",
+      "download_url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/4ae27b50-be86-4dc9-881a-778db59d1908/resource/5d385e68-6d86-47a9-9433-61929fbc00f9/download/programmed25-27_cycling_projects.zip",
+      "output": "cycling-program-2025-2027.zip",
+      "required": true,
+      "large": false,
+      "notes": "Primary source for the 15–25 plan-backed MVP candidate corridors."
+    },
+    {
+      "id": "cycling-network",
+      "title": "City of Toronto Cycling Network",
+      "purpose": ["connectivity", "network_coverage", "existing_infrastructure"],
+      "format": "GeoJSON",
+      "download_url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/abbe5ee3-e249-4f86-a219-f0022eaddcc9/resource/023da9a2-8848-4e10-9cad-e7f9119cd874/download/cycling-network-4326.geojson",
+      "output": "cycling-network.geojson",
+      "required": true,
+      "large": false
+    },
+    {
+      "id": "ksi-collisions",
+      "title": "Motor Vehicle Collisions Involving Killed or Seriously Injured Persons",
+      "purpose": ["safety"],
+      "format": "GeoJSON",
+      "download_url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/73a8e475-9683-42e1-ac06-b8690dcba062/resource/f8faf384-a96d-4dff-af59-db40f777c7d3/download/motor-vehicle-collisions-with-ksi-data-4326.geojson",
+      "output": "ksi-collisions.geojson",
+      "required": true,
+      "large": false
+    },
+    {
+      "id": "permanent-bike-counter-locations",
+      "title": "Permanent Bicycle Counter Locations",
+      "purpose": ["demand_validation"],
+      "format": "GeoJSON",
+      "download_url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/ff7e7369-cbba-4545-9e26-e5a5ef6a123c/resource/03ec1db0-7258-4d6b-8e64-29b80e543c55/download/cycling_permanent_counts_locations.geojson",
+      "output": "bike-counter-locations.geojson",
+      "required": true,
+      "large": false
+    },
+    {
+      "id": "permanent-bike-counter-daily",
+      "title": "Permanent Bicycle Counter Daily Counts",
+      "purpose": ["current_demand", "demand_validation"],
+      "format": "CSV",
+      "download_url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/ff7e7369-cbba-4545-9e26-e5a5ef6a123c/resource/64d37590-ebe8-4ba8-9abb-74eb11453fae/download/cycling_permanent_counts_daily.csv",
+      "output": "bike-counter-daily.csv",
+      "required": true,
+      "large": false
+    },
+    {
+      "id": "neighbourhood-profiles-2021",
+      "title": "Toronto Neighbourhood Profiles, 2021 Census, 158-neighbourhood model",
+      "purpose": ["equity_population", "potential_demand"],
+      "format": "XLSX",
+      "download_url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/6e19a90f-971c-46b3-852c-0c48c436d1fc/resource/19d4a806-7385-4889-acf2-256f1e079060/download/nbhd_2021_census_profile_full_158model.xlsx",
+      "output": "neighbourhood-profiles-2021.xlsx",
+      "required": true,
+      "large": false
+    },
+    {
+      "id": "ttc-gtfs",
+      "title": "TTC Routes and Schedules",
+      "purpose": ["transit_access"],
+      "format": "ZIP",
+      "download_url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/7795b45e-e65a-4465-81fc-c36b9dfff169/resource/cfb6b2b8-6191-41e3-bda1-b175c51148cb/download/opendata_ttc_schedules.zip",
+      "output": "ttc-gtfs.zip",
+      "required": false,
+      "large": false
+    }
+  ]
+}
