@@ -107,15 +107,15 @@ export function TorontoMap({ opportunities, selected, activeIds, built, showAllR
       const lines = geometryLines(opportunity.geometry)
       const routeClasses = [
         isSelected ? 'leaflet-selected-route' : null,
-        built && isSelected ? 'leaflet-built-route' : null,
+        built && (isSelected || showAllRoutes) ? 'leaflet-built-route' : null,
       ].filter(Boolean).join(' ')
 
       lines.forEach((positions) => {
         displayedPositions.push(...positions)
         const line = L.polyline(positions, {
-          color: isSelected ? '#7067e8' : '#8d8d92',
+          color: isSelected || showAllRoutes ? '#7067e8' : '#8d8d92',
           weight: isSelected ? (built ? 7 : 5) : 3,
-          opacity: isSelected ? 1 : isActive ? 0.72 : 0.24,
+          opacity: isSelected ? 1 : showAllRoutes ? 0.62 : isActive ? 0.72 : 0.24,
           className: routeClasses || undefined,
         }).addTo(group)
         line.bindTooltip(`<strong>${opportunity.name}</strong><br>${opportunity.subtitle}`, { className: 'velocity-tooltip' })
