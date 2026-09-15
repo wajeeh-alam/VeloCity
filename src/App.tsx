@@ -70,10 +70,6 @@ function App() {
   const listedOpportunities = artifact.records
   const selected = artifact.records.find((record) => record.corridorId === selectedId) ?? artifact.records[0]
   const comparison = selected.comparison
-  const routingScenario = routingBundle.scenarios.find((scenario) => scenario.corridorId === selected.corridorId)
-  const routedFlows = routingScenario?.status === 'precomputed'
-    ? routingScenario.simulations.flatMap((entry) => entry.simulation.routes)
-    : []
   const shownMetrics = comparison.after
   const prediction = selected.evidence.prediction
   const metricKeys = Object.keys(artifact.scenarioModel.metricDefinitions) as SimulationMetricKey[]
@@ -135,18 +131,12 @@ function App() {
               built
               showAllRoutes={showAllRoutes}
               onSelect={selectCorridor}
-              routedFlows={routedFlows}
             />
             <div className="map-legend">
               <span><i className="legend-line existing" />Current bike network</span>
               <span><i className="legend-line candidate" />Selected proposal</span>
-              <span><i className="legend-line routed" />Weighted routed flows</span>
             </div>
             <div className="map-callout"><small>Selected connection</small><strong>{selected.name}</strong><span>{selected.subtitle}</span></div>
-            <div className={`routing-state ${routedFlows.length ? 'ready' : ''}`}>
-              <b>{routedFlows.length ? `${routedFlows.length} B-routed flows` : 'B routing unavailable'}</b>
-              <span>{routedFlows.length ? 'Trained demand · agents appear in Proposed view' : routingScenario?.blockers[0] ?? 'No matching B scenario'}</span>
-            </div>
           </div>
 
           <section className="impact-section">

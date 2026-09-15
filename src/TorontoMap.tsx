@@ -3,7 +3,6 @@ import L, { type LatLngExpression, type LayerGroup, type Map as LeafletMap } fro
 import type { GeoJsonObject } from 'geojson'
 import 'leaflet/dist/leaflet.css'
 import type { GeoLine, OpportunityProfile } from './data/opportunities.ts'
-import type { RoutedFlow } from './data/precomputedScenarios.ts'
 
 type TorontoMapProps = {
   opportunities: OpportunityProfile[]
@@ -12,7 +11,6 @@ type TorontoMapProps = {
   built: boolean
   showAllRoutes: boolean
   onSelect: (corridor: OpportunityProfile) => void
-  routedFlows: RoutedFlow[]
 }
 
 function coordinateIsValid(value: unknown): value is [number, number] {
@@ -42,7 +40,7 @@ function hasDrawableCandidateRoute(opportunity: OpportunityProfile) {
   ))
 }
 
-export function TorontoMap({ opportunities, selected, activeIds, built, showAllRoutes, onSelect, routedFlows }: TorontoMapProps) {
+export function TorontoMap({ opportunities, selected, activeIds, built, showAllRoutes, onSelect }: TorontoMapProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<LeafletMap | null>(null)
   const layerRef = useRef<LayerGroup | null>(null)
@@ -131,21 +129,6 @@ export function TorontoMap({ opportunities, selected, activeIds, built, showAllR
       L.circleMarker(selectedPositions[0], { radius: 5, color: '#7067e8', fillColor: '#ffffff', fillOpacity: 1, weight: 2 }).addTo(group)
       L.circleMarker(selectedPositions[selectedPositions.length - 1], { radius: 5, color: '#7067e8', fillColor: '#7067e8', fillOpacity: 1, weight: 2 }).addTo(group)
 
-      if (built) {
-        routedFlows.slice(0, 12).forEach((flow) => {
-          const routePositions = flow.after.coordinates
-            .filter(coordinateIsValid)
-            .map(([longitude, latitude]) => [latitude, longitude] as LatLngExpression)
-          if (routePositions.length < 2) return
-          L.polyline(routePositions, {
-            color: '#7067e8',
-            weight: Math.max(1.5, 1.5 + flow.weight * 5),
-            opacity: 0.34,
-            interactive: false,
-          }).addTo(group)
-        })
-      }
-
       if (!showAllRoutes) {
         map.flyToBounds(L.latLngBounds(selectedPositions), { padding: [75, 75], maxZoom: 13, duration: 0.8 })
       }
@@ -158,7 +141,7 @@ export function TorontoMap({ opportunities, selected, activeIds, built, showAllR
     cyclingNetworkRef.current?.bringToBack()
     layerRef.current = group
     return () => { group.remove() }
-  }, [activeIds, built, onSelect, opportunities, routedFlows, selected, showAllRoutes])
+  }, [activeIds, built, onSelect, opportunities, selected, showAllRoutes])
 
   return <div ref={containerRef} className="leaflet-map" aria-label={`OpenStreetMap of Toronto highlighting ${selected.name}`} />
 }
