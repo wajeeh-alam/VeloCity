@@ -37,7 +37,6 @@ function App() {
   const [routingBundle, setRoutingBundle] = useState<PrecomputedBundle | null>(null)
   const [loadError, setLoadError] = useState<string | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const [built, setBuilt] = useState(false)
   const [showAllRoutes, setShowAllRoutes] = useState(false)
   const [year, setYear] = useState<1 | 2 | 3>(1)
 
@@ -83,13 +82,12 @@ function App() {
   const routedFlows = routingScenario?.status === 'precomputed'
     ? routingScenario.simulations.flatMap((entry) => entry.simulation.routes)
     : []
-  const shownMetrics = built ? comparison.after : comparison.before
+  const shownMetrics = comparison.after
   const prediction = selected.evidence.prediction
   const metricKeys = Object.keys(artifact.scenarioModel.metricDefinitions) as SimulationMetricKey[]
 
   function selectCorridor(corridor: OpportunityProfile) {
     setSelectedId(corridor.corridorId)
-    setBuilt(false)
     setYear(corridor.priority.rolloutYear)
   }
 
@@ -125,7 +123,7 @@ function App() {
         </aside>
 
         <section className="workspace">
-          <div className={`map-card ${built ? 'is-built' : ''}`}>
+          <div className="map-card is-built">
             <div className="map-toolbar">
               <div><span className="pulse" /><b>Network view</b><small>Toronto · Official candidate alignments</small></div>
               <div className="map-actions">
@@ -136,17 +134,14 @@ function App() {
                 >
                   {showAllRoutes ? `Showing all ${artifact.records.length}` : `Show all ${artifact.records.length} routes`}
                 </button>
-                <div className="view-switch" aria-label="Map scenario view">
-                  <button className={!built ? 'active' : ''} onClick={() => setBuilt(false)}>Existing</button>
-                  <button className={built ? 'active' : ''} onClick={() => setBuilt(true)}>Proposed</button>
-                </div>
+                <span className="proposed-label">Proposed</span>
               </div>
             </div>
             <TorontoMap
               opportunities={artifact.records}
               selected={selected}
               activeIds={activeIds}
-              built={built}
+              built
               showAllRoutes={showAllRoutes}
               onSelect={selectCorridor}
               routedFlows={routedFlows}
@@ -165,7 +160,7 @@ function App() {
 
           <section className="impact-section">
             <div className="impact-heading">
-              <div><span className="eyebrow">Illustrative scenario</span><h2>{built ? 'A safer network, connected.' : 'What changes if we build it?'}</h2></div>
+              <div><span className="eyebrow">Illustrative scenario</span><h2>A safer network, connected.</h2></div>
               <div className="comparison-key"><span>Current</span><span>With corridor</span></div>
             </div>
             <div className="metrics-grid">
@@ -179,7 +174,7 @@ function App() {
                   <div className="metric-icon">{metricIcons[key]}</div>
                   <span>{SIMULATION_METRIC_DEFINITIONS[key].label}</span>
                   <strong>{formatMetric(shownMetrics[key])}</strong>
-                  <div className="metric-change">{lower ? '↓' : '↑'} {change}% <small>{built ? 'illustrative change' : 'opportunity'}</small></div>
+                  <div className="metric-change">{lower ? '↓' : '↑'} {change}% <small>illustrative change</small></div>
                   <div className="metric-track"><i style={{ width: `${Math.max(8, shownMetrics[key] / Math.max(before, after, 1) * 100)}%` }} /></div>
                 </article>
               })}
@@ -216,13 +211,10 @@ function App() {
               </div>
             ))}
           </div>
-          <button className={`build-button ${built ? 'built' : ''}`} onClick={() => setBuilt((value) => !value)}>
-            <span>+</span>{built ? 'Reset scenario' : 'Build this corridor'}<b>→</b>
-          </button>
           <div className="scenario-notice"><b>Illustrative scenario</b><p>{artifact.portfolio.disclaimer}</p></div>
           <div className="rollout">
             <div className="rollout-head"><div><span className="eyebrow">Network rollout</span><b>3-year scenario</b></div><span>{activeIds.length} active</span></div>
-            <div className="year-selector">{([1, 2, 3] as const).map((value) => <button key={value} className={year === value ? 'active' : ''} onClick={() => { setYear(value); setBuilt(false) }}><b>0{value}</b><small>YEAR</small></button>)}</div>
+            <div className="year-selector">{([1, 2, 3] as const).map((value) => <button key={value} className={year === value ? 'active' : ''} onClick={() => setYear(value)}><b>0{value}</b><small>YEAR</small></button>)}</div>
           </div>
         </aside>
       </main>
