@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { prepareB, validateBundle, validateCanonicalBundle } from './prepare-b.mjs'
-import { hashFeatureSnapshot } from '../src/lib/corridorDemandArtifact.ts'
 import { SCORE_KEYS } from '../src/lib/corridorScoring.ts'
 import { buildGraph, adjacency, route, matchCandidate, bicycleAllowed, bicycleDirectional } from './b-osm-graph.mjs'
 
@@ -12,18 +11,18 @@ function input() {
     raw: { type: 'FeatureCollection', features: [{ properties: { SEGMENT_ID: 1 }, geometry: { type: 'LineString', coordinates: coords } }] },
     flows: { data_status: 'observed', period: '2024-06', flows: Array.from({ length: 50 }, (_, i) => ({ origin: station(0), destination: station(i), trip_count: i + 1 })) },
     osm: { osm3s: { timestamp_osm_base: '2026-09-15T00:00:00Z' }, elements: [...coords.map((p, i) => ({ type: 'node', id: i + 1, lon: p[0], lat: p[1] })), { type: 'way', id: 1, nodes: coords.map((_, i) => i + 1), tags: { highway: 'residential' } }] },
-    candidates: { features: [{ properties: { corridor_id: 'test', name: 'Test', candidate_type: 'plan_backed', data_status: 'fixture', scores: { safety: 60, connectivity: 60, equity_population: 60, current_demand: 60, potential_demand: 60, transit: 60, barriers: 60, coverage: 60, destinations: 60 } }, geometry: { type: 'LineString', coordinates: [coords[0], coords[59]] } }] },
+    candidates: { features: [{ id: 'test', properties: { corridorId: 'test', name: 'Test', sourceStatus: 'Study or Design', inputScores: Object.fromEntries(SCORE_KEYS.map((key) => [key, 60])) }, geometry: { type: 'LineString', coordinates: [coords[0], coords[59]] } }] },
     source: { title: 'Test source', download_url: 'https://example.com/network' },
     checksums: { network: 'a'.repeat(64), osm: 'd'.repeat(64), flows: 'b'.repeat(64), candidates: 'c'.repeat(64), sourceManifest: 'e'.repeat(64) },
   }
 }
 
 function validDemand() {
-  const features = { version: 'f1', raw: { observed: 10 }, normalized: Object.fromEntries(SCORE_KEYS.map((k) => [k, 60])) }
+  const inputScores = Object.fromEntries(SCORE_KEYS.map((k) => [k, 60]))
   const demand = {
-    schemaVersion: 'velocity.corridor-demand.v2', artifactId: 'test-demand', generatedAt: '2026-09-15',
-    model: { id: 'test', version: '1', trainedAt: '2026-09-15', datasetManifestVersion: 'd1', featureVersion: 'f1', target: 'relative-bicycles-per-observed-hour', unit: 'dimensionless-relative-hourly-demand', normalization: { referenceBicyclesPerHour: 10, fittedOn: 'training-only' }, productionEligible: true, validation: { strategy: 'spatial-holdout', grouping: 'corridor', metric: 'mae', modelValue: 1, medianBaselineValue: 2, baseline: 'training-median', lowerIsBetter: true, trainGroupIds: ['train'], testGroupIds: ['test'] } },
-    records: [{ corridorId: 'test', prediction: 2, uncertainty: { lower: 1, upper: 3, coverage: 0.9 }, features: { ...features, hash: hashFeatureSnapshot(features) }, observedDemandProvenance: { kind: 'bike-share-od', sourceName: 'Test source', sourceUrls: ['https://example.com/od'], observationStart: '2024-06-01', observationEnd: '2024-06-30', observedHours: 720 }, candidate: { kind: 'exploratory', sourceName: 'Test', sourceUrl: 'https://example.com/candidate', geometry: input().candidates.features[0].geometry } }],
+    schemaVersion: 'velocity.corridor-demand.v2', artifactId: 'test-demand', generatedAt: '2026-09-15T12:00:00Z',
+    model: { id: 'test', version: '1', trainedAt: '2026-09-15T11:00:00Z', datasetManifestVersion: 'd1', featureVersion: 'f1', target: 'relative-bicycles-per-observed-hour', unit: 'dimensionless-relative-hourly-demand', normalization: { referenceBicyclesPerHour: 10, fittedOn: 'training-only' }, productionEligible: true, validation: { strategy: 'spatial-holdout', grouping: 'corridor', metric: 'mae', modelValue: 1, medianBaselineValue: 2, baseline: 'training-median', lowerIsBetter: true, trainGroupIds: ['train'], testGroupIds: ['test'] } },
+    records: [{ corridorId: 'test', geometry: input().candidates.features[0].geometry, inputScores, rawFeatures: { observed: 10 }, prediction: { relativeBicyclesPerObservedHour: 2, uncertainty: { lower: 1, upper: 3, level: 0.9, method: 'spatial-holdout-residual-quantile' } }, observation: { start: '2024-06-01', end: '2024-06-30' }, sourceProvenance: ['test-source'] }],
   }
   return demand
 }
@@ -43,9 +42,9 @@ test('deterministic stable graph IDs and sample; preserves OD accounting and cap
   await assert.rejects(validateBundle(first), /conserve/)
 })
 
-test('fixture plan_backed input cannot become verified; absent and invalid A block scenarios', () => {
+test('plan-backed source remains explicit; absent and invalid A block scenarios', () => {
   const result = prepareB(input())
-  assert.equal(result.networks[0].candidateStatus, 'synthetic-fixture')
+  assert.equal(result.networks[0].candidateStatus, 'plan-backed-source')
   assert.equal(result.networks[0].partitions[0].network.isIllustrative, false)
   assert.equal(result.scenarios[0].status, 'blocked')
   assert.deepEqual(result.scenarios[0].simulations, [])
@@ -75,7 +74,7 @@ test('valid A handoff runs B scenario engine and conserves relative demand', () 
   assert.equal(unrelated.demandStatus, 'blocked')
   assert.equal(unrelated.scenarios[0].status, 'blocked')
   demand.records[0].corridorId = 'test'
-  delete demand.records[0].candidate.geometry
+  demand.records[0].geometry = null
   assert.equal(prepareB({ ...input(), demand }).demandStatus, 'blocked')
 })
 

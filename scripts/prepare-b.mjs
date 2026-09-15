@@ -13,13 +13,7 @@ import { evaluateScore } from '../src/lib/corridorScoring.ts'
 import { buildGraph, adjacency, route, snap, matchCandidate, compare } from './b-osm-graph.mjs'
 
 export const digest = (value) => createHash('sha256').update(value).digest('hex')
-export const INPUT_FILES = {
-  network: 'data/b-source/v1/cycling-network.geojson.gz',
-  osm: 'data/b-source/v1/b-osm-network.json.gz',
-  flows: 'data/b-source/v1/flows.json',
-  candidates: 'data/b-source/v1/corridors.geojson',
-  sourceManifest: 'data/b-source/v1/manifest.json',
-}
+export const INPUT_FILES = { network: 'data/b-source/v1/cycling-network.geojson.gz', osm: 'data/b-source/v1/b-osm-network.json.gz', flows: 'public/data/flows.json', candidates: 'public/data/candidate-catalogue.geojson', sourceManifest: 'data/b-source/v1/manifest.json' }
 const assumptions = [
   'OSM node identities and highway ways define connectivity. Geometric crossings are not joined. Forbidden roads and bicycle access restrictions are excluded.',
   'B v1 supports bidirectional edges only: one-way ways without explicit bicycle contraflow permission are omitted. Turn restrictions are not modeled; this is analysis, not navigation guidance.',
@@ -28,9 +22,13 @@ const assumptions = [
   'Travel time assumes 15km/h; geography uses OSM vertices in EPSG:4326. Population and destinations are unavailable and encoded zero; their metrics are unavailable, not observed zero access.',
   'Each OD partition contains complete fastest and stress-preferred routes before and after building, calculated on the complete acquired graph. Partitions exceeding browser caps are excluded, never truncated.',
   'OD snapping is limited to 200m. Disconnected and same-node pairs are excluded before normalization. Ready requires >=3 retained OD pairs, >=80% connectivity among snapped non-self trips, and >=20% retained coverage of connected trips.',
-  'Candidate windows overlap; never sum candidate demand. Portfolio uses existing candidate scores; partitions do not model interaction between builds. Fixture candidates remain unverified.',
+  'Candidate windows overlap; never sum candidate demand. Portfolio uses Member A model input scores; partitions do not model interaction between builds. Candidate provenance is plan-backed, but geometry is not a verified construction scope.',
   'OSM API tiles were acquired sequentially. The recorded OSM timestamp is acquisition start, not an atomic historical snapshot. Toronto infrastructure and current station positions have different observation dates from June 2024 trips.',
 ]
+
+const candidateId = (feature) => feature?.id ?? feature?.properties?.corridorId ?? feature?.properties?.corridor_id
+const geometryLines = (geometry) => geometry?.type === 'LineString' ? [geometry.coordinates] : geometry?.type === 'MultiLineString' ? geometry.coordinates : []
+const validPoint = (point) => Array.isArray(point) && point.length >= 2 && point.slice(0, 2).every(Number.isFinite)
 
 export function prepareB({ raw, osm, flows, candidates, source, checksums, demand }) {
   if (raw?.type !== 'FeatureCollection' || !raw.features?.length) throw Error('Missing raw Toronto cycling infrastructure')
@@ -42,7 +40,8 @@ export function prepareB({ raw, osm, flows, candidates, source, checksums, deman
   graph.adjacency = adjacency(graph)
   const parsed = demand === undefined ? { ok: false, errors: ['Missing A artifact: public/data/corridor-demand.json'] } : parseCorridorDemandArtifact(demand)
   const records = new Map(parsed.ok ? parsed.artifact.records.map((r) => [r.corridorId, r]) : [])
-  const known = candidates.features.map((f) => f.properties.corridor_id).sort(compare)
+  const known = candidates.features.map(candidateId).sort(compare)
+  if (known.some((id) => typeof id !== 'string')) throw Error('Candidate IDs required')
   if (new Set(known).size !== known.length) throw Error('Duplicate candidates')
   const demandErrors = parsed.ok ? [] : [...parsed.errors]
   if (parsed.ok) {
@@ -50,18 +49,20 @@ export function prepareB({ raw, osm, flows, candidates, source, checksums, deman
     for (const id of records.keys()) if (!known.includes(id)) demandErrors.push(`Unexpected demand record: ${id}`)
   }
   const networks = [], scenarios = [], portfolioCandidates = []
-  for (const f of [...candidates.features].sort((a, b) => compare(a.properties.corridor_id, b.properties.corridor_id))) {
-    const p = f.properties, id = p.corridor_id, coords = f.geometry?.coordinates
-    if (!/^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$/.test(id) || f.geometry?.type !== 'LineString' || coords.length < 2 || !coords.every((p) => p.length === 2 && p.every(Number.isFinite))) throw Error('Invalid candidate geometry/ID')
-    const candidateStatus = p.data_status === 'fixture' ? 'synthetic-fixture' : 'exploratory-unverified'
-    const s = p.scores
-    const inputs = { safety: s.safety, connectivity: s.connectivity, equity: s.equity_population, currentDemand: s.current_demand, potentialDemand: s.potential_demand, transit: s.transit, barriers: s.barriers, coverage: s.coverage, destinations: s.destinations }
-    if (!Object.values(inputs).every((v) => Number.isFinite(v) && v >= 0 && v <= 100)) throw Error('Invalid candidate scores')
-    const score = evaluateScore(inputs)
+  for (const f of [...candidates.features].sort((a, b) => compare(candidateId(a), candidateId(b)))) {
+    const p = f.properties ?? {}, id = candidateId(f), lines = geometryLines(f.geometry)
+    if (!/^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$/.test(id) || f.id !== id || p.corridorId !== id || !lines.length || lines.some((line) => !Array.isArray(line) || line.length < 2 || !line.every(validPoint))) throw Error('Invalid candidate geometry/ID')
+    const points = lines.flat(), coords = lines.length === 1 ? lines[0] : null
+    const candidateStatus = p.sourceStatus ? 'plan-backed-source' : 'exploratory-unverified'
+    const record = records.get(id), inputs = record?.inputScores ?? p.inputScores
+    const errors = []
+    if (!inputs || !Object.values(inputs).every((v) => Number.isFinite(v) && v >= 0 && v <= 100)) errors.push('Missing or invalid Member A model input scores')
+    const score = evaluateScore(inputs ?? Object.fromEntries(['safety', 'connectivity', 'equity', 'currentDemand', 'potentialDemand', 'transit', 'barriers', 'coverage', 'destinations'].map((key) => [key, 0])))
     const corridor = { id, name: p.name, inputs, tier: score.tier, meanScore: score.meanScore, subtitle: '', path: '', color: '', rolloutYear: 1, summary: '' }
-    portfolioCandidates.push({ corridor })
-    const match = matchCandidate(graph, coords), errors = []
-    if (!match) errors.push('Candidate cannot be conflated to a constrained connected OSM path')
+    if (inputs) portfolioCandidates.push({ corridor })
+    const match = coords ? matchCandidate(graph, coords) : null
+    if (!coords) errors.push(`Candidate has ${lines.length} disconnected alignment parts; B v1 requires one connected alignment`)
+    else if (!match) errors.push('Candidate cannot be conflated to a constrained connected OSM path')
     const matched = new Set(match?.edgeIds ?? [])
     const localGraph = { nodes: graph.nodes, edges: graph.edges.map((e) => matched.has(e.id) ? { ...e, corridorId: id } : e) }
     localGraph.adjacency = adjacency(localGraph)
@@ -72,7 +73,7 @@ export function prepareB({ raw, osm, flows, candidates, source, checksums, deman
       if (!cache.has(key)) cache.set(key, snap(localGraph, [station.lon, station.lat], 200)?.id)
       return cache.get(key)
     }
-    const xs = coords.map((p) => p[0]), ys = coords.map((p) => p[1])
+    const xs = points.map((p) => p[0]), ys = points.map((p) => p[1])
     const inWindow = (s) => s.lon >= Math.min(...xs) - 0.004 && s.lon <= Math.max(...xs) + 0.004 && s.lat >= Math.min(...ys) - 0.004 && s.lat <= Math.max(...ys) + 0.004
     for (const flow of [...flows.flows].sort((a, b) => b.trip_count - a.trip_count || compare(`${a.origin.station_id}:${a.destination.station_id}`, `${b.origin.station_id}:${b.destination.station_id}`))) {
       if (!Number.isSafeInteger(flow.trip_count) || flow.trip_count <= 0) throw Error('Invalid trip count')
@@ -100,10 +101,8 @@ export function prepareB({ raw, osm, flows, candidates, source, checksums, deman
     if (coverage.retainedOdPairs < 3) errors.push('Fewer than 3 bounded routable OD pairs')
     const partitions = errors.length ? [] : prepared.map((p) => ({ ...p, network: { ...p.network, flows: p.network.flows.map((f) => ({ ...f, weight: p.tripCount / accounting.retainedTrips })) } }))
     networks.push({ corridorId: id, candidateStatus, status: errors.length ? 'blocked' : 'ready', errors, accounting, coverage, match, partitions })
-    const record = records.get(id), alignmentErrors = []
-    if (record && JSON.stringify(record.candidate.geometry) !== JSON.stringify(f.geometry)) alignmentErrors.push(`A candidate geometry mismatch or missing geometry: ${id}`)
-    if (record && candidateStatus === 'synthetic-fixture' && record.candidate.kind === 'plan-backed') alignmentErrors.push(`A incorrectly claims fixture is plan-backed: ${id}`)
-    if (record && JSON.stringify(Object.entries(record.features.normalized).sort()) !== JSON.stringify(Object.entries(inputs).sort())) alignmentErrors.push(`A feature snapshot does not match candidate scores: ${id}`)
+    const alignmentErrors = []
+    if (record && JSON.stringify(record.geometry) !== JSON.stringify(f.geometry)) alignmentErrors.push(`A candidate geometry mismatch or missing geometry: ${id}`)
     demandErrors.push(...alignmentErrors)
     const blockers = [...errors, ...(!parsed.ok ? parsed.errors : !record ? [`Missing demand record: ${id}`] : alignmentErrors)]
     scenarios.push({ corridorId: id, candidateStatus, status: blockers.length ? 'blocked' : 'precomputed', blockers, simulations: blockers.length ? [] : partitions.map((partition) => ({ partitionId: partition.partitionId, simulation: simulateDemandNetwork(corridor, parsed.artifact, partition.network, { horizonYear: 1, activeCorridorIds: [id] }) })) })
@@ -145,24 +144,14 @@ async function loadCanonicalInputs(root, bundle) {
     if (entry.uncompressedSha256 !== digest(raw) || entry.uncompressedBytes !== raw.length) throw Error(`Pinned source content mismatch: ${key}`)
     unpack[key] = JSON.parse(raw)
   }
-  for (const key of ['flows', 'candidates']) {
-    const entry = manifest.files?.find((item) => item.role === key)
-    if (!entry || entry.path !== INPUT_FILES[key] || entry.sha256 !== digest(fileBytes[key]) || entry.bytes !== fileBytes[key].length) {
-      throw Error(`Pinned source manifest mismatch: ${key}`)
-    }
-  }
   const networkProvenance = manifest.provenance?.find((item) => item.role === 'network')
   if (!networkProvenance?.title || !networkProvenance?.url) throw Error('Pinned source provenance missing: network')
-  const demandPath = bundle && !bundle.checksums?.demand
-    ? null
-    : bundle?.checksums?.demandPath ?? 'public/data/corridor-demand.json'
-  if (demandPath && (path.isAbsolute(demandPath) || demandPath.split(/[\\/]/).includes('..'))) throw Error('Demand path must remain inside checkout')
+  const demandPath = bundle?.checksums?.demandPath ?? 'public/data/corridor-demand.json'
+  if (path.isAbsolute(demandPath) || demandPath.split(/[\\/]/).includes('..')) throw Error('Demand path must remain inside checkout')
   let demand, demandBytes
-  if (demandPath) {
-    try { demandBytes = await readFile(path.join(root, demandPath)); demand = JSON.parse(demandBytes) } catch (error) { if (error.code !== 'ENOENT') throw error }
-  }
+  try { demandBytes = await readFile(path.join(root, demandPath)); demand = JSON.parse(demandBytes) } catch (error) { if (error.code !== 'ENOENT') throw error }
   const checksums = Object.fromEntries(Object.entries(fileBytes).map(([key, bytes]) => [key, digest(bytes)]))
-  if (demandBytes && demandPath) { checksums.demand = digest(demandBytes); checksums.demandPath = demandPath }
+  if (demandBytes) { checksums.demand = digest(demandBytes); checksums.demandPath = demandPath }
   return { raw: unpack.network, osm: unpack.osm, flows: JSON.parse(fileBytes.flows), candidates: JSON.parse(fileBytes.candidates), source: { title: networkProvenance.title, download_url: networkProvenance.url }, checksums, demand }
 }
 

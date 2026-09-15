@@ -200,7 +200,7 @@ export function simulateDemandNetwork(corridor: Corridor, artifact: CorridorDema
   beforeActive.delete(corridor.id)
   const routes: ScenarioRoute[] = [...network.flows].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0).map((flow) => ({
     flowId: flow.id,
-    weight: flow.weight * records.get(flow.corridorId)!.prediction,
+    weight: flow.weight * records.get(flow.corridorId)!.prediction.relativeBicyclesPerObservedHour,
     before: safeRoute(network, flow, beforeActive),
     after: safeRoute(network, flow, afterActive),
   }))
@@ -219,7 +219,12 @@ export function simulateDemandNetwork(corridor: Corridor, artifact: CorridorDema
     scoring: evaluateScore(corridor.inputs),
     mode: 'trained-artifact',
     artifactId: artifact.artifactId,
-    demand: { prediction: prediction.prediction, lower: prediction.uncertainty.lower, upper: prediction.uncertainty.upper, unit: 'dimensionless-relative-hourly-demand' },
+    demand: {
+      prediction: prediction.prediction.relativeBicyclesPerObservedHour,
+      lower: prediction.prediction.uncertainty.lower,
+      upper: prediction.prediction.uncertainty.upper,
+      unit: 'dimensionless-relative-hourly-demand',
+    },
     metricDefinitions: { ...SIMULATION_METRIC_DEFINITIONS, lowStressTrips: { label: 'Demand allocated to low-stress routes', unit: 'relative-demand-weight', betterDirection: 'higher', integer: false } },
     disclaimer: `${network.isIllustrative ? 'Synthetic routing network. ' : ''}B routing scenario weighted by spatially validated relative hourly demand. Demand is conserved between before and after; these are conditional network accessibility and stress indicators, not absolute trips, causal ridership growth, crash forecasts, or official recommendations. Prediction intervals describe A demand uncertainty only, not scenario effect uncertainty.`,
     warnings,

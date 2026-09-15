@@ -3,6 +3,7 @@ import L, { type LatLngExpression, type LayerGroup, type Map as LeafletMap } fro
 import type { GeoJsonObject } from 'geojson'
 import 'leaflet/dist/leaflet.css'
 import type { GeoLine, OpportunityProfile } from './data/opportunities.ts'
+import type { RoutedFlow } from './data/precomputedScenarios.ts'
 
 type TorontoMapProps = {
   opportunities: OpportunityProfile[]
@@ -11,6 +12,7 @@ type TorontoMapProps = {
   built: boolean
   showAllRoutes: boolean
   onSelect: (corridor: OpportunityProfile) => void
+  routedFlows: RoutedFlow[]
 }
 
 function coordinateIsValid(value: unknown): value is [number, number] {
@@ -40,7 +42,7 @@ function hasDrawableCandidateRoute(opportunity: OpportunityProfile) {
   ))
 }
 
-export function TorontoMap({ opportunities, selected, activeIds, built, showAllRoutes, onSelect }: TorontoMapProps) {
+export function TorontoMap({ opportunities, selected, activeIds, built, showAllRoutes, onSelect, routedFlows }: TorontoMapProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<LeafletMap | null>(null)
   const layerRef = useRef<LayerGroup | null>(null)
@@ -130,8 +132,18 @@ export function TorontoMap({ opportunities, selected, activeIds, built, showAllR
       L.circleMarker(selectedPositions[selectedPositions.length - 1], { radius: 5, color: '#7067e8', fillColor: '#7067e8', fillOpacity: 1, weight: 2 }).addTo(group)
 
       if (built) {
-        selected.comparison.representativeAgents.slice(0, 8).forEach((agent, index) => {
-          const position = selectedPositions[Math.floor(index * (selectedPositions.length - 1) / Math.max(selected.comparison.representativeAgents.length - 1, 1))]
+        routedFlows.slice(0, 12).forEach((flow, index) => {
+          const routePositions = flow.after.coordinates
+            .filter(coordinateIsValid)
+            .map(([longitude, latitude]) => [latitude, longitude] as LatLngExpression)
+          if (routePositions.length < 2) return
+          L.polyline(routePositions, {
+            color: '#7067e8',
+            weight: Math.max(1.5, 1.5 + flow.weight * 5),
+            opacity: 0.34,
+            interactive: false,
+          }).addTo(group)
+          const position = routePositions[Math.floor((index + 1) * (routePositions.length - 1) / (routedFlows.length + 1))]
           L.circleMarker(position, {
             radius: 3.2,
             color: '#ffffff',
@@ -139,7 +151,7 @@ export function TorontoMap({ opportunities, selected, activeIds, built, showAllR
             fillOpacity: 1,
             weight: 1,
             className: 'leaflet-agent',
-          }).addTo(group).bindTooltip(`Marker represents ${agent.weight} simulated low-stress trips per weekday`)
+          }).addTo(group).bindTooltip(`B-routed OD flow · relative demand weight ${flow.weight.toFixed(3)}`)
         })
       }
 
@@ -155,7 +167,7 @@ export function TorontoMap({ opportunities, selected, activeIds, built, showAllR
     cyclingNetworkRef.current?.bringToBack()
     layerRef.current = group
     return () => { group.remove() }
-  }, [activeIds, built, onSelect, opportunities, selected, showAllRoutes])
+  }, [activeIds, built, onSelect, opportunities, routedFlows, selected, showAllRoutes])
 
   return <div ref={containerRef} className="leaflet-map" aria-label={`OpenStreetMap of Toronto highlighting ${selected.name}`} />
 }

@@ -179,7 +179,8 @@
           "candidateStatus": {
             "enum": [
               "synthetic-fixture",
-              "exploratory-unverified"
+              "exploratory-unverified",
+              "plan-backed-source"
             ]
           },
           "status": {
@@ -633,7 +634,8 @@
           "candidateStatus": {
             "enum": [
               "synthetic-fixture",
-              "exploratory-unverified"
+              "exploratory-unverified",
+              "plan-backed-source"
             ]
           },
           "status": {
