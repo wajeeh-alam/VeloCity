@@ -13,8 +13,6 @@ import {
   type OpportunityProfile,
 } from './data/opportunities.ts'
 
-const DISPLAYED_OPPORTUNITIES = 8
-
 const metricIcons: Record<SimulationMetricKey, string> = {
   lowStressTrips: '↗',
   populationConnected: '◎',
@@ -38,6 +36,7 @@ function App() {
   const [loadError, setLoadError] = useState<string | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [built, setBuilt] = useState(false)
+  const [showAllRoutes, setShowAllRoutes] = useState(false)
   const [year, setYear] = useState<1 | 2 | 3>(1)
 
   useEffect(() => {
@@ -74,7 +73,7 @@ function App() {
     return <main className="load-state"><strong>Loading Toronto corridor evidence…</strong></main>
   }
 
-  const listedOpportunities = artifact.records.slice(0, DISPLAYED_OPPORTUNITIES)
+  const listedOpportunities = artifact.records
   const selected = artifact.records.find((record) => record.corridorId === selectedId) ?? artifact.records[0]
   const comparison = selected.comparison
   const shownMetrics = built ? comparison.after : comparison.before
@@ -97,9 +96,9 @@ function App() {
       <main className="dashboard">
         <aside className="corridor-panel">
           <div className="eyebrow">Priority network gaps</div>
-          <h1>Candidate<br />corridors</h1>
-          <p className="intro">Explore plan-backed connections ranked with the shared evidence pipeline.</p>
-          <div className="list-heading"><span>{listedOpportunities.length} of {artifact.records.length} opportunities</span><span>Score</span></div>
+          <h1>Possible<br />bike routes</h1>
+          <p className="intro">Explore all plan-backed routes ranked with the shared evidence pipeline.</p>
+          <div className="list-heading"><span>Top {listedOpportunities.length} ML-ranked routes</span><span>Score</span></div>
           <div className="corridor-list">
             {listedOpportunities.map((corridor) => (
               <button
@@ -122,9 +121,18 @@ function App() {
           <div className={`map-card ${built ? 'is-built' : ''}`}>
             <div className="map-toolbar">
               <div><span className="pulse" /><b>Network view</b><small>Toronto · Official candidate alignments</small></div>
-              <div className="view-switch" aria-label="Map scenario view">
-                <button className={!built ? 'active' : ''} onClick={() => setBuilt(false)}>Existing</button>
-                <button className={built ? 'active' : ''} onClick={() => setBuilt(true)}>Proposed</button>
+              <div className="map-actions">
+                <button
+                  className={`routes-toggle ${showAllRoutes ? 'active' : ''}`}
+                  onClick={() => setShowAllRoutes((value) => !value)}
+                  aria-pressed={showAllRoutes}
+                >
+                  {showAllRoutes ? `Showing all ${artifact.records.length}` : `Show all ${artifact.records.length} routes`}
+                </button>
+                <div className="view-switch" aria-label="Map scenario view">
+                  <button className={!built ? 'active' : ''} onClick={() => setBuilt(false)}>Existing</button>
+                  <button className={built ? 'active' : ''} onClick={() => setBuilt(true)}>Proposed</button>
+                </div>
               </div>
             </div>
             <TorontoMap
@@ -132,6 +140,7 @@ function App() {
               selected={selected}
               activeIds={activeIds}
               built={built}
+              showAllRoutes={showAllRoutes}
               onSelect={selectCorridor}
             />
             <div className="map-legend">
