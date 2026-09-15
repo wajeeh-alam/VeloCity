@@ -135,7 +135,7 @@ export type SimulatedAgent = {
   path: string
   /** Number of estimated trips represented by this display agent. */
   weight?: number
-  weightUnit?: 'weighted-trips-per-weekday'
+  weightUnit?: 'weighted-trips-per-weekday' | 'relative-demand-weight'
   beforePath?: string
   afterPath?: string
   semantics?: 'representative-rerouted-demand'
@@ -152,6 +152,15 @@ export type CorridorSimulation = {
   disclaimer?: string
   artifactId?: string
   warnings?: string[]
+  metricDefinitions?: Readonly<Record<SimulationMetricKey, {
+    label: string
+    unit: string
+    betterDirection: 'higher' | 'lower'
+    integer: boolean
+  }>>
+  routes?: import('./corridorNetworkSimulation.ts').ScenarioRoute[]
+  networkState?: PortfolioNetworkState
+  demand?: { prediction: number; lower: number; upper: number; unit: 'dimensionless-relative-hourly-demand' }
 }
 
 export type PortfolioNetworkState = {
