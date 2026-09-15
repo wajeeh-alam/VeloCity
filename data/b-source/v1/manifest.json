@@ -1,6 +1,6 @@
 {
   "schemaVersion": "velocity.b-source.v1",
-  "generatedAt": "2026-09-15T16:31:23.863Z",
+  "generatedAt": "2026-09-15T17:11:49.500Z",
   "scope": "Candidate-local extracts sufficient to regenerate public/data/b-precomputed.json; not broad regional downloads.",
   "provenance": [
     {
@@ -11,28 +11,28 @@
     },
     {
       "role": "osm",
-      "title": "OpenStreetMap API 0.6 candidate-local tiles",
+      "title": "OpenStreetMap Overpass candidate-local extract",
       "url": "https://www.openstreetmap.org/copyright",
       "license": "ODbL-1.0",
-      "snapshot": "2026-09-15T16:31:23.863Z"
+      "snapshot": "2026-09-15T17:11:49.500Z"
     }
   ],
   "files": [
     {
       "role": "network",
       "path": "data/b-source/v1/cycling-network.geojson.gz",
-      "sha256": "69bec7620ef1c118377e69669b2ebe7e70ba2932ca995ca8cb023cb4d70e9814",
-      "bytes": 944840,
+      "sha256": "9885e808de196938d1f3bf6bf06b124bba8ddb2dd2e13e614b6cf697f8bbb380",
+      "bytes": 932672,
       "uncompressedSha256": "c5d53a5fd367d39da5cdd58f97b8f95d4d94fcbc760ab15d55620c34dfc6fec1",
       "uncompressedBytes": 3263145
     },
     {
       "role": "osm",
       "path": "data/b-source/v1/b-osm-network.json.gz",
-      "sha256": "5db6f11ece48d9be27610e311a940a678df629457eb34fe90015d857f4499f0c",
-      "bytes": 2646088,
-      "uncompressedSha256": "80f6f8ba70eb92ce44e1c138b8850b2d7164fa3f5b8c340c429f6f9f7f64df38",
-      "uncompressedBytes": 23051956
+      "sha256": "af1ad2728e9314ba7f9007710ce8b64e646707e8a00632dc234b9fb6d7c2ff6f",
+      "bytes": 6807355,
+      "uncompressedSha256": "ba9ab2946d8c3f80dd2309de1e2672bb5e5942e4bfea40bf4e4bd2d4dc1ab49d",
+      "uncompressedBytes": 45898631
     }
   ]
 }

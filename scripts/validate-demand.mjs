@@ -1,10 +1,13 @@
 import Ajv from 'ajv'
+import addFormats from 'ajv-formats'
 import { readFile } from 'node:fs/promises'
 import { pathToFileURL } from 'node:url'
 import process from 'node:process'
 
 const schema = JSON.parse(await readFile(new URL('../data/contracts/corridor-demand.v2.schema.json', import.meta.url), 'utf8'))
-const validateSchema = new Ajv({ allErrors: true, strict: false }).compile(schema)
+const ajv = new Ajv({ allErrors: true, strict: false })
+addFormats(ajv)
+const validateSchema = ajv.compile(schema)
 
 export function validateDemand(artifact, manifest, catalogue) {
   const failures = []
