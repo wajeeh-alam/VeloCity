@@ -132,7 +132,7 @@ export function TorontoMap({ opportunities, selected, activeIds, built, showAllR
       L.circleMarker(selectedPositions[selectedPositions.length - 1], { radius: 5, color: '#7067e8', fillColor: '#7067e8', fillOpacity: 1, weight: 2 }).addTo(group)
 
       if (built) {
-        routedFlows.slice(0, 12).forEach((flow, index) => {
+        routedFlows.slice(0, 12).forEach((flow) => {
           const routePositions = flow.after.coordinates
             .filter(coordinateIsValid)
             .map(([longitude, latitude]) => [latitude, longitude] as LatLngExpression)
@@ -143,15 +143,6 @@ export function TorontoMap({ opportunities, selected, activeIds, built, showAllR
             opacity: 0.34,
             interactive: false,
           }).addTo(group)
-          const position = routePositions[Math.floor((index + 1) * (routePositions.length - 1) / (routedFlows.length + 1))]
-          L.circleMarker(position, {
-            radius: 3.2,
-            color: '#ffffff',
-            fillColor: '#7067e8',
-            fillOpacity: 1,
-            weight: 1,
-            className: 'leaflet-agent',
-          }).addTo(group).bindTooltip(`B-routed OD flow · relative demand weight ${flow.weight.toFixed(3)}`)
         })
       }
 

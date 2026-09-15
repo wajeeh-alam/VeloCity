@@ -140,7 +140,7 @@ function App() {
             <div className="map-legend">
               <span><i className="legend-line existing" />Current bike network</span>
               <span><i className="legend-line candidate" />Selected proposal</span>
-              <span><i className="legend-dot" />Weighted routed flow</span>
+              <span><i className="legend-line routed" />Weighted routed flows</span>
             </div>
             <div className="map-callout"><small>Selected connection</small><strong>{selected.name}</strong><span>{selected.subtitle}</span></div>
             <div className={`routing-state ${routedFlows.length ? 'ready' : ''}`}>
