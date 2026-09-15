@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import L, { type LayerGroup, type Map as LeafletMap } from 'leaflet'
+import type { GeoJsonObject } from 'geojson'
 import 'leaflet/dist/leaflet.css'
 import type { Corridor, CorridorSimulation } from './data/corridors.ts'
 import { corridorGeometry } from './mapGeometry.ts'
@@ -17,6 +18,7 @@ export function TorontoMap({ corridors, selected, activeIds, built, simulation, 
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<LeafletMap | null>(null)
   const layerRef = useRef<LayerGroup | null>(null)
+  const cyclingNetworkRef = useRef<L.GeoJSON | null>(null)
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return
@@ -35,7 +37,33 @@ export function TorontoMap({ corridors, selected, activeIds, built, simulation, 
     }).addTo(map)
     L.control.zoom({ position: 'topright' }).addTo(map)
     mapRef.current = map
-    return () => { map.remove(); mapRef.current = null }
+
+    const controller = new AbortController()
+    fetch('/data/toronto-cycling-network.geojson', { signal: controller.signal })
+      .then((response) => response.ok ? response.json() as Promise<GeoJsonObject> : Promise.reject())
+      .then((network) => {
+        if (mapRef.current !== map) return
+        cyclingNetworkRef.current = L.geoJSON(network, {
+          style: {
+            color: '#3f3f46',
+            weight: 1.7,
+            opacity: 0.58,
+            lineCap: 'round',
+            lineJoin: 'round',
+          },
+          interactive: false,
+          pane: 'overlayPane',
+        }).addTo(map)
+        cyclingNetworkRef.current.bringToBack()
+      })
+      .catch(() => { /* Preserve the base map when the local network snapshot is unavailable. */ })
+
+    return () => {
+      controller.abort()
+      cyclingNetworkRef.current = null
+      map.remove()
+      mapRef.current = null
+    }
   }, [])
 
   useEffect(() => {
