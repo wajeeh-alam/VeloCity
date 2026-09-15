@@ -2,7 +2,7 @@
 export const INPUT_LIMITS = {
   errors: 20, stringLength: 2048, idLength: 128, depth: 12,
   objectKeys: 128, arrayLength: 2048, visitedValues: 100_000,
-  records: 512, rawFeatures: 64, geometryPoints: 512, sourceUrls: 8,
+  records: 512, rawFeatures: 64, geometryPoints: 512, sourceUrls: 8, sourceIds: 64,
   spatialGroups: 2048, networkNodes: 48, networkEdges: 128, networkFlows: 64,
   routingWork: 5_000_000,
 } as const
