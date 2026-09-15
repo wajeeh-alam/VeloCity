@@ -28,9 +28,10 @@ export function TorontoMap({ corridors, selected, activeIds, built, simulation, 
       zoomControl: false,
       attributionControl: true,
     })
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      maxZoom: 20,
+      subdomains: 'abcd',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
     }).addTo(map)
     L.control.zoom({ position: 'topright' }).addTo(map)
     mapRef.current = map
@@ -53,7 +54,7 @@ export function TorontoMap({ corridors, selected, activeIds, built, simulation, 
         built && isSelected ? 'leaflet-built-route' : null,
       ].filter(Boolean).join(' ')
       const line = L.polyline(positions, {
-        color: isSelected ? '#9bcbb9' : '#71807b',
+        color: isSelected ? '#7067e8' : '#8d8d92',
         weight: isSelected ? (built ? 7 : 5) : 3,
         opacity: isSelected ? 1 : isActive ? 0.72 : 0.3,
         className: routeClasses || undefined,
@@ -66,15 +67,15 @@ export function TorontoMap({ corridors, selected, activeIds, built, simulation, 
     if (selectedGeometry) {
       const first = selectedGeometry[0]
       const last = selectedGeometry[selectedGeometry.length - 1]
-      L.circleMarker(first, { radius: 5, color: '#9bcbb9', fillColor: '#111514', fillOpacity: 1, weight: 2 }).addTo(group)
-      L.circleMarker(last, { radius: 5, color: '#9bcbb9', fillColor: '#9bcbb9', fillOpacity: 1, weight: 2 }).addTo(group)
+      L.circleMarker(first, { radius: 5, color: '#7067e8', fillColor: '#ffffff', fillOpacity: 1, weight: 2 }).addTo(group)
+      L.circleMarker(last, { radius: 5, color: '#7067e8', fillColor: '#7067e8', fillOpacity: 1, weight: 2 }).addTo(group)
       if (built) {
         simulation.agents.slice(0, 8).forEach((agent, index) => {
           const position = selectedGeometry[index % selectedGeometry.length]
           L.circleMarker(position, {
             radius: 3.2,
-            color: '#eafff8',
-            fillColor: '#eafff8',
+            color: '#ffffff',
+            fillColor: '#ffffff',
             fillOpacity: 1,
             weight: 0,
             className: 'leaflet-agent',

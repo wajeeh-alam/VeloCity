@@ -65,10 +65,8 @@ function App() {
   return (
     <div className="app-shell">
       <header className="topbar">
-        <div className="logo" aria-hidden="true"><span>V</span></div>
         <div className="brand"><strong>VeloCity</strong><span>Toronto cycling network planner</span></div>
-        <div className="model-state"><i /> Network model <b>{simulation.mode === 'trained-artifact' ? 'LIVE' : 'DEMO'}</b></div>
-        <div className="demo-label">ILLUSTRATIVE DEMO DATA</div>
+        <div className="demo-label"><i /> Illustrative demo data</div>
       </header>
 
       <main className="dashboard">
@@ -92,13 +90,13 @@ function App() {
               </button>
             ))}
           </div>
-          <div className="source-note"><span>DATA MODE</span><b>{CORRIDOR_DATA_METADATA.mode.replaceAll('-', ' ')}</b></div>
+          <div className="source-note"><span>Data mode</span><b>{CORRIDOR_DATA_METADATA.mode.replaceAll('-', ' ')}</b></div>
         </aside>
 
         <section className="workspace">
           <div className={`map-card ${built ? 'is-built' : ''}`}>
             <div className="map-toolbar">
-              <div><span className="pulse" /><b>NETWORK VIEW</b><small>Toronto · Weekday scenario</small></div>
+              <div><span className="pulse" /><b>Network view</b><small>Toronto · Weekday scenario</small></div>
               <div className="view-switch" aria-label="Map scenario view">
                 <button className={!built ? 'active' : ''} onClick={() => setBuilt(false)}>Existing</button>
                 <button className={built ? 'active' : ''} onClick={() => setBuilt(true)}>Proposed</button>
@@ -106,13 +104,13 @@ function App() {
             </div>
             <TorontoMap corridors={corridors} selected={selected} activeIds={activeIds} built={built} simulation={simulation} onSelect={selectCorridor} />
             <div className="map-legend"><span><i className="legend-line existing" />Included by Year {year}</span><span><i className="legend-line candidate" />Selected</span><span><i className="legend-dot" />Weighted agent</span></div>
-            <div className="map-callout"><small>SELECTED CONNECTION</small><strong>{selected.name}</strong><span>{selected.subtitle}</span></div>
+            <div className="map-callout"><small>Selected connection</small><strong>{selected.name}</strong><span>{selected.subtitle}</span></div>
           </div>
 
           <section className="impact-section">
             <div className="impact-heading">
               <div><span className="eyebrow">Scenario impact</span><h2>{built ? 'A safer network, connected.' : 'What changes if we build it?'}</h2></div>
-              <div className="comparison-key"><span>● CURRENT</span><span>● WITH CORRIDOR</span></div>
+              <div className="comparison-key"><span>Current</span><span>With corridor</span></div>
             </div>
             <div className="metrics-grid">
               {(Object.keys(SIMULATION_METRIC_DEFINITIONS) as SimulationMetricKey[]).map((key) => {
@@ -139,7 +137,7 @@ function App() {
             <div className="score-ring" style={{ '--score-angle': `${selectedScore * 3.6}deg` } as CSSProperties}><b>{Math.round(selectedScore)}</b><small>/100</small></div>
           </div>
           <div className="priority-banner"><span>●</span><div><b>{selected.tier} priority</b><small>{selected.summary}</small></div></div>
-          <div className="profile-head"><b>Opportunity profile</b><span>INDEX / 100</span></div>
+          <div className="profile-head"><b>Opportunity profile</b><span>Index / 100</span></div>
           <div className="score-list">
             {SCORE_KEYS.map((key) => (
               <div className="score-item" key={key} title={SCORE_INPUT_SEMANTICS[key].highValueMeans}>
