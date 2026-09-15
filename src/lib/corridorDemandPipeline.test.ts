@@ -1,7 +1,7 @@
 /// <reference types="node" />
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { DEMAND_ARTIFACT_SCHEMA_VERSION, DEMAND_TARGET, hashFeatureSnapshot, parseCorridorDemandArtifact, type CorridorDemandArtifact } from './corridorDemandArtifact.ts'
+import { DEMAND_ARTIFACT_SCHEMA_VERSION, DEMAND_TARGET, parseCorridorDemandArtifact, type CorridorDemandArtifact } from './corridorDemandArtifact.ts'
 import type { Corridor } from './corridorDomain.ts'
 import { simulateCorridor } from './corridorSimulation.ts'
 import { generatePortfolioRollout } from './corridorPortfolio.ts'
@@ -15,7 +15,6 @@ const scores = normalizeScoreInputs(Object.fromEntries(SCORE_KEYS.map((key) => [
 const corridor = (id = 'link'): Corridor => ({ id, name: id, subtitle: '', tier: 'Top', meanScore: 99, inputs: scores, path: 'M 0 0 L 10 10', color: '#000', rolloutYear: 1, plannedRolloutYear: 1, summary: '' })
 
 function artifact(): CorridorDemandArtifact {
-  const features = { version: 'features-1', raw: { counter_hourly: 12, bike_share_od: 30 }, normalized: { ...scores } }
   return {
     schemaVersion: DEMAND_ARTIFACT_SCHEMA_VERSION,
     artifactId: 'trained-demand-1',
@@ -26,10 +25,11 @@ function artifact(): CorridorDemandArtifact {
       validation: { strategy: 'spatial-holdout', grouping: 'counter-site', metric: 'mae', modelValue: 0.2, medianBaselineValue: 0.4, baseline: 'training-median', lowerIsBetter: true, trainGroupIds: ['site-a'], testGroupIds: ['site-b'] },
     },
     records: [{
-      corridorId: 'link', prediction: 1.25, uncertainty: { lower: 0.8, upper: 1.8, coverage: 0.9 },
-      features: { ...features, hash: hashFeatureSnapshot(features) },
-      observedDemandProvenance: { kind: 'counter-observation', sourceName: 'Toronto counters', sourceUrls: ['https://open.toronto.ca/'], observationStart: '2024-06-01', observationEnd: '2024-06-30', observedHours: 600 },
-      candidate: { kind: 'exploratory', sourceName: 'Test candidate fixture', sourceUrl: 'https://example.com/test-candidate' },
+      corridorId: 'link', geometry: { type: 'LineString', coordinates: [[-79.4, 43.7], [-79.39, 43.7]] }, inputScores: { ...scores },
+      rawFeatures: { counter_hourly: 12, bike_share_od: 30 },
+      prediction: { relativeBicyclesPerObservedHour: 1.25, uncertainty: { lower: 0.8, upper: 1.8, level: 0.9, method: 'spatial-holdout-residual-quantile' } },
+      observation: { start: '2024-06-01', end: '2024-06-30' },
+      sourceProvenance: ['toronto-counters'],
     }],
   }
 }
@@ -101,35 +101,33 @@ test('baseline failures, overlapping groups and false producer gates always fall
 
 test('malformed predictions, uncertainty, IDs, provenance, dates, units, hashes and simulation fields fail closed', () => {
   const mutations: Array<(a: CorridorDemandArtifact) => void> = [
-    (a) => { a.records[0].prediction = NaN },
-    (a) => { a.records[0].prediction = -1 },
-    (a) => { a.records[0].uncertainty.lower = 2 },
-    (a) => { a.records[0].uncertainty.coverage = 1 },
+    (a) => { a.records[0].prediction.relativeBicyclesPerObservedHour = NaN },
+    (a) => { a.records[0].prediction.relativeBicyclesPerObservedHour = -1 },
+    (a) => { a.records[0].prediction.uncertainty.lower = 2 },
+    (a) => { a.records[0].prediction.uncertainty.level = 1 },
     (a) => { a.records.push(structuredClone(a.records[0])) },
     (a) => { a.records[0].corridorId = 'invalid id' },
-    (a) => { a.records[0].observedDemandProvenance.observedHours = 0 },
-    (a) => { a.records[0].observedDemandProvenance.sourceUrls = ['javascript:bad'] },
+    (a) => { a.records[0].sourceProvenance = [] },
+    (a) => { a.records[0].sourceProvenance = ['invalid source'] },
     (a) => { a.generatedAt = '2026-02-30' },
     (a) => { a.model.trainedAt = '2027-01-01' },
-    (a) => { a.records[0].features.raw.counter_hourly = 13 },
-    (a) => { a.records[0].features.version = 'other' },
+    (a) => { a.records[0].rawFeatures.counter_hourly = Number.POSITIVE_INFINITY },
+    (a) => { Reflect.set(a.records[0].inputScores, 'current_demand', 1) },
     (a) => { Reflect.set(a.model, 'unit', 'trips-per-day') },
     (a) => { Reflect.set(a.records[0], 'before', {}) },
     (a) => { a.records = [] },
     (a) => { Reflect.deleteProperty(a.records[0], 'prediction') },
-    (a) => { Reflect.deleteProperty(a.records[0], 'candidate') },
+    (a) => { Reflect.deleteProperty(a.records[0], 'inputScores') },
   ]
   for (const mutate of mutations) { const value = artifact(); mutate(value); assert.equal(parseCorridorDemandArtifact(value).ok, false); assert.equal(run(value).mode, 'synthetic-fallback') }
   assert.equal(run(null).mode, 'synthetic-fallback')
 })
 
-test('feature hashes ignore object insertion order and edits need a fresh trained snapshot', () => {
+test('edited scores must match the trained model inputs', () => {
   const value = artifact()
-  const features = value.records[0].features
-  assert.equal(hashFeatureSnapshot(features), hashFeatureSnapshot({ ...features, raw: { bike_share_od: 30, counter_hourly: 12 } }))
   const result = simulateCorridor({ ...corridor(), inputs: { ...scores, safety: 80 } }, { artifact: value, network: network(), networkState: state })
   assert.equal(result.mode, 'synthetic-fallback')
-  assert.match(result.warnings?.[0] ?? '', /feature snapshot/)
+  assert.match(result.warnings?.[0] ?? '', /model inputs/)
 })
 
 test('missing predictions, mapping, routing inputs and invalid portfolio states visibly fall back', () => {
@@ -187,8 +185,8 @@ test('other built corridors stay active in both scenarios; network input orderin
 
 test('zero demand is valid and yields no weighted agents; unsafe weight overflow fails closed', () => {
   const value = artifact()
-  value.records[0].prediction = 0
-  value.records[0].uncertainty.lower = 0
+  value.records[0].prediction.relativeBicyclesPerObservedHour = 0
+  value.records[0].prediction.uncertainty.lower = 0
   assert.equal(run(value).mode, 'trained-artifact')
   assert.equal(run(value).agents.length, 0)
   const graph = network(); graph.flows[0].weight = Number.MAX_VALUE
@@ -240,9 +238,9 @@ test('oversized demand collections and strings fail before feature hashing', () 
     (value) => { value.records = Array.from({ length: INPUT_LIMITS.records + 1 }, () => value.records[0]) },
     (value) => { value.model.validation.trainGroupIds = Array(INPUT_LIMITS.spatialGroups + 1).fill('group') },
     (value) => { value.artifactId = 'a'.repeat(INPUT_LIMITS.stringLength + 1) },
-    (value) => { value.records[0].features.raw = Object.fromEntries(Array.from({ length: INPUT_LIMITS.rawFeatures + 1 }, (_, index) => [`f${index}`, index])) },
-    (value) => { value.records[0].candidate.geometry = { type: 'LineString', coordinates: Array.from({ length: INPUT_LIMITS.geometryPoints + 1 }, () => [-79, 43]) } },
-    (value) => { value.records[0].observedDemandProvenance.sourceUrls = Array(INPUT_LIMITS.sourceUrls + 1).fill('https://example.com') },
+    (value) => { value.records[0].rawFeatures = Object.fromEntries(Array.from({ length: INPUT_LIMITS.rawFeatures + 1 }, (_, index) => [`f${index}`, index])) },
+    (value) => { value.records[0].geometry = { type: 'LineString', coordinates: Array.from({ length: INPUT_LIMITS.geometryPoints + 1 }, () => [-79, 43]) } },
+    (value) => { value.records[0].sourceProvenance = Array.from({ length: INPUT_LIMITS.sourceIds + 1 }, (_, index) => `source-${index}`) },
   ]
   for (const mutate of mutations) {
     const value = artifact(); mutate(value)

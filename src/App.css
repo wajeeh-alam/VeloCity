@@ -131,6 +131,10 @@ h1, h2, p { margin: 0; }
 .map-callout small { color: var(--muted); font-size: 8px; }
 .map-callout strong { margin: 4px 0 2px; font-size: 13px; }
 .map-callout span { color: #85858a; font-size: 9px; }
+.routing-state { position: absolute; right: 18px; bottom: 44px; z-index: 500; max-width: 250px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; background: rgba(255,255,255,.92); box-shadow: 0 8px 24px rgba(0,0,0,.07); display: grid; gap: 2px; }
+.routing-state b { font-size: 10px; }
+.routing-state span { color: #737373; font-size: 8px; line-height: 1.35; }
+.routing-state.ready b { color: var(--accent); }
 
 .impact-section { padding-top: 22px; }
 .impact-heading { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 13px; }

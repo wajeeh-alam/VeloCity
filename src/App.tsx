@@ -12,6 +12,7 @@ import {
   type OpportunityArtifact,
   type OpportunityProfile,
 } from './data/opportunities.ts'
+import { loadPrecomputedBundle, type PrecomputedBundle } from './data/precomputedScenarios.ts'
 
 const metricIcons: Record<SimulationMetricKey, string> = {
   lowStressTrips: '↗',
@@ -33,6 +34,7 @@ function formatObservationRange(start: string, end: string) {
 
 function App() {
   const [artifact, setArtifact] = useState<OpportunityArtifact | null>(null)
+  const [routingBundle, setRoutingBundle] = useState<PrecomputedBundle | null>(null)
   const [loadError, setLoadError] = useState<string | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [built, setBuilt] = useState(false)
@@ -41,10 +43,11 @@ function App() {
 
   useEffect(() => {
     let live = true
-    loadOpportunityArtifact()
-      .then((value) => {
+    Promise.all([loadOpportunityArtifact(), loadPrecomputedBundle()])
+      .then(([value, routing]) => {
         if (!live) return
         setArtifact(value)
+        setRoutingBundle(routing)
         setSelectedId(value.records[0]?.corridorId ?? null)
       })
       .catch((error: unknown) => {
@@ -69,13 +72,17 @@ function App() {
     )
   }
 
-  if (!artifact || !selectedId) {
+  if (!artifact || !routingBundle || !selectedId) {
     return <main className="load-state"><strong>Loading Toronto corridor evidence…</strong></main>
   }
 
   const listedOpportunities = artifact.records
   const selected = artifact.records.find((record) => record.corridorId === selectedId) ?? artifact.records[0]
   const comparison = selected.comparison
+  const routingScenario = routingBundle.scenarios.find((scenario) => scenario.corridorId === selected.corridorId)
+  const routedFlows = routingScenario?.status === 'precomputed'
+    ? routingScenario.simulations.flatMap((entry) => entry.simulation.routes)
+    : []
   const shownMetrics = built ? comparison.after : comparison.before
   const prediction = selected.evidence.prediction
   const metricKeys = Object.keys(artifact.scenarioModel.metricDefinitions) as SimulationMetricKey[]
@@ -142,13 +149,18 @@ function App() {
               built={built}
               showAllRoutes={showAllRoutes}
               onSelect={selectCorridor}
+              routedFlows={routedFlows}
             />
             <div className="map-legend">
               <span><i className="legend-line existing" />Current bike network</span>
               <span><i className="legend-line candidate" />Selected proposal</span>
-              <span><i className="legend-dot" />Weighted agent marker</span>
+              <span><i className="legend-dot" />Weighted routed flow</span>
             </div>
             <div className="map-callout"><small>Selected connection</small><strong>{selected.name}</strong><span>{selected.subtitle}</span></div>
+            <div className={`routing-state ${routedFlows.length ? 'ready' : ''}`}>
+              <b>{routedFlows.length ? `${routedFlows.length} B-routed flows` : 'B routing unavailable'}</b>
+              <span>{routedFlows.length ? 'Trained demand · agents appear in Proposed view' : routingScenario?.blockers[0] ?? 'No matching B scenario'}</span>
+            </div>
           </div>
 
           <section className="impact-section">
