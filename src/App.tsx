@@ -103,7 +103,7 @@ function App() {
               </div>
             </div>
             <TorontoMap corridors={corridors} selected={selected} activeIds={activeIds} built={built} simulation={simulation} onSelect={selectCorridor} />
-            <div className="map-legend"><span><i className="legend-line existing" />Included by Year {year}</span><span><i className="legend-line candidate" />Selected</span><span><i className="legend-dot" />Weighted agent</span></div>
+            <div className="map-legend"><span><i className="legend-line existing" />Current bike network</span><span><i className="legend-line candidate" />Selected proposal</span><span><i className="legend-dot" />Weighted agent</span></div>
             <div className="map-callout"><small>Selected connection</small><strong>{selected.name}</strong><span>{selected.subtitle}</span></div>
           </div>
 
