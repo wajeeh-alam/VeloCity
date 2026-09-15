@@ -1,0 +1,1618 @@
+{
+  "schemaVersion": "velocity.b-precompute.v2",
+  "coordinateReferenceSystem": "EPSG:4326",
+  "dataStatus": "osm-routing-analysis",
+  "checksums": {
+    "network": "c5d53a5fd367d39da5cdd58f97b8f95d4d94fcbc760ab15d55620c34dfc6fec1",
+    "osm": "80f6f8ba70eb92ce44e1c138b8850b2d7164fa3f5b8c340c429f6f9f7f64df38",
+    "flows": "d270406c5e76cfa23bef65e8019f40b060deb9bc96a0d044c5f0b04b3c388e93",
+    "candidates": "d055b141285f1e1c5b4c61d6b66ccd7e30da37fd65f0c41606b72bb9a9dab657"
+  },
+  "source": {
+    "name": "City of Toronto Cycling Network",
+    "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/abbe5ee3-e249-4f86-a219-f0022eaddcc9/resource/023da9a2-8848-4e10-9cad-e7f9119cd874/download/cycling-network-4326.geojson",
+    "osm": "https://www.openstreetmap.org/copyright",
+    "osmSnapshot": "2026-09-15T16:31:23.863Z"
+  },
+  "graph": {
+    "nodes": 27525,
+    "edges": 28249,
+    "exclusions": {
+      "forbiddenWays": 17349,
+      "directionalWays": 1079
+    },
+    "stressEvidence": {
+      "osmLowStressEdges": 21459,
+      "torontoEnrichedEdges": 821,
+      "highStressEdges": 5969
+    }
+  },
+  "observationPeriod": "2024-06",
+  "assumptions": [
+    "OSM node identities and highway ways define connectivity. Geometric crossings are not joined. Forbidden roads and bicycle access restrictions are excluded.",
+    "B v1 supports bidirectional edges only: one-way ways without explicit bicycle contraflow permission are omitted. Turn restrictions are not modeled; this is analysis, not navigation guidance.",
+    "Stress: cycleways, living streets, bicycle paths, protected tracks, and residential/service streets at assumed or tagged speed <=40 km/h are low stress. Other roads conservatively high stress. Toronto protected infrastructure lowers stress only when both OSM segment endpoints fall within 12m of the same source segment.",
+    "Candidate endpoints snap within 150m. Matched paths remain within 300m of candidate geometry and below 1.8 times candidate length. Only edges of that constrained path receive the hypothetical conversion.",
+    "Travel time assumes 15km/h; geography uses OSM vertices in EPSG:4326. Population and destinations are unavailable and encoded zero; their metrics are unavailable, not observed zero access.",
+    "Each OD partition contains complete fastest and stress-preferred routes before and after building, calculated on the complete acquired graph. Partitions exceeding browser caps are excluded, never truncated.",
+    "OD snapping is limited to 200m. Disconnected and same-node pairs are excluded before normalization. Ready requires >=3 retained OD pairs, >=80% connectivity among snapped non-self trips, and >=20% retained coverage of connected trips.",
+    "Candidate windows overlap; never sum candidate demand. Portfolio uses existing candidate scores; partitions do not model interaction between builds. Fixture candidates remain unverified.",
+    "OSM API tiles were acquired sequentially. The recorded OSM timestamp is acquisition start, not an atomic historical snapshot. Toronto infrastructure and current station positions have different observation dates from June 2024 trips."
+  ],
+  "demandStatus": "blocked",
+  "demandErrors": [
+    "Missing A artifact: public/data/corridor-demand.json"
+  ],
+  "networks": [
+    {
+      "corridorId": "fixture-core-weakness",
+      "candidateStatus": "synthetic-fixture",
+      "status": "ready",
+      "errors": [],
+      "accounting": {
+        "publishedTrips": 97440,
+        "outsideWindowTrips": 96802,
+        "sameNodeTrips": 111,
+        "disconnectedTrips": 71,
+        "cappedTrips": 284,
+        "retainedTrips": 172
+      },
+      "coverage": {
+        "connectedFraction": 0.8652751423149905,
+        "retainedFraction": 0.37719298245614036,
+        "retainedOdPairs": 4
+      },
+      "match": {
+        "edgeIds": [
+          "osm-w-220919663-1",
+          "osm-w-1527989722-0",
+          "osm-w-220919664-0",
+          "osm-w-220919664-1",
+          "osm-w-220919664-2",
+          "osm-w-1264767639-0",
+          "osm-w-1264767639-1",
+          "osm-w-1264767639-2",
+          "osm-w-1290849370-0",
+          "osm-w-460745483-0",
+          "osm-w-460745483-1",
+          "osm-w-460745483-2",
+          "osm-w-1264767638-0",
+          "osm-w-1264767638-1",
+          "osm-w-1264767637-0",
+          "osm-w-1264767637-1",
+          "osm-w-1290849369-0",
+          "osm-w-1290849368-0",
+          "osm-w-1264767636-0",
+          "osm-w-460745482-0",
+          "osm-w-5134647-0",
+          "osm-w-5134647-1",
+          "osm-w-1264793647-0",
+          "osm-w-1264793647-1",
+          "osm-w-1264793646-0",
+          "osm-w-1264793646-1",
+          "osm-w-1290849367-0",
+          "osm-w-1264793645-0",
+          "osm-w-1264793645-1",
+          "osm-w-1290849366-0",
+          "osm-w-1264793644-0",
+          "osm-w-1264793644-1",
+          "osm-w-1290849365-0",
+          "osm-w-1264793643-0",
+          "osm-w-1290849364-0",
+          "osm-w-1264793642-0",
+          "osm-w-1264793642-1",
+          "osm-w-1264793642-2",
+          "osm-w-1290849363-0",
+          "osm-w-1290849363-1",
+          "osm-w-1264793641-0",
+          "osm-w-1264793641-1",
+          "osm-w-1290849362-0",
+          "osm-w-1264793640-0",
+          "osm-w-1264793640-1",
+          "osm-w-1264793639-0",
+          "osm-w-1290849361-0",
+          "osm-w-1290849361-1",
+          "osm-w-24514318-4",
+          "osm-w-24514318-3",
+          "osm-w-24514318-2",
+          "osm-w-24514318-1",
+          "osm-w-24514318-0",
+          "osm-w-34772405-3",
+          "osm-w-34772405-2",
+          "osm-w-34772405-1",
+          "osm-w-34772405-0",
+          "osm-w-24514317-0",
+          "osm-w-506589037-6",
+          "osm-w-506589037-5",
+          "osm-w-506589037-4",
+          "osm-w-506589037-3",
+          "osm-w-506589037-2",
+          "osm-w-4963418-0",
+          "osm-w-4963418-1",
+          "osm-w-4963418-2",
+          "osm-w-4963418-3",
+          "osm-w-4963418-4",
+          "osm-w-4963418-5",
+          "osm-w-4963418-6",
+          "osm-w-4963418-7",
+          "osm-w-4952024-16",
+          "osm-w-4952024-15",
+          "osm-w-4952024-14",
+          "osm-w-4892215-6",
+          "osm-w-4892215-7",
+          "osm-w-4892215-8",
+          "osm-w-832940354-0",
+          "osm-w-832940354-1",
+          "osm-w-832940354-2",
+          "osm-w-832940354-3",
+          "osm-w-832940354-4",
+          "osm-w-832940354-5",
+          "osm-w-832940354-6",
+          "osm-w-832940354-7",
+          "osm-w-832940355-0",
+          "osm-w-832940355-1",
+          "osm-w-832940355-2",
+          "osm-w-832940355-3",
+          "osm-w-832940355-4",
+          "osm-w-832940355-5",
+          "osm-w-832940355-6",
+          "osm-w-832940355-7",
+          "osm-w-832940355-8",
+          "osm-w-832940355-9",
+          "osm-w-832940355-10",
+          "osm-w-832940355-11",
+          "osm-w-832940355-12",
+          "osm-w-832940355-13",
+          "osm-w-832940355-14",
+          "osm-w-832940355-15",
+          "osm-w-832940355-16",
+          "osm-w-832940355-17",
+          "osm-w-832940355-18",
+          "osm-w-832940355-19",
+          "osm-w-832940355-20",
+          "osm-w-506590989-0",
+          "osm-w-506590990-0",
+          "osm-w-506590990-1",
+          "osm-w-506590990-2",
+          "osm-w-506590990-3",
+          "osm-w-506590990-4",
+          "osm-w-506590990-5",
+          "osm-w-506590990-6",
+          "osm-w-506590990-7",
+          "osm-w-506590990-8",
+          "osm-w-506590990-9",
+          "osm-w-506590990-10",
+          "osm-w-506590990-11",
+          "osm-w-506590990-12",
+          "osm-w-506590990-13",
+          "osm-w-506590990-14",
+          "osm-w-506590990-15",
+          "osm-w-5045244-0",
+          "osm-w-5045244-1",
+          "osm-w-5045244-2",
+          "osm-w-5045251-0",
+          "osm-w-5045251-1",
+          "osm-w-5045251-2",
+          "osm-w-5045123-28",
+          "osm-w-5045123-29",
+          "osm-w-5045123-30",
+          "osm-w-293377157-1"
+        ],
+        "endpointSnapMetres": [
+          11.452370929625078,
+          51.13280457836991
+        ],
+        "pathMetres": 4329.4998916856275
+      },
+      "partitions": [
+        {
+          "partitionId": "fixture-core-weakness-od-7090-7706",
+          "tripCount": 70,
+          "network": {
+            "schemaVersion": "velocity.simulation-network.v1",
+            "coordinateReferenceSystem": "EPSG:4326",
+            "version": "osm-v1-80f6f8ba70eb",
+            "sourceName": "OpenStreetMap highway topology enriched with Toronto cycling infrastructure",
+            "sourceUrl": "https://www.openstreetmap.org/copyright",
+            "isIllustrative": false,
+            "nodes": [
+              {
+                "id": "osm-n-10887374238",
+                "longitude": -79.3285901,
+                "latitude": 43.6805483,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-10887374240",
+                "longitude": -79.3287034,
+                "latitude": 43.6805943,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-10887374243",
+                "longitude": -79.3275465,
+                "latitude": 43.6807064,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-10887374246",
+                "longitude": -79.3276679,
+                "latitude": 43.6807373,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-10887374295",
+                "longitude": -79.3267065,
+                "latitude": 43.6788871,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-12344490544",
+                "longitude": -79.3273328,
+                "latitude": 43.6801936,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-12344490545",
+                "longitude": -79.3270624,
+                "latitude": 43.6795449,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-146986070",
+                "longitude": -79.3286762,
+                "latitude": 43.6805314,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-146987970",
+                "longitude": -79.3267837,
+                "latitude": 43.6788702,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-146987981",
+                "longitude": -79.3275678,
+                "latitude": 43.6807575,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-334409166",
+                "longitude": -79.3281186,
+                "latitude": 43.6806466,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-394542708",
+                "longitude": -79.3292981,
+                "latitude": 43.6820084,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-830743030",
+                "longitude": -79.3291821,
+                "latitude": 43.6817289,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9121453897",
+                "longitude": -79.3293112,
+                "latitude": 43.6820395,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9349961753",
+                "longitude": -79.3292172,
+                "latitude": 43.6818134,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9429725833",
+                "longitude": -79.3268084,
+                "latitude": 43.6789353,
+                "population": 0,
+                "destinations": 0
+              }
+            ],
+            "edges": [
+              {
+                "id": "osm-w-1393402476-2",
+                "from": "osm-n-10887374295",
+                "to": "osm-n-146987970",
+                "minutes": 0.025970120206255207,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-14877791-15",
+                "from": "osm-n-146986070",
+                "to": "osm-n-10887374238",
+                "minutes": 0.028725221649302708,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-14877791-16",
+                "from": "osm-n-10887374238",
+                "to": "osm-n-334409166",
+                "minutes": 0.15799366289143582,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-14877791-17",
+                "from": "osm-n-334409166",
+                "to": "osm-n-10887374246",
+                "minutes": 0.1506285777042552,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-14877791-18",
+                "from": "osm-n-10887374246",
+                "to": "osm-n-146987981",
+                "minutes": 0.033461085203560025,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-28126005-0",
+                "from": "osm-n-146987970",
+                "to": "osm-n-9429725833",
+                "minutes": 0.03002889118202594,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-28126005-1",
+                "from": "osm-n-9429725833",
+                "to": "osm-n-12344490545",
+                "minutes": 0.28321660055322734,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-28126005-2",
+                "from": "osm-n-12344490545",
+                "to": "osm-n-12344490544",
+                "minutes": 0.30139230779275483,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-28126005-3",
+                "from": "osm-n-12344490544",
+                "to": "osm-n-10887374243",
+                "minutes": 0.23824698558482915,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-28126005-4",
+                "from": "osm-n-10887374243",
+                "to": "osm-n-146987981",
+                "minutes": 0.023741536666474005,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-329171738-0",
+                "from": "osm-n-146986070",
+                "to": "osm-n-10887374240",
+                "minutes": 0.02931677980466585,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-329171738-1",
+                "from": "osm-n-10887374240",
+                "to": "osm-n-830743030",
+                "minutes": 0.5276850015317133,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-329171738-2",
+                "from": "osm-n-830743030",
+                "to": "osm-n-9349961753",
+                "minutes": 0.039248147118452086,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-329171738-3",
+                "from": "osm-n-9349961753",
+                "to": "osm-n-394542708",
+                "minutes": 0.09056337988330607,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-329171738-4",
+                "from": "osm-n-394542708",
+                "to": "osm-n-9121453897",
+                "minutes": 0.014462117646526674,
+                "highStress": false
+              }
+            ],
+            "flows": [
+              {
+                "id": "fixture-core-weakness-od-7090-7706",
+                "from": "osm-n-9121453897",
+                "to": "osm-n-10887374295",
+                "corridorId": "fixture-core-weakness",
+                "weight": 0.4069767441860465
+              }
+            ],
+            "accessibilityMinutes": 15,
+            "stressPenalty": 3,
+            "maxLowStressDetourRatio": 1.5
+          }
+        },
+        {
+          "partitionId": "fixture-core-weakness-od-7348-7349",
+          "tripCount": 38,
+          "network": {
+            "schemaVersion": "velocity.simulation-network.v1",
+            "coordinateReferenceSystem": "EPSG:4326",
+            "version": "osm-v1-80f6f8ba70eb",
+            "sourceName": "OpenStreetMap highway topology enriched with Toronto cycling infrastructure",
+            "sourceUrl": "https://www.openstreetmap.org/copyright",
+            "isIllustrative": false,
+            "nodes": [
+              {
+                "id": "osm-n-2893788429",
+                "longitude": -79.3509967,
+                "latitude": 43.6900252,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-32658307",
+                "longitude": -79.3536544,
+                "latitude": 43.6894964,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-3513774896",
+                "longitude": -79.3522401,
+                "latitude": 43.6897792,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-3513774897",
+                "longitude": -79.3517717,
+                "latitude": 43.6898662,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-3513774898",
+                "longitude": -79.3514324,
+                "latitude": 43.6899362,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-3513774901",
+                "longitude": -79.3508001,
+                "latitude": 43.6900673,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-3513774906",
+                "longitude": -79.3502197,
+                "latitude": 43.6901691,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-4636723731",
+                "longitude": -79.3529165,
+                "latitude": 43.6896475,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-8786361517",
+                "longitude": -79.3532506,
+                "latitude": 43.6895811,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-8931447108",
+                "longitude": -79.3543636,
+                "latitude": 43.6893613,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-8931447149",
+                "longitude": -79.3500042,
+                "latitude": 43.6902146,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-8931447150",
+                "longitude": -79.3500354,
+                "latitude": 43.690296,
+                "population": 0,
+                "destinations": 0
+              }
+            ],
+            "edges": [
+              {
+                "id": "osm-w-43925739-0",
+                "from": "osm-n-32658307",
+                "to": "osm-n-8786361517",
+                "minutes": 0.13537174383178463,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-43925739-1",
+                "from": "osm-n-8786361517",
+                "to": "osm-n-4636723731",
+                "minutes": 0.11156074182619556,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-43925739-2",
+                "from": "osm-n-4636723731",
+                "to": "osm-n-3513774896",
+                "minutes": 0.22554117944750868,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-43925739-3",
+                "from": "osm-n-3513774896",
+                "to": "osm-n-3513774897",
+                "minutes": 0.15571006563826445,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-43925739-4",
+                "from": "osm-n-3513774897",
+                "to": "osm-n-3513774898",
+                "minutes": 0.1136046571127414,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-43925739-5",
+                "from": "osm-n-3513774898",
+                "to": "osm-n-2893788429",
+                "minutes": 0.14577361100290653,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-43925739-6",
+                "from": "osm-n-2893788429",
+                "to": "osm-n-3513774901",
+                "minutes": 0.06601677377034136,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-43925739-7",
+                "from": "osm-n-3513774901",
+                "to": "osm-n-3513774906",
+                "minutes": 0.1922960216035974,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-43925739-8",
+                "from": "osm-n-3513774906",
+                "to": "osm-n-8931447149",
+                "minutes": 0.07228211200121772,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-4952004-5",
+                "from": "osm-n-8931447108",
+                "to": "osm-n-32658307",
+                "minutes": 0.23613659582284988,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-965458351-1",
+                "from": "osm-n-8931447150",
+                "to": "osm-n-8931447149",
+                "minutes": 0.0375746819821345,
+                "highStress": false
+              }
+            ],
+            "flows": [
+              {
+                "id": "fixture-core-weakness-od-7348-7349",
+                "from": "osm-n-8931447150",
+                "to": "osm-n-8931447108",
+                "corridorId": "fixture-core-weakness",
+                "weight": 0.22093023255813954
+              }
+            ],
+            "accessibilityMinutes": 15,
+            "stressPenalty": 3,
+            "maxLowStressDetourRatio": 1.5
+          }
+        },
+        {
+          "partitionId": "fixture-core-weakness-od-7706-7090",
+          "tripCount": 34,
+          "network": {
+            "schemaVersion": "velocity.simulation-network.v1",
+            "coordinateReferenceSystem": "EPSG:4326",
+            "version": "osm-v1-80f6f8ba70eb",
+            "sourceName": "OpenStreetMap highway topology enriched with Toronto cycling infrastructure",
+            "sourceUrl": "https://www.openstreetmap.org/copyright",
+            "isIllustrative": false,
+            "nodes": [
+              {
+                "id": "osm-n-10887374238",
+                "longitude": -79.3285901,
+                "latitude": 43.6805483,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-10887374240",
+                "longitude": -79.3287034,
+                "latitude": 43.6805943,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-10887374243",
+                "longitude": -79.3275465,
+                "latitude": 43.6807064,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-10887374246",
+                "longitude": -79.3276679,
+                "latitude": 43.6807373,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-10887374295",
+                "longitude": -79.3267065,
+                "latitude": 43.6788871,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-12344490544",
+                "longitude": -79.3273328,
+                "latitude": 43.6801936,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-12344490545",
+                "longitude": -79.3270624,
+                "latitude": 43.6795449,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-146986070",
+                "longitude": -79.3286762,
+                "latitude": 43.6805314,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-146987970",
+                "longitude": -79.3267837,
+                "latitude": 43.6788702,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-146987981",
+                "longitude": -79.3275678,
+                "latitude": 43.6807575,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-334409166",
+                "longitude": -79.3281186,
+                "latitude": 43.6806466,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-394542708",
+                "longitude": -79.3292981,
+                "latitude": 43.6820084,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-830743030",
+                "longitude": -79.3291821,
+                "latitude": 43.6817289,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9121453897",
+                "longitude": -79.3293112,
+                "latitude": 43.6820395,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9349961753",
+                "longitude": -79.3292172,
+                "latitude": 43.6818134,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9429725833",
+                "longitude": -79.3268084,
+                "latitude": 43.6789353,
+                "population": 0,
+                "destinations": 0
+              }
+            ],
+            "edges": [
+              {
+                "id": "osm-w-1393402476-2",
+                "from": "osm-n-10887374295",
+                "to": "osm-n-146987970",
+                "minutes": 0.025970120206255207,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-14877791-15",
+                "from": "osm-n-146986070",
+                "to": "osm-n-10887374238",
+                "minutes": 0.028725221649302708,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-14877791-16",
+                "from": "osm-n-10887374238",
+                "to": "osm-n-334409166",
+                "minutes": 0.15799366289143582,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-14877791-17",
+                "from": "osm-n-334409166",
+                "to": "osm-n-10887374246",
+                "minutes": 0.1506285777042552,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-14877791-18",
+                "from": "osm-n-10887374246",
+                "to": "osm-n-146987981",
+                "minutes": 0.033461085203560025,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-28126005-0",
+                "from": "osm-n-146987970",
+                "to": "osm-n-9429725833",
+                "minutes": 0.03002889118202594,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-28126005-1",
+                "from": "osm-n-9429725833",
+                "to": "osm-n-12344490545",
+                "minutes": 0.28321660055322734,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-28126005-2",
+                "from": "osm-n-12344490545",
+                "to": "osm-n-12344490544",
+                "minutes": 0.30139230779275483,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-28126005-3",
+                "from": "osm-n-12344490544",
+                "to": "osm-n-10887374243",
+                "minutes": 0.23824698558482915,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-28126005-4",
+                "from": "osm-n-10887374243",
+                "to": "osm-n-146987981",
+                "minutes": 0.023741536666474005,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-329171738-0",
+                "from": "osm-n-146986070",
+                "to": "osm-n-10887374240",
+                "minutes": 0.02931677980466585,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-329171738-1",
+                "from": "osm-n-10887374240",
+                "to": "osm-n-830743030",
+                "minutes": 0.5276850015317133,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-329171738-2",
+                "from": "osm-n-830743030",
+                "to": "osm-n-9349961753",
+                "minutes": 0.039248147118452086,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-329171738-3",
+                "from": "osm-n-9349961753",
+                "to": "osm-n-394542708",
+                "minutes": 0.09056337988330607,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-329171738-4",
+                "from": "osm-n-394542708",
+                "to": "osm-n-9121453897",
+                "minutes": 0.014462117646526674,
+                "highStress": false
+              }
+            ],
+            "flows": [
+              {
+                "id": "fixture-core-weakness-od-7706-7090",
+                "from": "osm-n-10887374295",
+                "to": "osm-n-9121453897",
+                "corridorId": "fixture-core-weakness",
+                "weight": 0.19767441860465115
+              }
+            ],
+            "accessibilityMinutes": 15,
+            "stressPenalty": 3,
+            "maxLowStressDetourRatio": 1.5
+          }
+        },
+        {
+          "partitionId": "fixture-core-weakness-od-7093-7339",
+          "tripCount": 30,
+          "network": {
+            "schemaVersion": "velocity.simulation-network.v1",
+            "coordinateReferenceSystem": "EPSG:4326",
+            "version": "osm-v1-80f6f8ba70eb",
+            "sourceName": "OpenStreetMap highway topology enriched with Toronto cycling infrastructure",
+            "sourceUrl": "https://www.openstreetmap.org/copyright",
+            "isIllustrative": false,
+            "nodes": [
+              {
+                "id": "osm-n-11669138526",
+                "longitude": -79.3437474,
+                "latitude": 43.6758214,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-11750309181",
+                "longitude": -79.3457217,
+                "latitude": 43.6787734,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-11968261065",
+                "longitude": -79.3452326,
+                "latitude": 43.6788677,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-11968261067",
+                "longitude": -79.344654,
+                "latitude": 43.678983,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-11982038415",
+                "longitude": -79.3443164,
+                "latitude": 43.6789505,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-21291896",
+                "longitude": -79.3448791,
+                "latitude": 43.6789376,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-31296493",
+                "longitude": -79.3461625,
+                "latitude": 43.6786884,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-31296497",
+                "longitude": -79.3442436,
+                "latitude": 43.6773826,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-31296498",
+                "longitude": -79.3439238,
+                "latitude": 43.6766017,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-31296501",
+                "longitude": -79.3436084,
+                "latitude": 43.6758644,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-331074582",
+                "longitude": -79.3433829,
+                "latitude": 43.6767007,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-331074585",
+                "longitude": -79.3437055,
+                "latitude": 43.6774662,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-331074588",
+                "longitude": -79.3440181,
+                "latitude": 43.6782267,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-331074590",
+                "longitude": -79.3443547,
+                "latitude": 43.6790428,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-33212435",
+                "longitude": -79.344544,
+                "latitude": 43.6781189,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-3769904591",
+                "longitude": -79.3457026,
+                "latitude": 43.6753791,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-394542701",
+                "longitude": -79.3448436,
+                "latitude": 43.6788376,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-416757788",
+                "longitude": -79.3440303,
+                "latitude": 43.6757628,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-501605504",
+                "longitude": -79.3463268,
+                "latitude": 43.6752947,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-591115403",
+                "longitude": -79.3441784,
+                "latitude": 43.6786098,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-591115433",
+                "longitude": -79.3438646,
+                "latitude": 43.6778448,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-647198225",
+                "longitude": -79.3460741,
+                "latitude": 43.6753034,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-647198234",
+                "longitude": -79.3460352,
+                "latitude": 43.6753062,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-647198257",
+                "longitude": -79.3459756,
+                "latitude": 43.6753179,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-647198265",
+                "longitude": -79.3437177,
+                "latitude": 43.6758276,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-648749393",
+                "longitude": -79.3447156,
+                "latitude": 43.6785279,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-648750325",
+                "longitude": -79.3437722,
+                "latitude": 43.6766143,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-699224319",
+                "longitude": -79.3449921,
+                "latitude": 43.6789152,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-699224335",
+                "longitude": -79.3447578,
+                "latitude": 43.6789623,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-7028755355",
+                "longitude": -79.3459116,
+                "latitude": 43.6753329,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-7503976015",
+                "longitude": -79.3445653,
+                "latitude": 43.6781664,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-7926477898",
+                "longitude": -79.3436324,
+                "latitude": 43.6759203,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-7926477919",
+                "longitude": -79.3442793,
+                "latitude": 43.6774747,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-830735116",
+                "longitude": -79.3435462,
+                "latitude": 43.67708,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9147004746",
+                "longitude": -79.3436893,
+                "latitude": 43.677428,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9147004751",
+                "longitude": -79.3437228,
+                "latitude": 43.6775073,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9147004752",
+                "longitude": -79.3440034,
+                "latitude": 43.6781902,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9147004790",
+                "longitude": -79.3440339,
+                "latitude": 43.6782667,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9147004932",
+                "longitude": -79.3434007,
+                "latitude": 43.676742,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9147004940",
+                "longitude": -79.3437989,
+                "latitude": 43.6766121,
+                "population": 0,
+                "destinations": 0
+              },
+              {
+                "id": "osm-n-9309937202",
+                "longitude": -79.3442422,
+                "latitude": 43.6787719,
+                "population": 0,
+                "destinations": 0
+              }
+            ],
+            "edges": [
+              {
+                "id": "osm-w-1264793638-0",
+                "from": "osm-n-11968261067",
+                "to": "osm-n-331074590",
+                "minutes": 0.09997785982168222,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-1264793639-0",
+                "from": "osm-n-11750309181",
+                "to": "osm-n-11968261065",
+                "minutes": 0.16298010897151924,
+                "highStress": false,
+                "corridorId": "fixture-core-weakness"
+              },
+              {
+                "id": "osm-w-1264793640-1",
+                "from": "osm-n-31296493",
+                "to": "osm-n-11750309181",
+                "minutes": 0.14688678347061196,
+                "highStress": false,
+                "corridorId": "fixture-core-weakness"
+              },
+              {
+                "id": "osm-w-1290849360-0",
+                "from": "osm-n-21291896",
+                "to": "osm-n-699224335",
+                "minutes": 0.04057436055843673,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-1290849360-1",
+                "from": "osm-n-699224335",
+                "to": "osm-n-11968261067",
+                "minutes": 0.03466860993659782,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-1290849361-0",
+                "from": "osm-n-11968261065",
+                "to": "osm-n-699224319",
+                "minutes": 0.08027141997752948,
+                "highStress": false,
+                "corridorId": "fixture-core-weakness"
+              },
+              {
+                "id": "osm-w-1290849361-1",
+                "from": "osm-n-699224319",
+                "to": "osm-n-21291896",
+                "minutes": 0.037725491736424664,
+                "highStress": false,
+                "corridorId": "fixture-core-weakness"
+              },
+              {
+                "id": "osm-w-265532309-0",
+                "from": "osm-n-21291896",
+                "to": "osm-n-394542701",
+                "minutes": 0.0459253542263756,
+                "highStress": true
+              },
+              {
+                "id": "osm-w-265532309-1",
+                "from": "osm-n-394542701",
+                "to": "osm-n-648749393",
+                "minutes": 0.143788307790308,
+                "highStress": true
+              },
+              {
+                "id": "osm-w-265532309-2",
+                "from": "osm-n-648749393",
+                "to": "osm-n-7503976015",
+                "minutes": 0.16792059800448705,
+                "highStress": true
+              },
+              {
+                "id": "osm-w-265532309-3",
+                "from": "osm-n-7503976015",
+                "to": "osm-n-33212435",
+                "minutes": 0.02221334684322179,
+                "highStress": true
+              },
+              {
+                "id": "osm-w-265532309-4",
+                "from": "osm-n-33212435",
+                "to": "osm-n-7926477919",
+                "minutes": 0.2989481489647017,
+                "highStress": true
+              },
+              {
+                "id": "osm-w-265532309-5",
+                "from": "osm-n-7926477919",
+                "to": "osm-n-31296497",
+                "minutes": 0.04254837166772975,
+                "highStress": true
+              },
+              {
+                "id": "osm-w-265532309-6",
+                "from": "osm-n-31296497",
+                "to": "osm-n-31296498",
+                "minutes": 0.3622872490611816,
+                "highStress": true
+              },
+              {
+                "id": "osm-w-265532309-7",
+                "from": "osm-n-31296498",
+                "to": "osm-n-7926477898",
+                "minutes": 0.31727870850100476,
+                "highStress": true
+              },
+              {
+                "id": "osm-w-265532309-8",
+                "from": "osm-n-7926477898",
+                "to": "osm-n-31296501",
+                "minutes": 0.02603759576275395,
+                "highStress": true
+              },
+              {
+                "id": "osm-w-30057735-0",
+                "from": "osm-n-331074582",
+                "to": "osm-n-9147004932",
+                "minutes": 0.019243621183195475,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-30057735-1",
+                "from": "osm-n-9147004932",
+                "to": "osm-n-830735116",
+                "minutes": 0.15747334199390198,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-30057735-10",
+                "from": "osm-n-591115403",
+                "to": "osm-n-9309937202",
+                "minutes": 0.07497165758778368,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-30057735-11",
+                "from": "osm-n-9309937202",
+                "to": "osm-n-11982038415",
+                "minutes": 0.08295639665312637,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-30057735-12",
+                "from": "osm-n-11982038415",
+                "to": "osm-n-331074590",
+                "minutes": 0.04286734575536517,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-30057735-2",
+                "from": "osm-n-830735116",
+                "to": "osm-n-9147004746",
+                "minutes": 0.1615031530571185,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-30057735-3",
+                "from": "osm-n-9147004746",
+                "to": "osm-n-331074585",
+                "minutes": 0.01777405816369259,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-30057735-4",
+                "from": "osm-n-331074585",
+                "to": "osm-n-9147004751",
+                "minutes": 0.019111169060351218,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-30057735-5",
+                "from": "osm-n-9147004751",
+                "to": "osm-n-591115433",
+                "minutes": 0.15691020831190886,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-30057735-6",
+                "from": "osm-n-591115433",
+                "to": "osm-n-9147004752",
+                "minutes": 0.16000281014923284,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-30057735-7",
+                "from": "osm-n-9147004752",
+                "to": "osm-n-331074588",
+                "minutes": 0.01691114409451058,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-30057735-8",
+                "from": "osm-n-331074588",
+                "to": "osm-n-9147004790",
+                "minutes": 0.01850510572073831,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-30057735-9",
+                "from": "osm-n-9147004790",
+                "to": "osm-n-591115403",
+                "minutes": 0.15954632096925972,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-4853767-0",
+                "from": "osm-n-647198257",
+                "to": "osm-n-7028755355",
+                "minutes": 0.021661146047815903,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-4853767-1",
+                "from": "osm-n-7028755355",
+                "to": "osm-n-3769904591",
+                "minutes": 0.07036556998969269,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-4853767-2",
+                "from": "osm-n-3769904591",
+                "to": "osm-n-416757788",
+                "minutes": 0.5648800966164125,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-4853767-3",
+                "from": "osm-n-416757788",
+                "to": "osm-n-11669138526",
+                "minutes": 0.09474956052632458,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-4853767-4",
+                "from": "osm-n-11669138526",
+                "to": "osm-n-647198265",
+                "minutes": 0.009953082928134752,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-4853767-5",
+                "from": "osm-n-647198265",
+                "to": "osm-n-31296501",
+                "minutes": 0.03881484567516186,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-5000897-0",
+                "from": "osm-n-31296498",
+                "to": "osm-n-9147004940",
+                "minutes": 0.04048296645215943,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-5000897-1",
+                "from": "osm-n-9147004940",
+                "to": "osm-n-648750325",
+                "minutes": 0.008652910862158773,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-5000897-2",
+                "from": "osm-n-648750325",
+                "to": "osm-n-331074582",
+                "minutes": 0.13111329445037814,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-50769259-0",
+                "from": "osm-n-647198257",
+                "to": "osm-n-647198234",
+                "minutes": 0.019884301314241695,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-50769259-1",
+                "from": "osm-n-647198234",
+                "to": "osm-n-647198225",
+                "minutes": 0.012587564751760797,
+                "highStress": false
+              },
+              {
+                "id": "osm-w-50769259-2",
+                "from": "osm-n-647198225",
+                "to": "osm-n-501605504",
+                "minutes": 0.08146136691111498,
+                "highStress": false
+              }
+            ],
+            "flows": [
+              {
+                "id": "fixture-core-weakness-od-7093-7339",
+                "from": "osm-n-31296493",
+                "to": "osm-n-501605504",
+                "corridorId": "fixture-core-weakness",
+                "weight": 0.1744186046511628
+              }
+            ],
+            "accessibilityMinutes": 15,
+            "stressPenalty": 3,
+            "maxLowStressDetourRatio": 1.5
+          }
+        }
+      ]
+    },
+    {
+      "corridorId": "fixture-east-west",
+      "candidateStatus": "synthetic-fixture",
+      "status": "blocked",
+      "errors": [
+        "Candidate cannot be conflated to a constrained connected OSM path",
+        "Route-complete bounded coverage below 20% of connected trips"
+      ],
+      "accounting": {
+        "publishedTrips": 97440,
+        "outsideWindowTrips": 85539,
+        "sameNodeTrips": 1656,
+        "disconnectedTrips": 800,
+        "cappedTrips": 8085,
+        "retainedTrips": 1360
+      },
+      "coverage": {
+        "connectedFraction": 0.9219131283552953,
+        "retainedFraction": 0.1439915299100053,
+        "retainedOdPairs": 24
+      },
+      "match": null,
+      "partitions": []
+    },
+    {
+      "corridorId": "fixture-north-south",
+      "candidateStatus": "synthetic-fixture",
+      "status": "blocked",
+      "errors": [
+        "Candidate cannot be conflated to a constrained connected OSM path"
+      ],
+      "accounting": {
+        "publishedTrips": 97440,
+        "outsideWindowTrips": 95750,
+        "sameNodeTrips": 423,
+        "disconnectedTrips": 62,
+        "cappedTrips": 426,
+        "retainedTrips": 779
+      },
+      "coverage": {
+        "connectedFraction": 0.9510655090765588,
+        "retainedFraction": 0.6464730290456432,
+        "retainedOdPairs": 16
+      },
+      "match": null,
+      "partitions": []
+    }
+  ],
+  "portfolio": {
+    "dataStatus": "unverified-candidate-scores",
+    "years": [
+      {
+        "horizonYear": 1,
+        "builtCorridorIds": [
+          "fixture-east-west",
+          "fixture-core-weakness"
+        ],
+        "activeCorridorIds": [
+          "fixture-core-weakness",
+          "fixture-east-west"
+        ]
+      },
+      {
+        "horizonYear": 2,
+        "builtCorridorIds": [
+          "fixture-north-south"
+        ],
+        "activeCorridorIds": [
+          "fixture-core-weakness",
+          "fixture-east-west",
+          "fixture-north-south"
+        ]
+      },
+      {
+        "horizonYear": 3,
+        "builtCorridorIds": [],
+        "activeCorridorIds": [
+          "fixture-core-weakness",
+          "fixture-east-west",
+          "fixture-north-south"
+        ]
+      }
+    ],
+    "rankedCorridorIds": [
+      "fixture-east-west",
+      "fixture-core-weakness",
+      "fixture-north-south"
+    ],
+    "unbuiltCorridorIds": [],
+    "warnings": []
+  },
+  "scenarios": [
+    {
+      "corridorId": "fixture-core-weakness",
+      "candidateStatus": "synthetic-fixture",
+      "status": "blocked",
+      "blockers": [
+        "Missing A artifact: public/data/corridor-demand.json"
+      ],
+      "simulations": []
+    },
+    {
+      "corridorId": "fixture-east-west",
+      "candidateStatus": "synthetic-fixture",
+      "status": "blocked",
+      "blockers": [
+        "Candidate cannot be conflated to a constrained connected OSM path",
+        "Route-complete bounded coverage below 20% of connected trips",
+        "Missing A artifact: public/data/corridor-demand.json"
+      ],
+      "simulations": []
+    },
+    {
+      "corridorId": "fixture-north-south",
+      "candidateStatus": "synthetic-fixture",
+      "status": "blocked",
+      "blockers": [
+        "Candidate cannot be conflated to a constrained connected OSM path",
+        "Missing A artifact: public/data/corridor-demand.json"
+      ],
+      "simulations": []
+    }
+  ]
+}
