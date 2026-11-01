@@ -10,6 +10,21 @@ proxies, and precomputed network routes.
 VeloCity is planning evidence, not an official recommendation, engineering
 assessment, construction schedule, or causal ridership forecast.
 
+## Live demo
+
+**[Open VeloCity on GitHub Pages](https://wajeeh-alam.github.io/VeloCity/)**
+
+For a quick walkthrough:
+
+1. Start with the top-ranked Dupont Street corridor and follow its highlighted
+   alignment on the network map.
+2. Select another corridor to compare its trained hourly-demand evidence,
+   uncertainty interval, priority rank, and nine opportunity scores.
+3. Review the illustrative accessibility and high-stress-segment changes below
+   the map; these are planning proxies, not causal forecasts.
+4. Choose **Show all 20 routes** to see how the complete candidate portfolio
+   fits into Toronto's existing cycling network.
+
 ## What the dashboard does
 
 - Ranks candidate corridors with a published, versioned scoring rubric.
